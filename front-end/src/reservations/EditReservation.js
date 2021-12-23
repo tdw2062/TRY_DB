@@ -11,7 +11,7 @@ import ErrorAlert from "../layout/ErrorAlert";
  *  the date for which the user wants to view reservations.
  * @returns {JSX.Element}
  */
-function EditReservation({ date }) {
+function EditParticipant({ date }) {
   //Create state variables for each field of reservation and add event listeners
   const [firstName, setFirstName] = useState("");
   const handleFirstNameChange = (event) => setFirstName(event.target.value);
@@ -113,7 +113,7 @@ function EditReservation({ date }) {
   //Return the form to enter the reservation details
   return (
     <main>
-      <h1>Edit Reservation</h1>
+      <h1>Edit Participant</h1>
       <ResForm
         firstName={firstName}
         handleFirstNameChange={handleFirstNameChange}
@@ -121,12 +121,6 @@ function EditReservation({ date }) {
         handleLastNameChange={handleLastNameChange}
         mobileNumber={mobileNumber}
         handleMobileNumberChange={handleMobileNumberChange}
-        reservationDate={reservationDate}
-        handleReservationDateChange={handleReservationDateChange}
-        reservationTime={reservationTime}
-        handleReservationTimeChange={handleReservationTimeChange}
-        people={people}
-        handlePeopleChange={handlePeopleChange}
         handleSubmit={handleSubmit}
         handleCancel={handleCancel}
       />
@@ -135,4 +129,4 @@ function EditReservation({ date }) {
   );
 }
 
-export default EditReservation;
+export default EditParticipant;

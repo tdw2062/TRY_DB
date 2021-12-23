@@ -26,22 +26,7 @@ function NewReservation({ date }) {
   const handleMobileNumberChange = (event) =>
     setMobileNumber(event.target.value);
 
-  const [reservationDate, setReservationDate] = useState("");
-  const handleReservationDateChange = (event) =>
-    setReservationDate(event.target.value);
-
-  const [reservationTime, setReservationTime] = useState("");
-  const handleReservationTimeChange = (event) =>
-    setReservationTime(event.target.value);
-
-  const [people, setPeople] = useState("");
-  const handlePeopleChange = (event) => setPeople(Number(event.target.value));
-
   //Set visibility for the different types of errors that can occur
-  const [visibility, setVisibility] = useState(null);
-  const [visibility2, setVisibility2] = useState(null);
-  const [visibility3, setVisibility3] = useState(null);
-
   const [visibilityError, setVisibilityError] = useState(null);
   const [errMessage, setErrMessage] = useState("");
 
@@ -86,7 +71,7 @@ function NewReservation({ date }) {
       }
       newReservation(reservation);
 
-      history.push(`/dashboard?date=${reservationDate}`);
+      history.push(`/`);
     }
   };
 
@@ -94,51 +79,11 @@ function NewReservation({ date }) {
   //or before 10:00AM or after 9:30PM
   const validate = () => {
     //Reset visibility
-    setVisibility(null);
-    setVisibility2(null);
-    setVisibility3(null);
     setVisibilityError(null);
 
-    //Create date for reservation date
-    let month = Number(reservationDate.substring(5, 7)) - 1;
-    let day = Number(reservationDate.substring(8, 10));
-    let year = Number(reservationDate.substring(0, 4));
-    let hours = Number(reservationTime.substring(0, 2));
-    let minutes = Number(reservationTime.substring(3));
-
-    //Compare the current date with the date of the reservation entered
-    let resDate = new Date(year, month, day);
-    resDate.setHours(hours);
-    resDate.setMinutes(minutes);
-
-    let today = new Date();
-
-    //If the current date is greater than the reservation date, throw an error
-    if (resDate.valueOf() < today.valueOf()) {
-      setVisibility(true);
-      switched = true;
-    }
-
-    //If the reservation is made on a Tuesday, throw an error
-    if (resDate.getDay() === 2) {
-      setVisibility2(true);
-      switched = true;
-    }
-
-    //If the reservation is earlier than 10:30am or later than 9:30pm, throw an error
-    if (
-      resDate.getHours() < 10 ||
-      (resDate.getHours() === 10 && resDate.getMinutes() < 30)
-    ) {
-      setVisibility3(true);
-      switched = true;
-    }
-
-    if (
-      resDate.getHours() > 21 ||
-      (resDate.getHours() === 21 && resDate.getMinutes() > 30)
-    ) {
-      setVisibility3(true);
+    //If firstName, lastName, or mobileNumber are missing, throw an error
+    if (!firstName || !lastName || !mobileNumber) {
+      setVisibilityError(true);
       switched = true;
     }
   };
@@ -146,13 +91,13 @@ function NewReservation({ date }) {
   //Create the handleCancel function to cancel and return to the homepage1
   const handleCancel = (event) => {
     event.preventDefault();
-    history.push("/dashboard");
+    history.push("/");
   };
 
   //Return the form with inputs to create a new reservation
   return (
     <main>
-      <h1>Add a New Reservation</h1>
+      <h1>Add a New Program Participant</h1>
       <ResForm
         firstName={firstName}
         handleFirstNameChange={handleFirstNameChange}
@@ -160,18 +105,9 @@ function NewReservation({ date }) {
         handleLastNameChange={handleLastNameChange}
         mobileNumber={mobileNumber}
         handleMobileNumberChange={handleMobileNumberChange}
-        reservationDate={reservationDate}
-        handleReservationDateChange={handleReservationDateChange}
-        reservationTime={reservationTime}
-        handleReservationTimeChange={handleReservationTimeChange}
-        people={people}
-        handlePeopleChange={handlePeopleChange}
         handleSubmit={handleSubmit}
         handleCancel={handleCancel}
       />
-      <PastDateError visibility={visibility} />
-      <TuesdayError visibility2={visibility2} />
-      <TimeError visibility3={visibility3} />
       <ErrorCaught visibility3={visibilityError} msg={errMessage} />
     </main>
   );
