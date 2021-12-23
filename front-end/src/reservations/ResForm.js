@@ -56,39 +56,7 @@ function ResForm({
           value={mobileNumber}
         />
       </div>
-      <div className="form-group">
-        <label htmlFor="reservation_date">Date of Reservation</label>
-        <input
-          type="date"
-          name="reservation_date"
-          className="form-control"
-          id="reservation_date"
-          onChange={handleReservationDateChange}
-          value={reservationDate}
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="reservation_time">Time of Reservation</label>
-        <input
-          type="time"
-          name="reservation_time"
-          className="form-control"
-          id="reservation_time"
-          onChange={handleReservationTimeChange}
-          value={reservationTime}
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="people">People</label>
-        <input
-          type="number"
-          name="people"
-          className="form-control"
-          id="people"
-          onChange={handlePeopleChange}
-          value={people}
-        />
-      </div>
+
       <button type="submit" className="btn btn-primary">
         Submit
       </button>

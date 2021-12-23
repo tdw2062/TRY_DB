@@ -55,9 +55,6 @@ function NewReservation({ date }) {
       reservation.data.first_name = firstName;
       reservation.data.last_name = lastName;
       reservation.data.mobile_number = mobileNumber;
-      reservation.data.reservation_date = reservationDate;
-      reservation.data.reservation_time = reservationTime;
-      reservation.data.people = people;
 
       //Make api call to create a new reservation
       async function newReservation(reservation) {
