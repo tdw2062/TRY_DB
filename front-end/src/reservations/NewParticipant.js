@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { createReservation } from "../utils/api";
+import { createReservation, createParticipant } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 import ResForm from "./ResForm";
 import PastDateError from "./PastDateError";
@@ -47,26 +47,26 @@ function NewReservation({ date }) {
     validate();
 
     if (!switched) {
-      let reservation = {
+      let participant = {
         data: {},
       };
 
       //Set state variables
-      reservation.data.first_name = firstName;
-      reservation.data.last_name = lastName;
-      reservation.data.mobile_number = mobileNumber;
+      participant.data.first_name = firstName;
+      participant.data.last_name = lastName;
+      participant.data.mobile_number = mobileNumber;
 
       //Make api call to create a new reservation
-      async function newReservation(reservation) {
+      async function newParticipant(participant) {
         try {
-          const response = await createReservation(reservation);
+          const response = await createParticipant(participant);
         } catch (err) {
           console.log("Error making createReservation API call", err);
           setErrMessage(err);
           setVisibilityError(true);
         }
       }
-      newReservation(reservation);
+      newParticipant(participant);
 
       history.push(`/`);
     }

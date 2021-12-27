@@ -16,6 +16,10 @@ router
   .all(methodNotAllowed);
 
 //Route to get a specific participant
-router.route("/:participantId").get(controller.read).all(methodNotAllowed);
+router
+  .route("/:participantId")
+  .get(controller.read)
+  .put(controller.update)
+  .all(methodNotAllowed);
 
 module.exports = router;

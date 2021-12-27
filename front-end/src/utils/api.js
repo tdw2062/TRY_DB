@@ -105,6 +105,19 @@ export async function createTable(table, signal) {
   return await fetchJson(url, options, {});
 }
 
+//Create a participant
+export async function createParticipant(participant, signal) {
+  const url = `${API_BASE_URL}/participants`;
+  const options = {
+    method: "POST",
+    headers,
+    body: JSON.stringify(participant),
+    signal,
+  };
+
+  return await fetchJson(url, options, {});
+}
+
 //Gets one specific reservation by reservation_id
 export async function readReservation(reservationId, signal) {
   console.log("hello");
@@ -119,6 +132,12 @@ export async function readTable(tableId, signal) {
   return await fetchJson(url, { signal }, {});
 }
 
+//Gets one specific participant by participant_id
+export async function readParticipant(participantId, signal) {
+  const url = `${API_BASE_URL}/participants/${participantId}`;
+  return await fetchJson(url, { signal }, {});
+}
+
 //Updates a reservation
 export async function updateReservation(updatedReservation, signal) {
   const url = `${API_BASE_URL}/reservations/${updatedReservation.data.reservation_id}/edit`;
@@ -129,6 +148,18 @@ export async function updateReservation(updatedReservation, signal) {
     signal,
   };
   return await fetchJson(url, options, updatedReservation);
+}
+
+//Update participant
+export async function updateParticipant(updatedParticipant, signal) {
+  const url = `${API_BASE_URL}/participants/${updatedParticipant.data.participant_id}`;
+  const options = {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(updatedParticipant),
+    signal,
+  };
+  return await fetchJson(url, options, updatedParticipant);
 }
 
 //Updates the status of a reservation

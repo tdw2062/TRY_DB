@@ -37,8 +37,19 @@ async function createParticipant(req, res, next) {
   res.status(201).json({ data });
 }
 
+//Update the reservation
+async function update(req, res, next) {
+  //Update the reservation
+  const response = await participantsService.update(
+    req.body.data,
+    req.params.participantId
+  );
+  res.json({ data: response });
+}
+
 module.exports = {
   createParticipant: asyncErrorBoundary(createParticipant),
   list: asyncErrorBoundary(list),
   read: [asyncErrorBoundary(participantExists), asyncErrorBoundary(read)],
+  update: asyncErrorBoundary(update),
 };

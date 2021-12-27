@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { readReservation, updateReservation } from "../utils/api";
+import {
+  readReservation,
+  updateReservation,
+  readParticipant,
+  updateParticipant,
+} from "../utils/api";
 import ResForm from "./ResForm";
 import ErrorCaught from "./ErrorCaught";
 import ErrorAlert from "../layout/ErrorAlert";
@@ -23,91 +28,66 @@ function EditParticipant({ date }) {
   const handleMobileNumberChange = (event) =>
     setMobileNumber(event.target.value);
 
-  const [reservationDate, setReservationDate] = useState("");
-  const handleReservationDateChange = (event) =>
-    setReservationDate(event.target.value);
-
-  const [reservationTime, setReservationTime] = useState("");
-  const handleReservationTimeChange = (event) =>
-    setReservationTime(event.target.value);
-
-  const [people, setPeople] = useState("");
-  const handlePeopleChange = (event) => setPeople(Number(event.target.value));
-
   //State vars for error message
-  const [visibility3, setVisibility3] = useState(null);
   const [errMessage, setErrMessage] = useState("");
+  const [visibility3, setVisibility3] = useState(null);
 
-  //Get ReservationId from url
-  const { reservationId } = useParams();
+  //Get ParticipantId from url
+  const { participantId } = useParams();
 
   //Create instance of useHistory hook
   const history = useHistory();
 
   //Make an API Call to get the reservation based on the reservation_id
   useEffect(() => {
-    async function getReservation(reservationId) {
-      const response = await readReservation(reservationId);
-
-      let dateString = response.reservation_date.substring(0, 10);
+    async function getParticipant(participantId) {
+      const response = await readParticipant(participantId);
 
       setFirstName(response.first_name);
       setLastName(response.last_name);
       setMobileNumber(response.mobile_number);
-      setReservationDate(dateString);
-      setReservationTime(response.reservation_time);
-      setPeople(response.people);
     }
-    getReservation(reservationId);
-  }, [reservationId]);
+    getParticipant(participantId);
+  }, [participantId]);
 
   //Create the handleSubmit function to update the deck
   //This function creates a reservation based on the user input and then uses changeReservation() api call
   async function handleSubmit(event) {
     event.preventDefault();
 
-    setVisibility3(null);
-
-    let reservation = {
+    let participant = {
       data: {},
     };
 
-    reservation.data.reservation_id = reservationId;
-    reservation.data.first_name = firstName;
-    reservation.data.last_name = lastName;
-    reservation.data.mobile_number = mobileNumber;
-    reservation.data.reservation_date = reservationDate;
-    reservation.data.reservation_time = reservationTime;
-    reservation.data.people = people;
+    participant.data.participant_id = participantId;
+    participant.data.first_name = firstName;
+    participant.data.last_name = lastName;
+    participant.data.mobile_number = mobileNumber;
 
     //Make api call to update reservation
-    async function changeReservation(reservation) {
+    async function changeParticipant(participant) {
       try {
-        const response = await updateReservation(reservation);
+        const response = await updateParticipant(participant);
         console.log(response);
       } catch (err) {
         console.log("Error making updateReservation API call: ", err);
         setErrMessage(err);
-        setVisibility3(true);
       }
     }
-    await changeReservation(reservation);
+    await changeParticipant(participant);
 
     //Reset fields
     setFirstName("");
     setLastName("");
     setMobileNumber("");
-    setReservationDate("");
-    setReservationTime("");
-    setPeople("");
 
     //Go back to dashboard page
-    history.push(`/dashboard?date=${reservationDate}`);
+    history.push(`/dashboard`);
   }
 
   //Create the handleCancel function to return the user to the previous page
   const handleCancel = (event) => {
-    history.push(`/dashboard?date=${reservationDate}`);
+    history.push(`/dashboard`);
   };
 
   //Return the form to enter the reservation details

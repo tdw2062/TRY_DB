@@ -18,8 +18,18 @@ function list() {
   return knex("participants").select("*").orderBy("participant_id");
 }
 
+//Modify a given participant by participantId
+function update(updatedParticipant, participantId) {
+  return knex("participants")
+    .select("*")
+    .where({ participant_id: participantId })
+    .update(updatedParticipant, "*")
+    .then((updatedRecords) => updatedRecords[0]);
+}
+
 module.exports = {
   createParticipant,
   list,
   read,
+  update,
 };

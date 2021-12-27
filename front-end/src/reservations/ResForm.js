@@ -56,10 +56,9 @@ function ResForm({
           value={mobileNumber}
         />
       </div>
-
       <button type="submit" className="btn btn-primary">
         Submit
-      </button>
+      </button>{" "}
       <button type="cancel" className="btn btn-primary" onClick={handleCancel}>
         Cancel
       </button>
