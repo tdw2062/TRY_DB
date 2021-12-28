@@ -6,6 +6,7 @@ import Reservations from "../reservations/Reservations";
 import EditParticipant from "../reservations/EditParticipant";
 import NewParticipant from "../reservations/NewParticipant";
 import AddTable from "../reservations/AddTable";
+import AddStatus from "../reservations/AddStatus";
 import Search from "../reservations/Search";
 import Seat from "../reservations/Seat";
 import NotFound from "./NotFound";
@@ -51,7 +52,9 @@ function Routes() {
       <Route path="/dashboard">
         <Dashboard date={date} />
       </Route>
-
+      <Route path="/statuses">
+        <AddStatus date={date} />
+      </Route>
       <Route path="/tables/new">
         <AddTable date={date} />
       </Route>
