@@ -11,6 +11,7 @@ const reservationsRouter = require("./reservations/reservations.router");
 const tablesRouter = require("./tables/tables.router");
 const participantsRouter = require("./participants/participants.router");
 const statusesRouter = require("./statuses/statuses.router");
+const instancesRouter = require("./instances/instances.router");
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use("/reservations", reservationsRouter);
 app.use("/tables", tablesRouter);
 app.use("/participants", participantsRouter);
 app.use("/statuses", statusesRouter);
+app.use("/instances", instancesRouter);
 
 app.use(notFound);
 app.use(errorHandler);
