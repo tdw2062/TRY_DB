@@ -2,6 +2,7 @@ import React from "react";
 
 import { Redirect, Route, Switch, useLocation } from "react-router-dom";
 import Dashboard from "../dashboard/Dashboard";
+import ParticipantsDashboard from "../dashboard/ParticipantsDashboard";
 import Reservations from "../reservations/Reservations";
 import EditParticipant from "../reservations/EditParticipant";
 import NewParticipant from "../reservations/NewParticipant";
@@ -51,6 +52,9 @@ function Routes() {
       </Route>
       <Route path="/dashboard">
         <Dashboard date={date} />
+      </Route>
+      <Route path="/participants/dashboard">
+        <ParticipantsDashboard date={date} />
       </Route>
       <Route path="/statuses">
         <AddStatus date={date} />
