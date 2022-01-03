@@ -44,8 +44,16 @@ function ParticipantsDashboard({ date }) {
         <td>{instance.participant_id}</td>
         <td>{instance.first_name}</td>
         <td>{instance.last_name}</td>
+        <td>{instance.incident_num}</td>
         <td>{instance.start_date}</td>
         <td>{instance.discharge_date}</td>
+        <Link
+          to={`/participants/${instance.participant_id}/statuses/${instance.incident_num}`}
+        >
+          <button type="button" class="btn btn-primary">
+            Add Status
+          </button>
+        </Link>{" "}
       </tr>
     );
   });
@@ -56,7 +64,8 @@ function ParticipantsDashboard({ date }) {
       <h1>Participants</h1>
       <table>
         <tr>
-          <th>Participant ID</th> <th>First Name</th> <th>Last Name</th>
+          <th>Participant ID</th> <th>First Name</th> <th>Last Name</th>{" "}
+          <th>Incident #</th>
           <th>Start Date</th> <th>Discharge Date</th>
         </tr>
 

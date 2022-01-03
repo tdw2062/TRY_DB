@@ -125,6 +125,19 @@ export async function createTable(table, signal) {
   return await fetchJson(url, options, {});
 }
 
+//Creates a status
+export async function createStatus(status, signal) {
+  const url = `${API_BASE_URL}/statuses`;
+  const options = {
+    method: "POST",
+    headers,
+    body: JSON.stringify(status),
+    signal,
+  };
+  console.log("url to use", url, "options", options);
+  return await fetchJson(url, options, {});
+}
+
 //Create a participant
 export async function createParticipant(participant, signal) {
   const url = `${API_BASE_URL}/participants`;

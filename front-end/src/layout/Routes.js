@@ -44,6 +44,9 @@ function Routes() {
       <Route exact={true} path="/participants/new">
         <NewParticipant date={date} />
       </Route>
+      <Route path="/participants/:participantId/statuses/:incidentId">
+        <AddStatus date={date} />
+      </Route>
       <Route exact={true} path="/reservations">
         <Reservations date={date} />
       </Route>
@@ -56,9 +59,7 @@ function Routes() {
       <Route path="/participants/dashboard">
         <ParticipantsDashboard date={date} />
       </Route>
-      <Route path="/statuses">
-        <AddStatus date={date} />
-      </Route>
+
       <Route path="/tables/new">
         <AddTable date={date} />
       </Route>
