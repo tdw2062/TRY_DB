@@ -4,7 +4,7 @@
 
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { listParticipants } from "../utils/api";
+import { listInstances } from "../utils/api";
 import ErrorCaught from "../reservations/ErrorCaught";
 
 /**
@@ -15,8 +15,8 @@ import ErrorCaught from "../reservations/ErrorCaught";
  */
 function ParticipantsDashboard({ date }) {
   //The main state variables are reservations and tables which are arrays to be displayed
-  const [participants, setParticipants] = useState([]);
-  const [participantsError, setParticipantsError] = useState(null);
+  const [instances, setInstances] = useState([]);
+  const [instancesError, setInstancesError] = useState(null);
   const [visibility3, setVisibility3] = useState(null);
   const [errMessage, setErrMessage] = useState("");
   //Declare an instance of the useHistory hook
@@ -29,22 +29,23 @@ function ParticipantsDashboard({ date }) {
 
   function loadDashboard() {
     const abortController = new AbortController();
-    setParticipantsError(null);
+    setInstancesError(null);
 
-    listParticipants({}, abortController.signal)
-      .then(setParticipants)
-      .catch(setParticipantsError);
+    listInstances({}, abortController.signal)
+      .then(setInstances)
+      .catch(setInstancesError);
     return () => abortController.abort();
   }
 
   //Create table rows of reservations using the 'reservations' state array
-  const participantLinks = participants.map((participant) => {
+  const instanceLinks = instances.map((instance) => {
     return (
-      <tr key={participant.participant_id}>
-        <td>{participant.participant_id}</td>
-        <td>{participant.first_name}</td>
-        <td>{participant.last_name}</td>
-        <td>{participant.mobile_number}</td>
+      <tr key={instance.instance_id}>
+        <td>{instance.participant_id}</td>
+        <td>{instance.first_name}</td>
+        <td>{instance.last_name}</td>
+        <td>{instance.start_date}</td>
+        <td>{instance.discharge_date}</td>
       </tr>
     );
   });
@@ -55,13 +56,11 @@ function ParticipantsDashboard({ date }) {
       <h1>Participants</h1>
       <table>
         <tr>
-          <th>Participant ID</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Mobile Number</th>
+          <th>Participant ID</th> <th>First Name</th> <th>Last Name</th>
+          <th>Start Date</th> <th>Discharge Date</th>
         </tr>
 
-        {participantLinks}
+        {instanceLinks}
       </table>
       <br />
 
