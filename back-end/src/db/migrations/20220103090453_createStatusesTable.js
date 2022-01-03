@@ -2,8 +2,18 @@
 exports.up = function (knex) {
   return knex.schema.createTable("statuses", (table) => {
     table.increments("status_id").primary(); // sets status_id as the primary key
-    table.integer("participant_id");
-    table.integer("instance_id");
+    table.integer("participant_id").unsigned().notNullable();
+    table
+      .foreign("participant_id")
+      .references("participant_id")
+      .inTable("participants")
+      .onDelete("cascade");
+    table.integer("instance_id").unsigned().notNullable;
+    table
+      .foreign("instance_id")
+      .references("instance_id")
+      .inTable("instances")
+      .onDelete("cascade");
     table.string("status_name");
     table.date("date");
     table.string("program_status");
