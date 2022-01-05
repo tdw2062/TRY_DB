@@ -171,6 +171,12 @@ export async function readParticipant(participantId, signal) {
   return await fetchJson(url, { signal }, {});
 }
 
+//Gets one specific instance by instance_id
+export async function readInstance(instanceId, signal) {
+  const url = `${API_BASE_URL}/instances/${instanceId}`;
+  return await fetchJson(url, { signal }, {});
+}
+
 //Updates a reservation
 export async function updateReservation(updatedReservation, signal) {
   const url = `${API_BASE_URL}/reservations/${updatedReservation.data.reservation_id}/edit`;

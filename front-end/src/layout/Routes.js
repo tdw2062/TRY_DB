@@ -6,6 +6,7 @@ import ParticipantsDashboard from "../dashboard/ParticipantsDashboard";
 import Reservations from "../reservations/Reservations";
 import EditParticipant from "../reservations/EditParticipant";
 import NewParticipant from "../reservations/NewParticipant";
+import RecCheck from "../reservations/RecCheck";
 import AddTable from "../reservations/AddTable";
 import AddStatus from "../reservations/AddStatus";
 import Search from "../reservations/Search";
@@ -43,6 +44,9 @@ function Routes() {
       </Route>
       <Route exact={true} path="/participants/new">
         <NewParticipant date={date} />
+      </Route>
+      <Route exact={true} path="/participants/:instanceId/rec_check">
+        <RecCheck date={date} />
       </Route>
       <Route path="/participants/:participantId/statuses/:incidentId">
         <AddStatus date={date} />

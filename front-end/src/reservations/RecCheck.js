@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createStatus } from "../utils/api";
 import ErrorCaught from "./ErrorCaught";
-import { readParticipant } from "../utils/api";
+import { readInstance } from "../utils/api";
 import { useParams, useHistory } from "react-router-dom";
 
 /**
@@ -10,13 +10,7 @@ import { useParams, useHistory } from "react-router-dom";
  *  the date for which the user wants to view reservations.
  * @returns {JSX.Element}
  */
-function AddStatus({ date }) {
-  const [statuses, setStatuses] = useState([
-    { statusId: 1, statusName: "Had RC" },
-    { statusId: 2, statusName: "Start MAT" },
-    { statusId: 3, statusName: "On Restrictions" },
-  ]);
-
+function RecCheck({ date }) {
   //Create state variables for each field of reservation and add event listeners
   const [firstName, setFirstName] = useState("");
   const handleFirstNameChange = (event) => setFirstName(event.target.value);
@@ -47,43 +41,31 @@ function AddStatus({ date }) {
   const [visibility3, setVisibility3] = useState(null);
   const [errMessage, setErrMessage] = useState("");
 
-  //Get ParticipantId from url
-  const { participantId, incidentId } = useParams();
+  //Get InstanceId from url
+  const { instanceId } = useParams();
+  console.log("instanceId", instanceId);
 
   //Make an API Call to get the reservation based on the reservation_id
   useEffect(() => {
-    async function getParticipant(participantId) {
-      const response = await readParticipant(participantId);
+    async function getInstance(instanceId) {
+      const response = await readInstance(instanceId);
+
+      let startDateString = response.start_date.substring(0, 10);
+      let dischargeDateString = response.start_date.substring(0, 10);
+      let checkDateString = response.start_date.substring(0, 10);
 
       setFirstName(response.first_name);
       setLastName(response.last_name);
-      setIncident(incidentId);
+      setIncident(response.incident_num);
+      setStartDate(startDateString);
+      setDischargeDate(dischargeDateString);
+      setCheckDate(checkDateString);
     }
-    getParticipant(participantId);
-  }, [participantId]);
+    getInstance(instanceId);
+    console.log("start date", startDate, "discharge date", dischargeDate);
+  }, [instanceId]);
 
-  async function handleSubmit() {
-    //Make an api call to post the new table to the db
-    let status = {
-      data: {},
-    };
-
-    status.data.participant_id = participantId;
-    status.data.instance_id = incidentId;
-    status.data.status_name = statusName;
-    status.data.date = statusDate;
-
-    try {
-      const response = await createStatus(status);
-    } catch (err) {
-      console.log("Error making createTable API call: ", err);
-    }
-  }
-
-  //Create table rows from the statuses state array and use to populate the drop-down
-  const statusLinks = statuses.map((status) => (
-    <option value={status.statusName}>{status.statusName}</option>
-  ));
+  async function handleSubmit() {}
 
   //Return the html with status drop-down
   return (
@@ -175,6 +157,7 @@ function AddStatus({ date }) {
             <option value="4"> 4 Year</option>
             <option value="5"> 5 Year</option>
           </select>
+          <br />
           <button type="submit" className="btn btn-primary">
             Submit
           </button>
@@ -185,4 +168,4 @@ function AddStatus({ date }) {
   );
 }
 
-export default AddStatus;
+export default RecCheck;
