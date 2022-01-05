@@ -13,11 +13,17 @@ exports.up = function (knex) {
     table.date("start_date");
     table.date("discharge_date");
     table.date("next_check_date");
-    table.string("1_YR");
-    table.string("2_YR");
-    table.string("3_YR");
-    table.string("4_YR");
-    table.string("5_YR");
+    table.string("1_YR_Fed");
+    table.string("1_YR_State");
+    table.string("2_YR_Fed");
+    table.string("2_YR_State");
+    table.string("3_YR_Fed");
+    table.string("3_YR_State");
+    table.string("4_YR_Fed");
+    table.string("4_YR_State");
+    table.string("5_YR_Fed");
+    table.string("5_YR_State");
+
     table.timestamps(true, true); // adds created_at and updated_at columns; passing true as the first argument sets the columns to be a timestamp type while passing true as the second argument sets those columns to be non-nullable and to use the current timestamp by default
   });
 };

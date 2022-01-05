@@ -37,6 +37,12 @@ function RecCheck({ date }) {
   const [timePeriod, setTimePeriod] = useState(null);
   const handleTimePeriodChange = (event) => setTimePeriod(event.target.value);
 
+  const [fed, setFed] = useState("");
+  const handleFedChange = (event) => setFed(event.target.value);
+
+  const [state, setState] = useState("");
+  const handleStateChange = (event) => setState(event.target.value);
+
   //State vars for ErrorCaught
   const [visibility3, setVisibility3] = useState(null);
   const [errMessage, setErrMessage] = useState("");
@@ -71,7 +77,36 @@ function RecCheck({ date }) {
     };
 
     instance.data.instance_id = Number(instanceId);
-    if (timePeriod === "1") instance.data["1_YR"] = "yes";
+    if (timePeriod === "1" && fed === "yes") instance.data["1_YR_Fed"] = "yes";
+    if (timePeriod === "1" && fed === "no") instance.data["1_YR_Fed"] = "no";
+    if (timePeriod === "1" && state === "yes")
+      instance.data["1_YR_State"] = "yes";
+    if (timePeriod === "1" && state === "no")
+      instance.data["1_YR_State"] = "no";
+    if (timePeriod === "2" && fed === "yes") instance.data["2_YR_Fed"] = "yes";
+    if (timePeriod === "2" && fed === "no") instance.data["2_YR_Fed"] = "no";
+    if (timePeriod === "2" && state === "yes")
+      instance.data["2_YR_State"] = "yes";
+    if (timePeriod === "2" && state === "no")
+      instance.data["2_YR_State"] = "no";
+    if (timePeriod === "3" && fed === "yes") instance.data["3_YR_Fed"] = "yes";
+    if (timePeriod === "3" && fed === "no") instance.data["3_YR_Fed"] = "no";
+    if (timePeriod === "3" && state === "yes")
+      instance.data["3_YR_State"] = "yes";
+    if (timePeriod === "3" && state === "no")
+      instance.data["3_YR_State"] = "no";
+    if (timePeriod === "4" && fed === "yes") instance.data["4_YR_Fed"] = "yes";
+    if (timePeriod === "4" && fed === "no") instance.data["4_YR_Fed"] = "no";
+    if (timePeriod === "4" && state === "yes")
+      instance.data["4_YR_State"] = "yes";
+    if (timePeriod === "4" && state === "no")
+      instance.data["4_YR_State"] = "no";
+    if (timePeriod === "5" && fed === "yes") instance.data["5_YR_Fed"] = "yes";
+    if (timePeriod === "5" && fed === "no") instance.data["5_YR_Fed"] = "no";
+    if (timePeriod === "5" && state === "yes")
+      instance.data["5_YR_State"] = "yes";
+    if (timePeriod === "5" && state === "no")
+      instance.data["5_YR_State"] = "no";
 
     //Make api call to update instance
     async function changeInstance(instance) {
@@ -170,6 +205,30 @@ function RecCheck({ date }) {
             <option value="3"> 3 Year</option>
             <option value="4"> 4 Year</option>
             <option value="5"> 5 Year</option>
+          </select>
+          <label for="fed">Federal Check</label>
+          <select
+            class="form-control"
+            id="fed"
+            name="fed"
+            onChange={handleFedChange}
+            value={fed}
+          >
+            <option value="">--Went Back?--</option>
+            <option value="yes"> Yes</option>
+            <option value="no"> No</option>
+          </select>
+          <label for="state">State Check</label>
+          <select
+            class="form-control"
+            id="state"
+            name="state"
+            onChange={handleStateChange}
+            value={state}
+          >
+            <option value="">--Went Back?--</option>
+            <option value="yes"> Yes</option>
+            <option value="no"> No</option>
           </select>
           <br />
           <button type="submit" className="btn btn-primary">
