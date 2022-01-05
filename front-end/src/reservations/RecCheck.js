@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createStatus } from "../utils/api";
 import ErrorCaught from "./ErrorCaught";
-import { readInstance } from "../utils/api";
+import { readInstance, updateInstance } from "../utils/api";
 import { useParams, useHistory } from "react-router-dom";
 
 /**
@@ -65,7 +65,21 @@ function RecCheck({ date }) {
     console.log("start date", startDate, "discharge date", dischargeDate);
   }, [instanceId]);
 
-  async function handleSubmit() {}
+  async function handleSubmit(event) {
+    let instance = {
+      data: {},
+    };
+
+    instance.data.instance_id = Number(instanceId);
+    if (timePeriod === "1") instance.data["1_YR"] = "yes";
+
+    //Make api call to update instance
+    async function changeInstance(instance) {
+      const response = await updateInstance(instance);
+      console.log(response);
+    }
+    await changeInstance(instance);
+  }
 
   //Return the html with status drop-down
   return (

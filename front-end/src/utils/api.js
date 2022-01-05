@@ -252,3 +252,15 @@ export async function updateTableStatus(updatedTable, signal) {
   };
   return await fetchJson(url, options, updatedTable);
 }
+
+//Updates an instance
+export async function updateInstance(updatedInstance, signal) {
+  const url = `${API_BASE_URL}/instances/${updatedInstance.data.instance_id}`;
+  const options = {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(updatedInstance),
+    signal,
+  };
+  return await fetchJson(url, options, updatedInstance);
+}
