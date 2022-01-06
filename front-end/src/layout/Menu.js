@@ -17,13 +17,13 @@ function Menu() {
           to="/"
         >
           <div className="sidebar-brand-text mx-3">
-            <span>Periodic Tables</span>
+            <span>T.R.Y. Database</span>
           </div>
         </Link>
         <hr className="sidebar-divider my-0" />
         <ul className="nav navbar-nav text-light" id="accordionSidebar">
           <li className="nav-item">
-            <Link className="nav-link" to="/dashboard">
+            <Link className="nav-link" to="/participants/dashboard">
               <span className="oi oi-dashboard" />
               &nbsp;Dashboard
             </Link>
@@ -31,19 +31,19 @@ function Menu() {
           <li className="nav-item">
             <Link className="nav-link" to="/search">
               <span className="oi oi-magnifying-glass" />
-              &nbsp;Search
+              &nbsp;Find Participant
             </Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link" to="/reservations/new">
               <span className="oi oi-plus" />
-              &nbsp;New Reservation
+              &nbsp;Enroll Participant
             </Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link" to="/tables/new">
               <span className="oi oi-layers" />
-              &nbsp;New Table
+              &nbsp;Recidivism Dashboard
             </Link>
           </li>
         </ul>
