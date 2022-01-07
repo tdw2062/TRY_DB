@@ -39,14 +39,17 @@ function ParticipantsDashboard({ date }) {
 
   //Create table rows of reservations using the 'reservations' state array
   const instanceLinks = instances.map((instance) => {
+    let startDateString = instance.start_date.substring(0, 10);
+    let dischargeDateString = instance.discharge_date.substring(0, 10);
+
     return (
       <tr key={instance.instance_id}>
         <td>{instance.participant_id}</td>
         <td>{instance.first_name}</td>
         <td>{instance.last_name}</td>
         <td>{instance.incident_num}</td>
-        <td>{instance.start_date}</td>
-        <td>{instance.discharge_date}</td>
+        <td>{startDateString}</td>
+        <td>{dischargeDateString}</td>
         <Link
           to={`/participants/${instance.participant_id}/statuses/${instance.incident_num}`}
         >
@@ -54,6 +57,14 @@ function ParticipantsDashboard({ date }) {
             Add Status
           </button>
         </Link>{" "}
+        <Link to={`/participants/${instance.instance_id}/view`}>
+          <button type="button" class="btn btn-primary">
+            View
+          </button>
+        </Link>{" "}
+        <button type="button" class="btn btn-primary">
+          Edit
+        </button>
       </tr>
     );
   });
@@ -61,7 +72,7 @@ function ParticipantsDashboard({ date }) {
   //Return the html code for the reservations and the tables
   return (
     <main>
-      <h1>Participants</h1>
+      <h1>Active Participants</h1>
       <table>
         <tr>
           <th>Participant ID</th> <th>First Name</th> <th>Last Name</th>{" "}
