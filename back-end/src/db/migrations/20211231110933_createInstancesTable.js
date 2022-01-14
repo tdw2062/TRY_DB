@@ -12,6 +12,9 @@ exports.up = function (knex) {
     table.string("incident_num");
     table.date("start_date");
     table.date("discharge_date");
+    table.string("discharge_reason");
+    table.date("housing_transition");
+    table.string("status_at_discharge");
     table.date("next_check_date");
     table.string("1_YR_Fed");
     table.string("1_YR_State");
