@@ -7,6 +7,7 @@ import Reservations from "../reservations/Reservations";
 import EditParticipant from "../reservations/EditParticipant";
 import NewParticipant from "../reservations/NewParticipant";
 import ViewParticipant from "../reservations/ViewParticipant";
+import DischargeInfo from "../reservations/DischargeInfo";
 import RecCheck from "../reservations/RecCheck";
 import RecDashboard from "../dashboard/RecDashboard";
 import AddTable from "../reservations/AddTable";
@@ -44,6 +45,7 @@ function Routes() {
       <Route exact={true} path="/participants/:participantId/edit">
         <EditParticipant date={date} />
       </Route>
+
       <Route exact={true} path="/participants/new">
         <NewParticipant date={date} />
       </Route>
@@ -55,6 +57,9 @@ function Routes() {
       </Route>
       <Route exact={true} path="/participants/:instanceId/view">
         <ViewParticipant date={date} />
+      </Route>
+      <Route exact={true} path="/participants/:instanceId/discharge">
+        <DischargeInfo date={date} />
       </Route>
       <Route path="/participants/:participantId/statuses/:incidentId">
         <AddStatus date={date} />
