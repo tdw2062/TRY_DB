@@ -14,10 +14,12 @@ import ErrorAlert from "../layout/ErrorAlert";
 function DischargeInfo({ date }) {
   //Create state variables for each field of reservation and add event listeners
   const [firstName, setFirstName] = useState("");
-
   const [lastName, setLastName] = useState("");
-
   const [startDate, setStartDate] = useState("");
+  const [dischargeDate, setDischargeDate] = useState("");
+  const [housingTransition, setHousingTransition] = useState("");
+  const [dischargeReason, setDischargeReason] = useState("");
+  const [dischargeStatus, setDischargeStatus] = useState("");
 
   //State vars for error message
   const [errMessage, setErrMessage] = useState("");
@@ -36,6 +38,10 @@ function DischargeInfo({ date }) {
       setFirstName(response.first_name);
       setLastName(response.last_name);
       setStartDate(response.start_date);
+      setDischargeDate(response.discharge_date);
+      setDischargeReason(response.discharge_reason);
+      setHousingTransition(response.housing_transition);
+      setDischargeStatus(response.status_at_discharge);
     }
     getInstance(instanceId);
   }, [instanceId]);
@@ -77,6 +83,50 @@ function DischargeInfo({ date }) {
             id="start_date"
             readonly
             value={startDate}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="discharge_date">Discharge Date</label>
+          <input
+            type="text"
+            name="discharge_date"
+            className="form-control"
+            id="discharge_date"
+            readonly
+            value={dischargeDate}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="discharge_reason">Discharge Reason</label>
+          <input
+            type="text"
+            name="discharge_reason"
+            className="form-control"
+            id="discharge_reason"
+            readonly
+            value={dischargeReason}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="housing_transition">Housing Transition</label>
+          <input
+            type="text"
+            name="housing_transition"
+            className="form-control"
+            id="housing_transition"
+            readonly
+            value={housingTransition}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="discharge_status">Discharge Status</label>
+          <input
+            type="text"
+            name="discharge_status"
+            className="form-control"
+            id="discharge_status"
+            readonly
+            value={dischargeStatus}
           />
         </div>
       </form>
