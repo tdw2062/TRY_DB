@@ -15,6 +15,13 @@ exports.seed = function (knex) {
           housing_transition: "02-05-2020",
           status_at_discharge: "Leadership Development",
           discharge_date: "02-02-2020",
+          iop_start_date: "12-01-2021",
+          iop_end_date: "01-15-2022",
+          iop_week_date: "01-15-2022",
+          started_mat_date: "01-15-2022",
+          aftercare_start_date: "02-01-2022",
+          aftercare_8week_date: "04-01-2022",
+          aftercare_end_date: "04-15-2022",
         },
         {
           participant_id: 2,
@@ -26,6 +33,13 @@ exports.seed = function (knex) {
           housing_transition: "01-05-2021",
           status_at_discharge: "Leadership Development",
           discharge_date: "01-02-2021",
+          iop_start_date: "12-01-2021",
+          iop_end_date: "01-15-2022",
+          iop_week_date: "01-15-2022",
+          started_mat_date: "01-15-2022",
+          aftercare_start_date: "02-01-2022",
+          aftercare_8week_date: "04-01-2022",
+          aftercare_end_date: "04-15-2022",
         },
       ]);
     });

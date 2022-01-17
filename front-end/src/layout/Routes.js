@@ -8,6 +8,7 @@ import EditParticipant from "../reservations/EditParticipant";
 import NewParticipant from "../reservations/NewParticipant";
 import ViewParticipant from "../reservations/ViewParticipant";
 import DischargeInfo from "../reservations/DischargeInfo";
+import TreatmentInfo from "../reservations/TreatmentInfo";
 import RecCheck from "../reservations/RecCheck";
 import RecDashboard from "../dashboard/RecDashboard";
 import AddTable from "../reservations/AddTable";
@@ -60,6 +61,9 @@ function Routes() {
       </Route>
       <Route exact={true} path="/participants/:instanceId/discharge">
         <DischargeInfo date={date} />
+      </Route>
+      <Route exact={true} path="/participants/:instanceId/treatment">
+        <TreatmentInfo date={date} />
       </Route>
       <Route path="/participants/:participantId/statuses/:incidentId">
         <AddStatus date={date} />

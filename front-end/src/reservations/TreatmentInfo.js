@@ -16,10 +16,13 @@ function DischargeInfo({ date }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [startDate, setStartDate] = useState("");
-  const [dischargeDate, setDischargeDate] = useState("");
-  const [housingTransition, setHousingTransition] = useState("");
-  const [dischargeReason, setDischargeReason] = useState("");
-  const [dischargeStatus, setDischargeStatus] = useState("");
+  const [iopStart, setIopStart] = useState("");
+  const [iopEnd, setIopEnd] = useState("");
+  const [iopWeek, setIopWeek] = useState("");
+  const [startMat, setStartMat] = useState("");
+  const [afterCareStart, setAftercareStart] = useState("");
+  const [afterCare8Week, setAftercare8Week] = useState("");
+  const [afterCareEnd, setAftercareEnd] = useState("");
 
   //State vars for error message
   const [errMessage, setErrMessage] = useState("");
@@ -35,13 +38,17 @@ function DischargeInfo({ date }) {
   useEffect(() => {
     async function getInstance(instanceId) {
       const response = await readInstance(instanceId);
+
       setFirstName(response.first_name);
       setLastName(response.last_name);
       setStartDate(response.start_date.substring(0, 10));
-      setDischargeDate(response.discharge_date.substring(0, 10));
-      setDischargeReason(response.discharge_reason);
-      setHousingTransition(response.housing_transition);
-      setDischargeStatus(response.status_at_discharge);
+      setIopStart(response.iop_start_date.substring(0, 10));
+      setIopEnd(response.iop_end_date.substring(0, 10));
+      setIopWeek(response.iop_week_date.substring(0, 10));
+      setStartMat(response.started_mat_date.substring(0, 10));
+      setAftercareStart(response.aftercare_start_date.substring(0, 10));
+      setAftercare8Week(response.aftercare_8week_date.substring(0, 10));
+      setAftercareEnd(response.aftercare_end_date.substring(0, 10));
     }
     getInstance(instanceId);
   }, [instanceId]);
@@ -49,7 +56,7 @@ function DischargeInfo({ date }) {
   //Return the form to enter the reservation details
   return (
     <main>
-      <h1>View Discharge Info</h1>
+      <h1>View Treatment Info</h1>
       <form>
         <div className="form-group">
           <label htmlFor="first_name">First Name</label>
@@ -86,47 +93,83 @@ function DischargeInfo({ date }) {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="discharge_date">Discharge Date</label>
+          <label htmlFor="iop_start">IOP Start Date</label>
           <input
             type="text"
-            name="discharge_date"
+            name="iop_start"
             className="form-control"
-            id="discharge_date"
+            id="iop_start"
             readonly
-            value={dischargeDate}
+            value={iopStart}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="iop_end">IOP End Date</label>
+          <input
+            type="text"
+            name="iop_end"
+            className="form-control"
+            id="iop_end"
+            readonly
+            value={iopEnd}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="discharge_reason">Discharge Reason</label>
+          <label htmlFor="iop_week">IOP Week Date</label>
           <input
             type="text"
-            name="discharge_reason"
+            name="iop_week"
             className="form-control"
-            id="discharge_reason"
+            id="iop_week"
             readonly
-            value={dischargeReason}
+            value={iopWeek}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="started_mat">Started MAT Date</label>
+          <input
+            type="text"
+            name="started_mat"
+            className="form-control"
+            id="started_mat"
+            readonly
+            value={startMat}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="housing_transition">Housing Transition</label>
+          <label htmlFor="aftercare_start">Started Aftercare</label>
           <input
             type="text"
-            name="housing_transition"
+            name="aftercare_start"
             className="form-control"
-            id="housing_transition"
+            id="aftercare_start"
             readonly
-            value={housingTransition}
+            value={afterCareStart}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="aftercare_8week">Aftercare Eight Week</label>
+          <input
+            type="text"
+            name="aftercare_8week"
+            className="form-control"
+            id="aftercare_8week"
+            readonly
+            value={afterCare8Week}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="discharge_status">Discharge Status</label>
+          <label htmlFor="aftercare_end">Aftercare End Date</label>
           <input
             type="text"
-            name="discharge_status"
+            name="aftercare_end"
             className="form-control"
-            id="discharge_status"
+            id="aftercare_end"
             readonly
-            value={dischargeStatus}
+            value={afterCareEnd}
           />
         </div>
       </form>

@@ -11,6 +11,13 @@ exports.up = function (knex) {
     table.string("last_name");
     table.string("incident_num");
     table.date("start_date");
+    table.date("iop_start_date");
+    table.date("iop_end_date");
+    table.date("iop_week_date");
+    table.date("started_mat_date");
+    table.date("aftercare_start_date");
+    table.date("aftercare_8week_date");
+    table.date("aftercare_end_date");
     table.date("discharge_date");
     table.string("discharge_reason");
     table.date("housing_transition");
