@@ -1,9 +1,7 @@
 import React from "react";
 
 import { Redirect, Route, Switch, useLocation } from "react-router-dom";
-import Dashboard from "../dashboard/Dashboard";
 import ParticipantsDashboard from "../dashboard/ParticipantsDashboard";
-import Reservations from "../reservations/Reservations";
 import EditParticipant from "../reservations/EditParticipant";
 import NewParticipant from "../reservations/NewParticipant";
 import ViewParticipant from "../reservations/ViewParticipant";
@@ -11,10 +9,7 @@ import DischargeInfo from "../reservations/DischargeInfo";
 import TreatmentInfo from "../reservations/TreatmentInfo";
 import RecCheck from "../reservations/RecCheck";
 import RecDashboard from "../dashboard/RecDashboard";
-import AddTable from "../reservations/AddTable";
 import AddStatus from "../reservations/AddStatus";
-import Search from "../reservations/Search";
-import Seat from "../reservations/Seat";
 import NotFound from "./NotFound";
 import { today } from "../utils/date-time";
 
@@ -26,63 +21,34 @@ import { today } from "../utils/date-time";
  * @returns {JSX.Element}
  */
 function Routes() {
-  const query = new URLSearchParams(useLocation().search);
-  let date = query.get("date");
-  if (!date) {
-    date = today();
-    // TODO: set query param to default date
-  }
-
-  console.log("currentDate", date);
-
   return (
     <Switch>
-      <Route exact={true} path="/">
-        <Redirect to={"/dashboard"} />
-      </Route>
-      <Route exact={true} path="/reservations/:reservationId/seat">
-        <Seat date={date} />
-      </Route>
       <Route exact={true} path="/participants/:participantId/edit">
-        <EditParticipant date={date} />
+        <EditParticipant />
       </Route>
-
       <Route exact={true} path="/participants/new">
-        <NewParticipant date={date} />
+        <NewParticipant />
       </Route>
       <Route exact={true} path="/participants/rec_dashboard">
-        <RecDashboard date={date} />
+        <RecDashboard />
       </Route>
       <Route exact={true} path="/participants/:instanceId/rec_check">
-        <RecCheck date={date} />
+        <RecCheck />
       </Route>
       <Route exact={true} path="/participants/:instanceId/view">
-        <ViewParticipant date={date} />
+        <ViewParticipant />
       </Route>
       <Route exact={true} path="/participants/:instanceId/discharge">
-        <DischargeInfo date={date} />
+        <DischargeInfo />
       </Route>
       <Route exact={true} path="/participants/:instanceId/treatment">
-        <TreatmentInfo date={date} />
+        <TreatmentInfo />
       </Route>
       <Route path="/participants/:participantId/statuses/:incidentId">
-        <AddStatus date={date} />
-      </Route>
-      <Route exact={true} path="/reservations">
-        <Reservations date={date} />
-      </Route>
-      <Route exact={true} path="/search">
-        <Search date={date} />
-      </Route>
-      <Route path="/dashboard">
-        <Dashboard date={date} />
+        <AddStatus />
       </Route>
       <Route path="/participants/dashboard">
-        <ParticipantsDashboard date={date} />
-      </Route>
-
-      <Route path="/tables/new">
-        <AddTable date={date} />
+        <ParticipantsDashboard />
       </Route>
       <Route>
         <NotFound />

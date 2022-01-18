@@ -10,7 +10,7 @@ import { useParams, useHistory } from "react-router-dom";
  *  the date for which the user wants to view reservations.
  * @returns {JSX.Element}
  */
-function AddStatus({ date }) {
+function AddStatus() {
   const [statuses, setStatuses] = useState([
     { statusId: 1, statusName: "Had RC" },
     { statusId: 2, statusName: "Start MAT" },

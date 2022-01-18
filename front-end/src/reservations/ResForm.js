@@ -11,12 +11,6 @@ function ResForm({
   handleLastNameChange,
   mobileNumber,
   handleMobileNumberChange,
-  reservationDate,
-  handleReservationDateChange,
-  reservationTime,
-  handleReservationTimeChange,
-  people,
-  handlePeopleChange,
   handleSubmit,
   handleCancel,
 }) {

@@ -3,9 +3,6 @@ import { useHistory } from "react-router-dom";
 import { createReservation, createParticipant } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 import ResForm from "./ResForm";
-import PastDateError from "./PastDateError";
-import TuesdayError from "./TuesdayError";
-import TimeError from "./TimeError";
 import ErrorCaught from "./ErrorCaught";
 
 /**
