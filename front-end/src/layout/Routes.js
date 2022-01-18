@@ -5,6 +5,7 @@ import ParticipantsDashboard from "../dashboard/ParticipantsDashboard";
 import EditParticipant from "../reservations/EditParticipant";
 import NewParticipant from "../reservations/NewParticipant";
 import ViewParticipant from "../reservations/ViewParticipant";
+import AdmFunding from "../reservations/AdmFunding";
 import DischargeInfo from "../reservations/DischargeInfo";
 import TreatmentInfo from "../reservations/TreatmentInfo";
 import RecCheck from "../reservations/RecCheck";
@@ -43,6 +44,9 @@ function Routes() {
       </Route>
       <Route exact={true} path="/participants/:instanceId/treatment">
         <TreatmentInfo />
+      </Route>
+      <Route exact={true} path="/participants/:instanceId/adm">
+        <AdmFunding />
       </Route>
       <Route path="/participants/:participantId/statuses/:incidentId">
         <AddStatus />

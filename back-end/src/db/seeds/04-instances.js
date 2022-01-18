@@ -22,6 +22,13 @@ exports.seed = function (knex) {
           aftercare_start_date: "02-01-2022",
           aftercare_8week_date: "04-01-2022",
           aftercare_end_date: "04-15-2022",
+          adm_start_date: "03-01-2022",
+          adm_fund: "yes",
+          adm_days: 100,
+          tu_status_adm: "Current",
+          adm_90: "06-01-2022",
+          adm_180: "09-01-2022",
+          last_adm_date: "10-01-2022",
         },
         {
           participant_id: 2,
@@ -40,6 +47,13 @@ exports.seed = function (knex) {
           aftercare_start_date: "02-01-2022",
           aftercare_8week_date: "04-01-2022",
           aftercare_end_date: "04-15-2022",
+          adm_start_date: "03-01-2022",
+          adm_fund: "yes",
+          adm_days: 100,
+          tu_status_adm: "Current",
+          adm_90: "06-01-2022",
+          adm_180: "09-01-2022",
+          last_adm_date: "10-01-2022",
         },
       ]);
     });

@@ -11,6 +11,13 @@ exports.up = function (knex) {
     table.string("last_name");
     table.string("incident_num");
     table.date("start_date");
+    table.date("adm_start_date");
+    table.string("adm_fund");
+    table.integer("adm_days");
+    table.string("tu_status_adm");
+    table.date("adm_90");
+    table.date("adm_180");
+    table.date("last_adm_date");
     table.date("iop_start_date");
     table.date("iop_end_date");
     table.date("iop_week_date");
