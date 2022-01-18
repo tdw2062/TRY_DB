@@ -3,7 +3,7 @@
 
 exports.seed = async function (knex) {
   // Deletes ALL existing entries
-  await knex.raw("TRUNCATE TABLE tables RESTART IDENTITY CASCADE");
+  await knex.raw("TRUNCATE TABLE participants RESTART IDENTITY CASCADE");
 
   return knex("participants").insert([
     {

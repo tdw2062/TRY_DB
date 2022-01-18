@@ -41,7 +41,7 @@ function Menu() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/tables/new">
+            <Link className="nav-link" to="/participants/rec_dashboard">
               <span className="oi oi-layers" />
               &nbsp;Recidivism Dashboard
             </Link>
