@@ -25,6 +25,12 @@ exports.up = function (knex) {
     table.date("aftercare_start_date");
     table.date("aftercare_8week_date");
     table.date("aftercare_end_date");
+    table.date("ged_start_date");
+    table.date("ged_end_date");
+    table.date("job_search_start");
+    table.date("leadership_dev_start");
+    table.date("last_ld_meeting");
+    table.string("employment_details");
     table.date("discharge_date");
     table.string("discharge_reason");
     table.date("housing_transition");

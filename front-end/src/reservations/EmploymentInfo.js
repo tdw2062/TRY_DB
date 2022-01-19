@@ -11,7 +11,7 @@ import ErrorAlert from "../layout/ErrorAlert";
  *  the date for which the user wants to view reservations.
  * @returns {JSX.Element}
  */
-function AdmFunding({ date }) {
+function EmploymentInfo({ date }) {
   //Create state variables for each field of reservation and add event listeners
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -178,4 +178,4 @@ function AdmFunding({ date }) {
   );
 }
 
-export default AdmFunding;
+export default EmploymentInfo;
