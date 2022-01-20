@@ -12,7 +12,7 @@ import ErrorAlert from "../layout/ErrorAlert";
  * @returns {JSX.Element}
  */
 function DischargeInfo({ date }) {
-  //Create state variables for each field of reservation and add event listeners
+  //Create state variables for the discharge information
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -25,13 +25,13 @@ function DischargeInfo({ date }) {
   const [errMessage, setErrMessage] = useState("");
   const [visibility3, setVisibility3] = useState(null);
 
-  //Get ParticipantId from url
+  //Get instancetId from url
   let { instanceId } = useParams();
 
   //Create instance of useHistory hook
   const history = useHistory();
 
-  //Make an API Call to get the reservation based on the reservation_id
+  //Make an API Call to get the instance information based on instance id
   useEffect(() => {
     async function getInstance(instanceId) {
       const response = await readInstance(instanceId);
@@ -46,7 +46,7 @@ function DischargeInfo({ date }) {
     getInstance(instanceId);
   }, [instanceId]);
 
-  //Return the form to enter the reservation details
+  //Return the form to view the discharge details
   return (
     <main>
       <h1>View Discharge Info</h1>
