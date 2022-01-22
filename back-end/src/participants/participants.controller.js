@@ -1,15 +1,15 @@
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 
 /**
- * List handler for reservation resources
+ * List handler for participant resources
  */
 
 const participantsService = require("./participants.service.js");
 
-//Helper function that determines if a given table exists (by tableId)
+//Helper function that determines if a given participant exists (by tableId)
 async function participantExists(req, res, next) {
   const participant = await participantsService.read(req.params.participantId);
-  //If a table is found, save in locals, otherwise throw an error
+  //If a participant is found, save in locals, otherwise throw an error
   if (participant) {
     res.locals.participant = participant;
     return next();
@@ -31,15 +31,15 @@ async function list(req, res, next) {
   res.json({ data });
 }
 
-//Create a table based on the request body data
+//Create a participant based on the request body data
 async function createParticipant(req, res, next) {
   const data = await participantsService.createParticipant(req.body.data);
   res.status(201).json({ data });
 }
 
-//Update the reservation
+//Update the participant
 async function update(req, res, next) {
-  //Update the reservation
+  //Update the participant
   const response = await participantsService.update(
     req.body.data,
     req.params.participantId

@@ -6,10 +6,10 @@ const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 
 const instancesService = require("./instances.service.js");
 
-//Helper function that determines if a given table exists (by tableId)
+//Helper function that determines if a given instance exists (by tableId)
 async function instanceExists(req, res, next) {
   const instance = await instancesService.read(req.params.instanceId);
-  //If a table is found, save in locals, otherwise throw an error
+  //If an instance is found, save in locals, otherwise throw an error
   if (instance) {
     res.locals.instance = instance;
     return next();
@@ -31,15 +31,15 @@ async function list(req, res, next) {
   res.json({ data });
 }
 
-//Create a table based on the request body data
+//Create an instance based on the request body data
 async function createInstance(req, res, next) {
   const data = await instancesService.createInstance(req.body.data);
   res.status(201).json({ data });
 }
 
-//Update the reservation
+//Update the instance
 async function update(req, res, next) {
-  //Update the reservation
+  //Update the instance
   const response = await instancesService.update(
     req.body.data,
     req.params.instanceId

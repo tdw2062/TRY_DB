@@ -73,7 +73,7 @@ function ParticipantsDashboard({ date }) {
   return (
     <main>
       <h1>Active Participants</h1>
-      <table>
+      <table class="table">
         <tr>
           <th>Participant ID</th> <th>First Name</th> <th>Last Name</th>{" "}
           <th>Incident #</th>
