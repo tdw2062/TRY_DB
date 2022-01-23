@@ -16,13 +16,12 @@ function EmploymentInfo({ date }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [startDate, setStartDate] = useState("");
-  const [admStart, setAdmStart] = useState("");
-  const [admFund, setAdmFund] = useState("");
-  const [admDays, setAdmDays] = useState(null);
-  const [admStatusTU, setAdmStatusTU] = useState("");
-  const [adm90, setAdm90] = useState("");
-  const [adm180, setAdm180] = useState("");
-  const [lastAdmDate, setLastAdmDate] = useState("");
+  const [gedStart, setGedStart] = useState("");
+  const [gedEnd, setGedEnd] = useState("");
+  const [jobSearchStart, setJobSearchStart] = useState("");
+  const [leaderDevStart, setLeaderDevStart] = useState("");
+  const [lastLD, setLastLD] = useState("");
+  const [employDetails, setEmployDetails] = useState("");
 
   //State vars for error message
   const [errMessage, setErrMessage] = useState("");
@@ -42,21 +41,20 @@ function EmploymentInfo({ date }) {
       setFirstName(response.first_name);
       setLastName(response.last_name);
       setStartDate(response.start_date.substring(0, 10));
-      setAdmStart(response.adm_start_date.substring(0, 10));
-      setAdmFund(response.adm_fund);
-      setAdmDays(response.adm_days);
-      setAdmStatusTU(response.tu_status_adm);
-      setAdm90(response.adm_90.substring(0, 10));
-      setAdm180(response.adm_180.substring(0, 10));
-      setLastAdmDate(response.last_adm_date.substring(0, 10));
+      setGedStart(response.ged_start_date.substring(0, 10));
+      setGedEnd(response.ged_end_date.substring(0, 10));
+      setJobSearchStart(response.job_search_start.substring(0, 10));
+      setLeaderDevStart(response.leadership_dev_start.substring(0, 10));
+      setLastLD(response.last_ld_meeting.substring(0, 10));
+      setEmployDetails(response.employment_details);
     }
     getInstance(instanceId);
   }, [instanceId]);
 
-  //Return the form to enter the reservation details
+  //Return the form to show the employment info
   return (
     <main>
-      <h1>View Treatment Info</h1>
+      <h1>View Employment Info</h1>
       <form>
         <div className="form-group">
           <label htmlFor="first_name">First Name</label>
@@ -93,83 +91,74 @@ function EmploymentInfo({ date }) {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="adm_start">ADM Start Date:</label>
+          <label htmlFor="ged_start">GED Start Date:</label>
           <input
             type="text"
-            name="adm_start"
+            name="ged_start"
             className="form-control"
-            id="adm_start"
+            id="ged_start"
             readonly
-            value={admStart}
+            value={gedStart}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="ged_end">GED End Date:</label>
+          <input
+            type="text"
+            name="ged_end"
+            className="form-control"
+            id="ged_end"
+            readonly
+            value={gedEnd}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="job_search_start">Job Search Start Date:</label>
+          <input
+            type="text"
+            name="job_search_start"
+            className="form-control"
+            id="job_search_start"
+            readonly
+            value={jobSearchStart}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="leadership_dev_start">
+            Leadership Development Start Date:
+          </label>
+          <input
+            type="text"
+            name="leadership_dev_start"
+            className="form-control"
+            id="leadership_dev_start"
+            readonly
+            value={leaderDevStart}
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="adm_fund">ADM Funding:</label>
+          <label htmlFor="last_ld_meeting">
+            Last Leadership Development Meeting:
+          </label>
           <input
             type="text"
-            name="adm_fund"
+            name="last_ld_meeting"
             className="form-control"
-            id="adm_fund"
+            id="last_ld_meeting"
             readonly
-            value={admFund}
+            value={lastLD}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="adm_days">ADM Days:</label>
+          <label htmlFor="employment_details">Employment Details:</label>
           <input
             type="text"
-            name="adm_days"
+            name="employment_details"
             className="form-control"
-            id="adm_days"
+            id="employment_details"
             readonly
-            value={admDays}
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="adm_status">ADM Treatment Update Status:</label>
-          <input
-            type="text"
-            name="adm_status"
-            className="form-control"
-            id="adm_status"
-            readonly
-            value={admStatusTU}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="adm_90">ADM 90 Days:</label>
-          <input
-            type="text"
-            name="adm_90"
-            className="form-control"
-            id="adm_90"
-            readonly
-            value={adm90}
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="adm_180">ADM 180:</label>
-          <input
-            type="text"
-            name="adm_180"
-            className="form-control"
-            id="adm_180"
-            readonly
-            value={adm180}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="last_adm_date">Last ADM Date:</label>
-          <input
-            type="text"
-            name="last_adm_date"
-            className="form-control"
-            id="last_adm_date"
-            readonly
-            value={lastAdmDate}
+            value={employDetails}
           />
         </div>
       </form>
