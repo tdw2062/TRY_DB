@@ -12,7 +12,7 @@ import ErrorAlert from "../layout/ErrorAlert";
  * @returns {JSX.Element}
  */
 function EmploymentInfo({ date }) {
-  //Create state variables for each field of reservation and add event listeners
+  //Create state variables for each field of employment info and add event listeners
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -27,13 +27,13 @@ function EmploymentInfo({ date }) {
   const [errMessage, setErrMessage] = useState("");
   const [visibility3, setVisibility3] = useState(null);
 
-  //Get ParticipantId from url
+  //Get instanceId from url
   let { instanceId } = useParams();
 
   //Create instance of useHistory hook
   const history = useHistory();
 
-  //Make an API Call to get the reservation based on the reservation_id
+  //Make an API Call to get the instance based on the instance_id
   useEffect(() => {
     async function getInstance(instanceId) {
       const response = await readInstance(instanceId);
