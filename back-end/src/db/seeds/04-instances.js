@@ -1,3 +1,5 @@
+const { maxlenException } = require("jshint/src/reg");
+
 exports.seed = function (knex) {
   // Deletes ALL existing entries
   return knex("instances")
@@ -35,6 +37,22 @@ exports.seed = function (knex) {
           adm_90: "06-01-2022",
           adm_180: "09-01-2022",
           last_adm_date: "10-01-2022",
+          gender: "male",
+          birth_date: "02-02-1982",
+          home_county: "Summit",
+          income_before_try: "30,000k",
+          accounts_before_try: "No",
+          last_use_date: "04-02-2020",
+          years_inside: 3,
+          sex_offender: "yes",
+          recent_stay_length: "6 months",
+          drug_of_choice: "crack",
+          mat_entering_try: "Yes",
+          tanf: "No",
+          charges: "Assault & battery",
+          coping_period_length: "90 days",
+          needs_ged: "Yes",
+          employment_status_entering: "Unemployed",
         },
         {
           participant_id: 2,
@@ -66,6 +84,22 @@ exports.seed = function (knex) {
           adm_90: "06-01-2022",
           adm_180: "09-01-2022",
           last_adm_date: "10-01-2022",
+          gender: "male",
+          birth_date: "01-01-1984",
+          home_county: "Holmes",
+          income_before_try: "45,000k",
+          accounts_before_try: "Yes",
+          last_use_date: "05-02-2020",
+          years_inside: 3,
+          sex_offender: "yes",
+          recent_stay_length: "12 months",
+          drug_of_choice: "crack",
+          mat_entering_try: "Yes",
+          tanf: "No",
+          charges: "Robbery",
+          coping_period_length: "90 days",
+          needs_ged: "No",
+          employment_status_entering: "Unemployed",
         },
       ]);
     });
