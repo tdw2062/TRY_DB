@@ -3,6 +3,7 @@ import React from "react";
 import { Redirect, Route, Switch, useLocation } from "react-router-dom";
 import ParticipantsDashboard from "../dashboard/ParticipantsDashboard";
 import EditParticipant from "../reservations/EditParticipant";
+import EnrollParticipant from "../reservations/EnrollParticipant";
 import NewParticipant from "../reservations/NewParticipant";
 import ViewParticipant from "../reservations/ViewParticipant";
 import AdmFunding from "../reservations/AdmFunding";
@@ -57,6 +58,9 @@ function Routes() {
       </Route>
       <Route path="/participants/dashboard">
         <ParticipantsDashboard />
+      </Route>
+      <Route path="/participants/enroll">
+        <EnrollParticipant />
       </Route>
       <Route>
         <NotFound />
