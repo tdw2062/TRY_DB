@@ -115,6 +115,10 @@ function EnrollParticipant({ date }) {
       setStartDate(response.start_date);
       setMat(response.mat_entering_try);
       setTanf(response.tanf);
+      setChargesDescr(response.charges);
+      setCopingLength(response.coping_period_length);
+      setNeedsGed(response.needs_ged);
+      setEmploymentDetails(response.employment_status_entering);
     }
     getParticipant(participantId);
   }, [participantId]);

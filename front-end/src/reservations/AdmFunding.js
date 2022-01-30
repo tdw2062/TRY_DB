@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { readInstance, readParticipant, updateParticipant } from "../utils/api";
-import ResForm from "./ResForm";
 import ErrorCaught from "./ErrorCaught";
 import ErrorAlert from "../layout/ErrorAlert";
 
