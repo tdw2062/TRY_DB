@@ -5,7 +5,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { listInstances } from "../utils/api";
-import ErrorCaught from "../reservations/ErrorCaught";
+import ErrorCaught from "../ErrorCaught";
 
 /**
  * Defines the dashboard page.

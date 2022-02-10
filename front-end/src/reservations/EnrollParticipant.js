@@ -6,8 +6,8 @@ import {
   readParticipant,
   updateParticipant,
 } from "../utils/api";
-import ResForm from "./ResForm";
-import ErrorCaught from "./ErrorCaught";
+import EnrollForm from "./ResForm";
+
 import ErrorAlert from "../layout/ErrorAlert";
 
 /**
@@ -28,7 +28,7 @@ function EnrollParticipant({ date }) {
   const handleGenderChange = (event) => setGender(event.target.value);
 
   const [dob, setDob] = useState("");
-  const handleDobChange = (event) => setDobChange(event.target.value);
+  const handleDobChange = (event) => setDob(event.target.value);
 
   const [homeCounty, setHomeCounty] = useState("");
   const handleHomeCountyChange = (event) => setHomeCounty(event.target.value);
@@ -71,7 +71,7 @@ function EnrollParticipant({ date }) {
 
   const [chargesDescr, setChargesDescr] = useState("");
   const handleChargesDescrChange = (event) =>
-    setChargesDescrChange(event.target.value);
+    setChargesDescr(event.target.value);
 
   const [copingLength, setCopingLength] = useState("");
   const handleCopingLengthChange = (event) =>
@@ -135,7 +135,6 @@ function EnrollParticipant({ date }) {
     participant.data.participant_id = participantId;
     participant.data.first_name = firstName;
     participant.data.last_name = lastName;
-    participant.data.mobile_number = mobileNumber;
 
     //Make api call to update reservation
     async function changeParticipant(participant) {
@@ -152,7 +151,6 @@ function EnrollParticipant({ date }) {
     //Reset fields
     setFirstName("");
     setLastName("");
-    setMobileNumber("");
 
     //Go back to dashboard page
     history.push(`/dashboard`);
@@ -167,17 +165,14 @@ function EnrollParticipant({ date }) {
   return (
     <main>
       <h1>Enroll Participant</h1>
-      <ResForm
+      <EnrollForm
         firstName={firstName}
         handleFirstNameChange={handleFirstNameChange}
         lastName={lastName}
         handleLastNameChange={handleLastNameChange}
-        mobileNumber={mobileNumber}
-        handleMobileNumberChange={handleMobileNumberChange}
         handleSubmit={handleSubmit}
         handleCancel={handleCancel}
       />
-      <ErrorCaught visibility3={visibility3} msg={errMessage} />
     </main>
   );
 }

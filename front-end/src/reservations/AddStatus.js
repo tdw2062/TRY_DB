@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { createStatus } from "../utils/api";
-import ErrorCaught from "./ErrorCaught";
+
 import { readParticipant } from "../utils/api";
 import { useParams, useHistory } from "react-router-dom";
 
@@ -142,7 +142,6 @@ function AddStatus() {
           </button>
         </form>
       </div>
-      <ErrorCaught visibility3={visibility3} msg={errMessage} />
     </main>
   );
 }

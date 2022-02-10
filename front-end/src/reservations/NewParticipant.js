@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { createReservation, createParticipant } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 import ResForm from "./ResForm";
-import ErrorCaught from "./ErrorCaught";
+import ErrorCaught from "../ErrorCaught";
 
 /**
  * Defines the dashboard page.

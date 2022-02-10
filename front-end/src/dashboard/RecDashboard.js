@@ -5,7 +5,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { listInstances } from "../utils/api";
-import ErrorCaught from "../reservations/ErrorCaught";
 
 /**
  * Defines the dashboard page.
@@ -107,7 +106,6 @@ function RecDashboard({ date }) {
         {instanceLinks}
       </table>
       <br />
-      <ErrorCaught visibility3={visibility3} msg={errMessage} />
     </main>
   );
 }

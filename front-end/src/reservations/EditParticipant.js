@@ -7,7 +7,7 @@ import {
   updateParticipant,
 } from "../utils/api";
 import ResForm from "./ResForm";
-import ErrorCaught from "./ErrorCaught";
+
 import ErrorAlert from "../layout/ErrorAlert";
 
 /**
@@ -104,7 +104,6 @@ function EditParticipant({ date }) {
         handleSubmit={handleSubmit}
         handleCancel={handleCancel}
       />
-      <ErrorCaught visibility3={visibility3} msg={errMessage} />
     </main>
   );
 }
