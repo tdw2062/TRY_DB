@@ -54,7 +54,7 @@ function EnrollParticipant({ date }) {
   const handleSexOffChange = (event) => setSexOff(event.target.value);
 
   const [recentStayLength, setRecentStayLength] = useState("");
-  const handleRecentStayLength = (event) =>
+  const handleRecentStayLengthChange = (event) =>
     setRecentStayLength(event.target.value);
 
   const [drugChoice, setDrugChoice] = useState("");
@@ -170,6 +170,42 @@ function EnrollParticipant({ date }) {
         handleFirstNameChange={handleFirstNameChange}
         lastName={lastName}
         handleLastNameChange={handleLastNameChange}
+        gender={gender}
+        handleGenderChange={handleGenderChange}
+        dob={dob}
+        handleDobChange={handleDobChange}
+        homeCounty={homeCounty}
+        handleHomeCountyChange={handleHomeCountyChange}
+        incidentNum={incidentNum}
+        handleIncidentNumChange={handleIncidentNumChange}
+        incomeBefore={incomeBefore}
+        handleIncomeBeforeChange={handleIncomeBeforeChange}
+        accountsPrior={accountsPrior}
+        handleAccountsPriorChange={handleAccountsPriorChange}
+        lastUseDate={lastUseDate}
+        handleLastUseChange={handleLastUseChange}
+        yearsInside={yearsInside}
+        handleYearsInsideChange={handleYearsInsideChange}
+        sexOff={sexOff}
+        handleSexOffChange={handleSexOffChange}
+        recentStayLength={recentStayLength}
+        handleRecentStayLengthChange={handleRecentStayLengthChange}
+        drugChoice={drugChoice}
+        handleDrugChoiceChange={handleDrugChoiceChange}
+        startDate={startDate}
+        handleStartDateChange={handleStartDateChange}
+        mat={mat}
+        handleMatChange={handleMatChange}
+        tanf={tanf}
+        handleTanfChange={handleTanfChange}
+        chargesDescr={chargesDescr}
+        handleChargesDescrChange={handleChargesDescrChange}
+        copingLength={copingLength}
+        handleCopingLengthChange={handleCopingLengthChange}
+        needsGed={needsGed}
+        handleNeedsGedChange={handleNeedsGedChange}
+        employmentDetails={employmentDetails}
+        handleEmploymentDetailsChange={handleEmploymentDetailsChange}
         handleSubmit={handleSubmit}
         handleCancel={handleCancel}
       />
