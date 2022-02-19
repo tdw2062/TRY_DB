@@ -35,7 +35,7 @@ function Menu() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/reservations/new">
+            <Link className="nav-link" to="/participants/enroll">
               <span className="oi oi-plus" />
               &nbsp;Enroll Participant
             </Link>

@@ -6,7 +6,7 @@ import {
   readParticipant,
   updateParticipant,
 } from "../utils/api";
-import EnrollForm from "./ResForm";
+import EnrollForm from "./EnrollForm";
 
 import ErrorAlert from "../layout/ErrorAlert";
 

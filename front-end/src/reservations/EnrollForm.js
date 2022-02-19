@@ -28,7 +28,7 @@ function EnrollForm({
   sexOff,
   handleSexOffChange,
   recentStayLength,
-  handleRecentStayLength,
+  handleRecentStayLengthChange,
   drugChoice,
   handleDrugChoiceChange,
   startDate,
@@ -206,14 +206,36 @@ function EnrollForm({
         />
       </div>
       <div className="form-group">
-        <label htmlFor="accounts_prior">Had Accounts Before TRY?</label>
+        <label htmlFor="mat">MAT</label>
         <input
           type="text"
-          name="accounts_prior"
+          name="mat"
           className="form-control"
-          id="accounts_prior"
-          onChange={handleAccountsPriorChange}
-          value={accountsPrior}
+          id="mat"
+          onChange={handleMatChange}
+          value={mat}
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="tanf">TANF</label>
+        <input
+          type="text"
+          name="tanf"
+          className="form-control"
+          id="tanf"
+          onChange={handleTanfChange}
+          value={tanf}
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="charges_descr">Charges Description:</label>
+        <input
+          type="text"
+          name="charges_descr"
+          className="form-control"
+          id="charges_descr"
+          onChange={handleChargesDescrChange}
+          value={chargesDescr}
         />
       </div>
       <button type="submit" className="btn btn-primary">
