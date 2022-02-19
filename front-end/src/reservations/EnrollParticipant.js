@@ -4,7 +4,7 @@ import {
   readReservation,
   updateReservation,
   readParticipant,
-  updateParticipant,
+  createParticipant,
 } from "../utils/api";
 import EnrollForm from "./EnrollForm";
 
@@ -88,40 +88,8 @@ function EnrollParticipant({ date }) {
   const [errMessage, setErrMessage] = useState("");
   const [visibility3, setVisibility3] = useState(null);
 
-  //Get ParticipantId from url
-  const { participantId } = useParams();
-
   //Create instance of useHistory hook
   const history = useHistory();
-
-  //Make an API Call to get the reservation based on the reservation_id
-  useEffect(() => {
-    async function getParticipant(participantId) {
-      const response = await readParticipant(participantId);
-
-      setFirstName(response.first_name);
-      setLastName(response.last_name);
-      setGender(response.gender);
-      setDob(response.birth_date);
-      setHomeCounty(response.home_county);
-      setIncidentNum(response.incident_num);
-      setIncomeBefore(response.income_before_try);
-      setAccountsPrior(response.accounts_before_try);
-      setLastUseDate(response.last_use_date);
-      setYearsInside(response.years_inside);
-      setSexOff(response.sex_offender);
-      setRecentStayLength(response.recent_stay_length);
-      setDrugChoice(response.drug_of_choice);
-      setStartDate(response.start_date);
-      setMat(response.mat_entering_try);
-      setTanf(response.tanf);
-      setChargesDescr(response.charges);
-      setCopingLength(response.coping_period_length);
-      setNeedsGed(response.needs_ged);
-      setEmploymentDetails(response.employment_status_entering);
-    }
-    getParticipant(participantId);
-  }, [participantId]);
 
   //Create the handleSubmit function to update the deck
   //This function creates a reservation based on the user input and then uses changeReservation() api call
@@ -132,28 +100,49 @@ function EnrollParticipant({ date }) {
       data: {},
     };
 
-    participant.data.participant_id = participantId;
+    participant.data.participant_id = 1;
     participant.data.first_name = firstName;
     participant.data.last_name = lastName;
+    participant.data.gender = gender;
+    participant.data.birth_date = dob;
+    participant.data.home_county = homeCounty;
+    participant.data.incident_num = incidentNum;
+    participant.data.income_before_try = incomeBefore;
+    participant.data.accounts_before_try = accountsPrior;
+    participant.data.last_use_date = lastUseDate;
+    participant.data.years_inside = yearsInside;
+    participant.data.sex_offender = sexOff;
+    participant.data.recent_stay_length = recentStayLength;
+    participant.data.drug_of_choice = drugChoice;
+    participant.data.start_date = startDate;
+    participant.data.mat_entering_try = mat;
+    participant.data.tanf = tanf;
+    participant.data.charges = chargesDescr;
+    participant.data.coping_period_length = copingLength;
+    participant.data.needs_ged = needsGed;
+    participant.data.employment_status_entering = employmentDetails;
+
+    //Log participant
+    console.log("participant", participant);
 
     //Make api call to update reservation
-    async function changeParticipant(participant) {
+    async function newParticipant(participant) {
       try {
-        const response = await updateParticipant(participant);
+        const response = await createParticipant(participant);
         console.log(response);
       } catch (err) {
         console.log("Error making updateReservation API call: ", err);
         setErrMessage(err);
       }
     }
-    await changeParticipant(participant);
+    await newParticipant(participant);
 
     //Reset fields
     setFirstName("");
     setLastName("");
 
     //Go back to dashboard page
-    history.push(`/dashboard`);
+    //history.push(`/participants/dashboard`);
   }
 
   //Create the handleCancel function to return the user to the previous page

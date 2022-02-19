@@ -99,7 +99,7 @@ export async function createStatus(status, signal) {
 
 //Create a participant
 export async function createParticipant(participant, signal) {
-  const url = `${API_BASE_URL}/participants`;
+  const url = `${API_BASE_URL}/instances`;
   const options = {
     method: "POST",
     headers,

@@ -237,7 +237,7 @@ function EnrollForm({
           <div className="form-group">
             <label htmlFor="start_date">Start Date</label>
             <input
-              type="text"
+              type="date"
               name="start_date"
               className="form-control"
               id="start_date"

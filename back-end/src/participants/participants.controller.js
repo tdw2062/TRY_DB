@@ -33,7 +33,9 @@ async function list(req, res, next) {
 
 //Create a participant based on the request body data
 async function createParticipant(req, res, next) {
+  console.log("request body", req.body.data);
   const data = await participantsService.createParticipant(req.body.data);
+  console.log("response data", data);
   res.status(201).json({ data });
 }
 
