@@ -13,31 +13,37 @@ function ParticipantMenu() {
           View Participant Info
         </button>
       </Link>
+      <br />
       <Link to="/participants/1/view">
         <button type="button" class="btn btn-secondary">
           View Documents
         </button>
       </Link>
+      <br />
       <Link to="/participants/1/employment">
         <button type="button" class="btn btn-secondary">
           View Employment Info
         </button>
       </Link>
+      <br />
       <Link to="/participants/1/treatment">
         <button type="button" class="btn btn-secondary">
           View Treatment Info
         </button>
       </Link>
+      <br />
       <Link to="/participants/1/adm">
         <button type="button" class="btn btn-secondary">
           View ADM Info
         </button>
       </Link>
+      <br />
       <Link to="/participants/1/discharge">
         <button type="button" class="btn btn-secondary">
           View Discharge Info
         </button>
       </Link>
+      <br />
     </div>
   );
 }

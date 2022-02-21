@@ -5,6 +5,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { readInstance, listStatuses } from "../utils/api";
+import ParticipantMenu from "./ParticipantMenu";
 
 /**
  * Defines the dashboard page.
@@ -74,22 +75,38 @@ function ParticipantsDashboard({ date }) {
   //Return the html code for the reservations and the tables
   return (
     <main>
-      <h1>View Participant</h1>
-      <table>
-        <tr>
-          <td>First Name: {firstName}</td>
-          <td>Last Name: {lastName}</td>
-          <td>Incident #: {incidentNum}</td>
-          <td>Start Date: {startDate}</td>
-        </tr>
-      </table>
-      <h1>Status Updates</h1>
-      <table>
-        <tr>
-          <th>Status Name</th> <th>Date</th> <th>Notes</th>{" "}
-        </tr>
-        {statusLinks}
-      </table>
+      <h1>
+        <center>View Participant</center>
+      </h1>
+      <center>
+        <table>
+          <tr>
+            <td>First Name: {firstName} </td>
+            <td>Last Name: {lastName}</td>
+            <td>Incident #: {incidentNum}</td>
+            <td>Start Date: {startDate}</td>
+          </tr>
+        </table>
+      </center>
+      <br />
+
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <ParticipantMenu />
+          </div>
+          <div class="col-9">
+            <h1>Status Updates</h1>
+            <table>
+              <tr>
+                <th>Status Name</th> <th>Date</th> <th>Notes</th>{" "}
+              </tr>
+              {statusLinks}
+            </table>
+          </div>
+        </div>
+      </div>
+
       <br />
     </main>
   );
