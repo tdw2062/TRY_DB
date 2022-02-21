@@ -40,7 +40,9 @@ function ParticipantsDashboard({ date }) {
   //Create table rows of reservations using the 'reservations' state array
   const instanceLinks = instances.map((instance) => {
     let startDateString = instance.start_date.substring(0, 10);
-    let dischargeDateString = instance.discharge_date.substring(0, 10);
+    let dischargeDateString = "";
+    if (instance.discharge_date)
+      dischargeDateString = instance.discharge_date.substring(0, 10);
 
     return (
       <tr key={instance.instance_id}>
