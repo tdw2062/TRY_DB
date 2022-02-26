@@ -53,6 +53,7 @@ exports.seed = function (knex) {
           coping_period_length: "90 days",
           needs_ged: "Yes",
           employment_status_entering: "Unemployed",
+          next_check_date: "05-18-2022",
         },
         {
           participant_id: 2,
@@ -100,6 +101,7 @@ exports.seed = function (knex) {
           coping_period_length: "90 days",
           needs_ged: "No",
           employment_status_entering: "Unemployed",
+          next_check_date: "02-24-2022",
         },
       ]);
     });

@@ -28,6 +28,7 @@ async function read(req, res, next) {
 //List all of the instances
 async function list(req, res, next) {
   const params = req.query;
+  console.log("params in controller", params);
   const data = await instancesService.list(params);
   res.json({ data });
 }

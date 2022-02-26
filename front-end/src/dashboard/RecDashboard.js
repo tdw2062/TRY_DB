@@ -14,26 +14,57 @@ import { listInstances } from "../utils/api";
  */
 function RecDashboard({ date }) {
   //The main state variables are reservations and tables which are arrays to be displayed
-  const [instances, setInstances] = useState([]);
+  let [instances, setInstances] = useState([]);
   const [instancesError, setInstancesError] = useState(null);
   const [visibility3, setVisibility3] = useState(null);
   const [errMessage, setErrMessage] = useState("");
+  const [day, setDay] = useState("");
+  const [month, setMonth] = useState("");
+  const [year, setYear] = useState("");
   //Declare an instance of the useHistory hook
   const history = useHistory();
 
   //Use useEffect to load the reservations and the tables
 
   //Load reservations
-  useEffect(loadDashboard, [date]);
+  useEffect(loadDashboard, [day, month, year]);
 
   function loadDashboard() {
+    console.log("trying");
+
     const abortController = new AbortController();
     setInstancesError(null);
 
-    listInstances({}, abortController.signal)
+    listInstances({ day, month, year }, abortController.signal)
       .then(setInstances)
       .catch(setInstancesError);
     return () => abortController.abort();
+  }
+
+  function pastDue() {
+    const currDate = new Date();
+    setMonth(currDate.getMonth());
+    setDay(currDate.getDate());
+    setYear(currDate.getFullYear());
+    console.log("dateString", month, day, year);
+  }
+
+  function dueWithin30() {
+    const currDate = new Date();
+    currDate.setDate(currDate.getDate() + 30);
+    setMonth(currDate.getMonth());
+    setDay(currDate.getDate());
+    setYear(currDate.getFullYear());
+    console.log("dateString", month, day, year);
+  }
+
+  function dueWithin90() {
+    const currDate = new Date();
+    currDate.setDate(currDate.getDate() + 90);
+    setMonth(currDate.getMonth());
+    setDay(currDate.getDate());
+    setYear(currDate.getFullYear());
+    console.log("dateString", month, day, year);
   }
 
   //Create table rows of reservations using the 'reservations' state array
@@ -78,13 +109,13 @@ function RecDashboard({ date }) {
     <main>
       <h1>Recidivism Dashboard</h1>
       <br />
-      <button type="button" class="btn btn-primary">
+      <button type="button" class="btn btn-primary" onClick={pastDue}>
         Past Due
       </button>{" "}
-      <button type="button" class="btn btn-primary">
+      <button type="button" class="btn btn-primary" onClick={dueWithin30}>
         Due within 30 Days
       </button>{" "}
-      <button type="button" class="btn btn-primary">
+      <button type="button" class="btn btn-primary" onClick={dueWithin90}>
         Due within 90 Days
       </button>
       <br />

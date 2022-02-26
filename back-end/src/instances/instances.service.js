@@ -15,7 +15,24 @@ function read(instance_id) {
 
 //List all tables
 function list(params) {
-  return knex("instances").select("*").where(params).orderBy("instance_id");
+  if (!params.hasOwnProperty("month")) {
+    console.log("today empty");
+    return knex("instances").select("*").where(params).orderBy("instance_id");
+  } else if (params.month === "") {
+    console.log("today blank");
+    return knex("instances").select("*").orderBy("instance_id");
+  } else {
+    console.log("today filled in");
+    let newDate = new Date();
+    newDate.setFullYear(params.year);
+    newDate.setMonth(params.month);
+    newDate.setDate(params.day);
+    console.log("newDate", newDate);
+    return knex("instances")
+      .select("*")
+      .where("next_check_date", "<", newDate)
+      .orderBy("instance_id");
+  }
 }
 
 //Modify a given instance by instanceId
