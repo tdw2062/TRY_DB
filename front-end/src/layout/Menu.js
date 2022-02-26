@@ -29,7 +29,7 @@ function Menu() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/search">
+            <Link className="nav-link" to="/participants/search">
               <span className="oi oi-magnifying-glass" />
               &nbsp;Find Participant
             </Link>

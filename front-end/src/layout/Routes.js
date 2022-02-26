@@ -6,6 +6,7 @@ import EditParticipant from "../reservations/EditParticipant";
 import EnrollParticipant from "../reservations/EnrollParticipant";
 import NewParticipant from "../reservations/NewParticipant";
 import ParticipantMenu from "../reservations/ParticipantMenu";
+import Search from "../reservations/Search";
 import ViewParticipant from "../reservations/ViewParticipant";
 import AdmFunding from "../reservations/AdmFunding";
 import DischargeInfo from "../reservations/DischargeInfo";
@@ -32,6 +33,9 @@ function Routes() {
       </Route>
       <Route exact={true} path="/participants/new">
         <NewParticipant />
+      </Route>
+      <Route exact={true} path="/participants/search">
+        <Search />
       </Route>
       <Route exact={true} path="/participant_menu">
         <ParticipantMenu />

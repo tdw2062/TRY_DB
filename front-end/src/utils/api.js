@@ -70,6 +70,7 @@ export async function listInstances(params, signal) {
   Object.entries(params).forEach(([key, value]) =>
     url.searchParams.append(key, value.toString())
   );
+  console.log("fetchUrl", url);
 
   return await fetchJson(url, { headers, signal }, []);
 }

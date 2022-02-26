@@ -14,8 +14,8 @@ function read(instance_id) {
 }
 
 //List all tables
-function list() {
-  return knex("instances").select("*").orderBy("instance_id");
+function list(params) {
+  return knex("instances").select("*").where(params).orderBy("instance_id");
 }
 
 //Modify a given instance by instanceId

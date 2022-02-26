@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SearchResults from "./SearchResults";
-import { listReservations } from "../utils/api";
+import { listInstances } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 
 /**
@@ -11,24 +11,27 @@ import ErrorAlert from "../layout/ErrorAlert";
  */
 function Search({ date }) {
   //Create the phone nubmer state variable and add event listeners
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const handlePhoneNumberChange = (event) => setPhoneNumber(event.target.value);
+  const [last_name, setLastName] = useState("");
+  const handleLastNameChange = (event) => setLastName(event.target.value);
   const [visibilityStatus, setVisibilityStatus] = useState(null);
-  const [reservations, setReservations] = useState([]);
-  const [reservationsError, setReservationsError] = useState(null);
+  const [instances, setInstances] = useState([]);
+  const [instancesError, setInstancesError] = useState(null);
 
   //UseEffect is used to get the reservations
-  useEffect(loadDashboard, [phoneNumber]);
+  useEffect(loadDashboard, [last_name]);
 
   //Load all of the reservations filtered by phone number
   function loadDashboard() {
     const abortController = new AbortController();
-    setReservationsError(null);
-    const mobile_number = phoneNumber;
+    setInstancesError(null);
+    console.log("last_name", last_name);
 
-    listReservations({ mobile_number }, abortController.signal)
-      .then(setReservations)
-      .catch(setReservationsError);
+    listInstances({ last_name }, abortController.signal)
+      .then((response) => {
+        setInstances(response);
+        console.log("instances", response);
+      })
+      .catch(setInstancesError);
     return () => abortController.abort();
   }
 
@@ -47,17 +50,17 @@ function Search({ date }) {
   //Return the form to enter the phone number and show the results
   return (
     <main>
-      <h1>Find Reservations</h1>
+      <h1>Find Instances</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="mobile_number">Enter a Customer Phone Number</label>
+          <label htmlFor="last_name">Enter a Participant's Last Name</label>
           <input
             type="text"
-            name="mobile_number"
+            name="last_name"
             className="form-control"
-            id="mobile_number"
-            onChange={handlePhoneNumberChange}
-            value={phoneNumber}
+            id="last_name"
+            onChange={handleLastNameChange}
+            value={last_name}
           />
         </div>
 
@@ -68,8 +71,8 @@ function Search({ date }) {
       <div>
         <SearchResults
           visibility={visibilityStatus}
-          phoneNumber={phoneNumber}
-          reservations={reservations}
+          last_name={last_name}
+          instances={instances}
         />
       </div>
     </main>
