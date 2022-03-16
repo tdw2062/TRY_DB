@@ -14,7 +14,7 @@ function ParticipantMenu() {
         </button>
       </Link>
       <br />
-      <Link to="/participants/1/view">
+      <Link to="/participants/1/documents">
         <button type="button" class="btn btn-secondary">
           View Documents
         </button>

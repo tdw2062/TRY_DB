@@ -7,6 +7,7 @@ import EnrollParticipant from "../reservations/EnrollParticipant";
 import NewParticipant from "../reservations/NewParticipant";
 import ParticipantMenu from "../reservations/ParticipantMenu";
 import Search from "../reservations/Search";
+import Documents from "../reservations/Documents";
 import ViewParticipant from "../reservations/ViewParticipant";
 import AdmFunding from "../reservations/AdmFunding";
 import DischargeInfo from "../reservations/DischargeInfo";
@@ -57,6 +58,9 @@ function Routes() {
       </Route>
       <Route exact={true} path="/participants/:instanceId/adm">
         <AdmFunding />
+      </Route>
+      <Route exact={true} path="/participants/:instanceId/documents">
+        <Documents />
       </Route>
       <Route exact={true} path="/participants/:instanceId/employment">
         <EmploymentInfo />

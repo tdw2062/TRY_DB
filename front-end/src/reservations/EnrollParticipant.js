@@ -100,7 +100,6 @@ function EnrollParticipant({ date }) {
       data: {},
     };
 
-    participant.data.participant_id = 1;
     participant.data.first_name = firstName;
     participant.data.last_name = lastName;
     participant.data.gender = gender;

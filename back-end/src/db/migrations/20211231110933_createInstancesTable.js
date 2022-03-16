@@ -1,12 +1,6 @@
 exports.up = function (knex) {
   return knex.schema.createTable("instances", (table) => {
     table.increments("instance_id").primary(); // sets instance_id as the primary key
-    table.integer("participant_id").unsigned().notNullable();
-    table
-      .foreign("participant_id")
-      .references("participant_id")
-      .inTable("participants")
-      .onDelete("cascade");
     table.string("first_name");
     table.string("last_name");
     table.string("gender");
@@ -24,6 +18,13 @@ exports.up = function (knex) {
     table.string("charges");
     table.string("coping_period_length");
     table.string("needs_ged");
+    table.string("has_birth_certificate");
+    table.string("has_checking");
+    table.string("has_id");
+    table.string("has_license");
+    table.string("has_savings");
+    table.string("has_social");
+    table.string("has_temps");
     table.string("employment_status_entering");
     table.string("incident_num");
     table.date("start_date");
