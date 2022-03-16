@@ -6,6 +6,7 @@ import EditParticipant from "../reservations/EditParticipant";
 import EnrollParticipant from "../reservations/EnrollParticipant";
 import NewParticipant from "../reservations/NewParticipant";
 import ParticipantMenu from "../reservations/ParticipantMenu";
+import EditInstance from "../reservations/EditInstance";
 import Search from "../reservations/Search";
 import Documents from "../reservations/Documents";
 import ViewParticipant from "../reservations/ViewParticipant";
@@ -29,9 +30,6 @@ import { today } from "../utils/date-time";
 function Routes() {
   return (
     <Switch>
-      <Route exact={true} path="/participants/:participantId/edit">
-        <EditParticipant />
-      </Route>
       <Route exact={true} path="/participants/new">
         <NewParticipant />
       </Route>
@@ -49,6 +47,9 @@ function Routes() {
       </Route>
       <Route exact={true} path="/participants/:instanceId/view">
         <ViewParticipant />
+      </Route>
+      <Route exact={true} path="/participants/:instanceId/edit">
+        <EditInstance />
       </Route>
       <Route exact={true} path="/participants/:instanceId/discharge">
         <DischargeInfo />

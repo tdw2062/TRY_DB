@@ -168,7 +168,7 @@ function EnrollForm({
           <div className="form-group">
             <label htmlFor="last_use_date">Last Use Date</label>
             <input
-              type="text"
+              type="date"
               name="last_use_date"
               className="form-control"
               id="last_use_date"

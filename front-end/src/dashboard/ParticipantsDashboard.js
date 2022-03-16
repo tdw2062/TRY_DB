@@ -64,9 +64,11 @@ function ParticipantsDashboard({ date }) {
             View
           </button>
         </Link>{" "}
-        <button type="button" class="btn btn-primary">
-          Edit
-        </button>
+        <Link to={`/participants/${instance.instance_id}/edit`}>
+          <button type="button" class="btn btn-primary">
+            Edit
+          </button>
+        </Link>
       </tr>
     );
   });
