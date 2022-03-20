@@ -181,7 +181,7 @@ function EditInstance({ date }) {
   //Return the form to enter the reservation details
   return (
     <main>
-      <h1>Enroll Participant</h1>
+      <h1>Edit Participant</h1>
       <EnrollForm
         firstName={firstName}
         handleFirstNameChange={handleFirstNameChange}
