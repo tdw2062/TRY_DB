@@ -66,7 +66,7 @@ function Routes() {
       <Route exact={true} path="/participants/:instanceId/employment">
         <EmploymentInfo />
       </Route>
-      <Route path="/participants/:participantId/statuses/:incidentId">
+      <Route path="/participants/:instanceId/statuses">
         <AddStatus />
       </Route>
       <Route path="/participants/dashboard">

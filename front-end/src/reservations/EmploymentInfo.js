@@ -41,12 +41,18 @@ function EmploymentInfo({ date }) {
       setFirstName(response.first_name);
       setLastName(response.last_name);
       setStartDate(response.start_date.substring(0, 10));
-      setGedStart(response.ged_start_date.substring(0, 10));
-      setGedEnd(response.ged_end_date.substring(0, 10));
-      setJobSearchStart(response.job_search_start.substring(0, 10));
-      setLeaderDevStart(response.leadership_dev_start.substring(0, 10));
-      setLastLD(response.last_ld_meeting.substring(0, 10));
-      setEmployDetails(response.employment_details);
+      if (response.ged_start_date)
+        setGedStart(response.ged_start_date.substring(0, 10));
+      if (response.ged_end_date)
+        setGedEnd(response.ged_end_date.substring(0, 10));
+      if (response.job_search_start)
+        setJobSearchStart(response.job_search_start.substring(0, 10));
+      if (response.leadership_dev_start)
+        setLeaderDevStart(response.leadership_dev_start.substring(0, 10));
+      if (response.last_ld_meeting)
+        setLastLD(response.last_ld_meeting.substring(0, 10));
+      if (response.employment_details)
+        setEmployDetails(response.employment_details);
     }
     getInstance(instanceId);
   }, [instanceId]);

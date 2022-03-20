@@ -23,7 +23,11 @@ async function read(req, res, next) {
 
 //List all of the statuses
 async function list(req, res, next) {
-  const data = await statusesService.list();
+  const params = req.query;
+  if (params.instance_id) params.instance_id = Number(params.instance_id);
+  console.log("controller params", params);
+  const data = await statusesService.list(params);
+  console.log("data", data);
   res.json({ data });
 }
 

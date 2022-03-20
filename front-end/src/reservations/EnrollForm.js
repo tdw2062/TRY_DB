@@ -3,6 +3,7 @@
 //The two props are visibility and reservationId
 
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function EnrollForm({
   firstName,
@@ -334,9 +335,11 @@ function EnrollForm({
       <button type="submit" className="btn btn-primary">
         Submit
       </button>{" "}
-      <button type="cancel" className="btn btn-primary" onClick={handleCancel}>
-        Cancel
-      </button>
+      <Link to={`/participants/dashboard`}>
+        <button type="cancel" className="btn btn-primary">
+          Return to Dashboard
+        </button>
+      </Link>
     </form>
   );
 }

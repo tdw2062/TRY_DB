@@ -78,8 +78,8 @@ function RecDashboard({ date }) {
       checkDateString = instance.next_check_date.substring(0, 10);
 
     return (
-      <tr key={instance.instance_id}>
-        <td>{instance.participant_id}</td>
+      <tr key={instance.instance_id} style={{ padding: "15px" }}>
+        <td>{instance.instance_id}</td>
         <td>{instance.first_name}</td>
         <td>{instance.last_name}</td>
         <td>{startDateString}</td>
@@ -95,11 +95,17 @@ function RecDashboard({ date }) {
         <td>{instance["4_YR_State"]}</td>
         <td>{instance["5_YR_Fed"]}</td>
         <td>{instance["5_YR_State"]}</td>
-        <Link to={`/participants/${instance.instance_id}/rec_check`}>
-          <button type="button" class="btn btn-primary">
-            Perform Check
-          </button>
-        </Link>{" "}
+        <td>
+          <Link to={`/participants/${instance.instance_id}/rec_check`}>
+            <button
+              type="button"
+              class="btn btn-primary"
+              style={{ margin: "5px" }}
+            >
+              Perform Check
+            </button>
+          </Link>{" "}
+        </td>
       </tr>
     );
   });
@@ -120,9 +126,9 @@ function RecDashboard({ date }) {
       </button>
       <br />
       <br />
-      <table>
+      <table class="table table-sm">
         <tr>
-          <th>Participant ID</th> <th>First Name</th> <th>Last Name</th>{" "}
+          <th>Instance ID</th> <th>First Name</th> <th>Last Name</th>
           <th>Start Date</th> <th>Discharge Date</th> <th>Next Check Date</th>
           <th>1 YR Fed</th>
           <th>1 YR State</th>
@@ -134,6 +140,7 @@ function RecDashboard({ date }) {
           <th>4 YR State</th>
           <th>5 YR Fed</th>
           <th>5 YR State</th>
+          <th></th>
         </tr>
 
         {instanceLinks}

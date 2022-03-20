@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { createStatus } from "../utils/api";
 
 import { readInstance, updateInstance } from "../utils/api";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, Link } from "react-router-dom";
 
 /**
  * Defines the dashboard page.
@@ -114,6 +114,8 @@ function RecCheck({ date }) {
       console.log(response);
     }
     await changeInstance(instance);
+
+    alert("Recidivism Check Performed Successfully");
   }
 
   //Return the html with status drop-down
@@ -233,7 +235,12 @@ function RecCheck({ date }) {
           <br />
           <button type="submit" className="btn btn-primary">
             Submit
-          </button>
+          </button>{" "}
+          <Link to={`/participants/rec_dashboard`}>
+            <button type="cancel" className="btn btn-primary">
+              Return to Recidivism Dashboard
+            </button>
+          </Link>
         </form>
       </div>
     </main>

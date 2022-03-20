@@ -28,6 +28,8 @@ function ParticipantsDashboard({ date }) {
 
   //Get instanceId from url
   const { instanceId } = useParams();
+  const instance_id = instanceId;
+  console.log("instance id", instance_id);
 
   //Use useEffect to load the statuses and the instances
   //Load reservations
@@ -37,7 +39,7 @@ function ParticipantsDashboard({ date }) {
     const abortController = new AbortController();
     setStatusesError(null);
 
-    listStatuses({}, abortController.signal)
+    listStatuses({ instance_id }, abortController.signal)
       .then(setStatuses)
       .catch(setStatusesError);
     return () => abortController.abort();
@@ -65,9 +67,9 @@ function ParticipantsDashboard({ date }) {
 
     return (
       <tr key={status.status_id}>
-        <td>{status.status_name}</td>
-        <td>{dateString}</td>
-        <td>{status.notes}</td>
+        <td style={{ padding: "10px" }}>{status.status_name}</td>
+        <td style={{ padding: "10px" }}>{dateString}</td>
+        <td style={{ padding: "10px" }}>{status.notes}</td>
       </tr>
     );
   });
@@ -79,12 +81,24 @@ function ParticipantsDashboard({ date }) {
         <center>View Participant</center>
       </h1>
       <center>
-        <table>
-          <tr>
-            <td>First Name: {firstName} </td>
-            <td>Last Name: {lastName}</td>
-            <td>Incident #: {incidentNum}</td>
-            <td>Start Date: {startDate}</td>
+        <table
+          class="table table-sm"
+          style={{ width: "70%", fontSize: "25px" }}
+        >
+          <tr style={{ padding: "5px" }}>
+            <td>
+              <strong>First Name: </strong>
+              {firstName}{" "}
+            </td>
+            <td>
+              <strong>Last Name: </strong> {lastName}
+            </td>
+            <td>
+              <strong>Incident #: </strong> {incidentNum}
+            </td>
+            <td>
+              <strong>Start Date: </strong> {startDate}
+            </td>
           </tr>
         </table>
       </center>
@@ -93,11 +107,11 @@ function ParticipantsDashboard({ date }) {
       <div class="container">
         <div class="row">
           <div class="col">
-            <ParticipantMenu />
+            <ParticipantMenu instanceId={instanceId} />
           </div>
           <div class="col-9">
             <h1>Status Updates</h1>
-            <table>
+            <table class="table table-sm">
               <tr>
                 <th>Status Name</th> <th>Date</th> <th>Notes</th>{" "}
               </tr>

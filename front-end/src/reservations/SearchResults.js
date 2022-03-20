@@ -37,7 +37,7 @@ function SearchResults({ visibility, last_name, instances }) {
       return (
         <div>
           <h1>Instances found for {last_name}</h1>
-          <table>
+          <table class="table">
             <th>First Name</th>
             <th>Last Name</th>
             <th>Start Date</th>

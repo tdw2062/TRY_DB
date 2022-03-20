@@ -136,10 +136,7 @@ function EnrollParticipant({ date }) {
     }
     await newParticipant(participant);
 
-    //Reset fields
-    setFirstName("");
-    setLastName("");
-
+    alert("Participant Enrolled Successfully");
     //Go back to dashboard page
     //history.push(`/participants/dashboard`);
   }

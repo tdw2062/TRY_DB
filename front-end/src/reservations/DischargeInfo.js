@@ -37,9 +37,11 @@ function DischargeInfo({ date }) {
       setFirstName(response.first_name);
       setLastName(response.last_name);
       setStartDate(response.start_date.substring(0, 10));
-      setDischargeDate(response.discharge_date.substring(0, 10));
+      if (response.discharge_date)
+        setDischargeDate(response.discharge_date.substring(0, 10));
       setDischargeReason(response.discharge_reason);
-      setHousingTransition(response.housing_transition);
+      if (response.housing_transition)
+        setHousingTransition(response.housing_transition.substring(0, 10));
       setDischargeStatus(response.status_at_discharge);
     }
     getInstance(instanceId);

@@ -41,14 +41,22 @@ function DischargeInfo({ date }) {
 
       setFirstName(response.first_name);
       setLastName(response.last_name);
-      setStartDate(response.start_date.substring(0, 10));
-      setIopStart(response.iop_start_date.substring(0, 10));
-      setIopEnd(response.iop_end_date.substring(0, 10));
-      setIopWeek(response.iop_week_date.substring(0, 10));
-      setStartMat(response.started_mat_date.substring(0, 10));
-      setAftercareStart(response.aftercare_start_date.substring(0, 10));
-      setAftercare8Week(response.aftercare_8week_date.substring(0, 10));
-      setAftercareEnd(response.aftercare_end_date.substring(0, 10));
+      if (response.start_date)
+        setStartDate(response.start_date.substring(0, 10));
+      if (response.iop_start_date)
+        setIopStart(response.iop_start_date.substring(0, 10));
+      if (response.iop_end_date)
+        setIopEnd(response.iop_end_date.substring(0, 10));
+      if (response.iop_week_date)
+        setIopWeek(response.iop_week_date.substring(0, 10));
+      if (response.started_mat_date)
+        setStartMat(response.started_mat_date.substring(0, 10));
+      if (response.aftercare_start_date)
+        setAftercareStart(response.aftercare_start_date.substring(0, 10));
+      if (response.aftercare_8week_date)
+        setAftercare8Week(response.aftercare_8week_date.substring(0, 10));
+      if (response.aftercare_end_date)
+        setAftercareEnd(response.aftercare_end_date.substring(0, 10));
     }
     getInstance(instanceId);
   }, [instanceId]);

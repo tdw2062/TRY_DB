@@ -41,13 +41,15 @@ function AdmFunding({ date }) {
       setFirstName(response.first_name);
       setLastName(response.last_name);
       setStartDate(response.start_date.substring(0, 10));
-      setAdmStart(response.adm_start_date.substring(0, 10));
+      if (response.adm_start_date)
+        setAdmStart(response.adm_start_date.substring(0, 10));
       setAdmFund(response.adm_fund);
       setAdmDays(response.adm_days);
       setAdmStatusTU(response.tu_status_adm);
-      setAdm90(response.adm_90.substring(0, 10));
-      setAdm180(response.adm_180.substring(0, 10));
-      setLastAdmDate(response.last_adm_date.substring(0, 10));
+      if (response.adm_90) setAdm90(response.adm_90.substring(0, 10));
+      if (response.adm_180) setAdm180(response.adm_180.substring(0, 10));
+      if (response.last_adm_date)
+        setLastAdmDate(response.last_adm_date.substring(0, 10));
     }
     getInstance(instanceId);
   }, [instanceId]);

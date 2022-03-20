@@ -5,40 +5,40 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-function ParticipantMenu() {
+function ParticipantMenu({ instanceId }) {
   return (
     <div class="btn-group-vertical">
-      <Link to="/participants/1/view">
+      <Link to={`/participants/${instanceId}/edit`}>
         <button type="button" class="btn btn-secondary">
-          View Participant Info
+          Edit Participant Info
         </button>
       </Link>
       <br />
-      <Link to="/participants/1/documents">
+      <Link to={`/participants/${instanceId}/documents`}>
         <button type="button" class="btn btn-secondary">
           View Documents
         </button>
       </Link>
       <br />
-      <Link to="/participants/1/employment">
+      <Link to={`/participants/${instanceId}/employment`}>
         <button type="button" class="btn btn-secondary">
           View Employment Info
         </button>
       </Link>
       <br />
-      <Link to="/participants/1/treatment">
+      <Link to={`/participants/${instanceId}/treatment`}>
         <button type="button" class="btn btn-secondary">
           View Treatment Info
         </button>
       </Link>
       <br />
-      <Link to="/participants/1/adm">
+      <Link to={`/participants/${instanceId}/adm`}>
         <button type="button" class="btn btn-secondary">
           View ADM Info
         </button>
       </Link>
       <br />
-      <Link to="/participants/1/discharge">
+      <Link to={`/participants/${instanceId}/discharge`}>
         <button type="button" class="btn btn-secondary">
           View Discharge Info
         </button>

@@ -93,9 +93,6 @@ function EditInstance({ date }) {
   //Get instanceId from url
   let { instanceId } = useParams();
 
-  //Create instance of useHistory hook
-  const history = useHistory();
-
   //Make an API Call to get the instance based on the instance_id
   useEffect(() => {
     async function getInstance(instanceId) {
@@ -170,9 +167,7 @@ function EditInstance({ date }) {
     }
     await updateParticipant(participant);
 
-    //Reset fields
-    setFirstName("");
-    setLastName("");
+    alert("Participant Info Updated Successfully");
 
     //Go back to dashboard page
     //history.push(`/participants/dashboard`);
@@ -180,7 +175,7 @@ function EditInstance({ date }) {
 
   //Create the handleCancel function to return the user to the previous page
   const handleCancel = (event) => {
-    history.push(`/dashboard`);
+    //history.push(`/dashboard`);
   };
 
   //Return the form to enter the reservation details

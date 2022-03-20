@@ -46,26 +46,36 @@ function ParticipantsDashboard({ date }) {
 
     return (
       <tr key={instance.instance_id}>
-        <td>{instance.participant_id}</td>
+        <td>{instance.instance_id}</td>
         <td>{instance.first_name}</td>
         <td>{instance.last_name}</td>
         <td>{instance.incident_num}</td>
         <td>{startDateString}</td>
         <td>{dischargeDateString}</td>
-        <Link
-          to={`/participants/${instance.participant_id}/statuses/${instance.incident_num}`}
-        >
-          <button type="button" class="btn btn-primary">
+        <Link to={`/participants/${instance.instance_id}/statuses`}>
+          <button
+            type="button"
+            class="btn btn-primary"
+            style={{ margin: "5px" }}
+          >
             Add Status
           </button>
         </Link>{" "}
         <Link to={`/participants/${instance.instance_id}/view`}>
-          <button type="button" class="btn btn-primary">
+          <button
+            type="button"
+            class="btn btn-primary"
+            style={{ margin: "5px" }}
+          >
             View
           </button>
         </Link>{" "}
         <Link to={`/participants/${instance.instance_id}/edit`}>
-          <button type="button" class="btn btn-primary">
+          <button
+            type="button"
+            class="btn btn-primary"
+            style={{ margin: "5px" }}
+          >
             Edit
           </button>
         </Link>
@@ -79,7 +89,7 @@ function ParticipantsDashboard({ date }) {
       <h1>Active Participants</h1>
       <table class="table">
         <tr>
-          <th>Participant ID</th> <th>First Name</th> <th>Last Name</th>{" "}
+          <th>Instance ID</th> <th>First Name</th> <th>Last Name</th>{" "}
           <th>Incident #</th>
           <th>Start Date</th> <th>Discharge Date</th>
         </tr>

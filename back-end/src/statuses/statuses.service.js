@@ -14,8 +14,9 @@ function read(status_id) {
 }
 
 //List all tables
-function list() {
-  return knex("statuses").select("*").orderBy("status_id");
+function list(params) {
+  console.log("service params", params);
+  return knex("statuses").select("*").where(params).orderBy("status_id");
 }
 
 //Modify a given participant by statusId

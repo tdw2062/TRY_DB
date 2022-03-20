@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { createStatus } from "../utils/api";
 
-import { readParticipant } from "../utils/api";
-import { useParams, useHistory } from "react-router-dom";
+import { readInstance } from "../utils/api";
+import { useParams, Link, useHistory } from "react-router-dom";
 
 /**
  * Defines the dashboard page.
@@ -15,6 +15,12 @@ function AddStatus() {
     { statusId: 1, statusName: "Had RC" },
     { statusId: 2, statusName: "Start MAT" },
     { statusId: 3, statusName: "On Restrictions" },
+    { statusId: 4, statusName: "Got License" },
+    { statusId: 5, statusName: "Off Restrictions" },
+    { statusId: 6, statusName: "ADM Funding Start" },
+    { statusId: 7, statusName: "Drug Test Date" },
+    { statusId: 8, statusName: "IOP Start Date" },
+    { statusId: 9, statusName: "ADM Funding Start" },
   ]);
 
   //Create state variables for each field of reservation and add event listeners
@@ -33,24 +39,27 @@ function AddStatus() {
   const [statusDate, setStatusDate] = useState(null);
   const handleStatusDateChange = (event) => setStatusDate(event.target.value);
 
+  const [statusNotes, setStatusNotes] = useState(null);
+  const handleStatusNotesChange = (event) => setStatusNotes(event.target.value);
+
   //State vars for ErrorCaught
   const [visibility3, setVisibility3] = useState(null);
   const [errMessage, setErrMessage] = useState("");
 
   //Get ParticipantId from url
-  const { participantId, incidentId } = useParams();
+  const { instanceId } = useParams();
 
   //Make an API Call to get the reservation based on the reservation_id
   useEffect(() => {
-    async function getParticipant(participantId) {
-      const response = await readParticipant(participantId);
+    async function getInstance(instanceId) {
+      const response = await readInstance(instanceId);
 
       setFirstName(response.first_name);
       setLastName(response.last_name);
-      setIncident(incidentId);
+      setIncident(response.incident_num);
     }
-    getParticipant(participantId);
-  }, [participantId]);
+    getInstance(instanceId);
+  }, [instanceId]);
 
   async function handleSubmit() {
     //Make an api call to post the new table to the db
@@ -58,16 +67,18 @@ function AddStatus() {
       data: {},
     };
 
-    status.data.participant_id = participantId;
-    status.data.instance_id = incidentId;
+    status.data.instance_id = instanceId;
     status.data.status_name = statusName;
     status.data.date = statusDate;
+    status.data.notes = statusNotes;
 
     try {
       const response = await createStatus(status);
     } catch (err) {
       console.log("Error making createTable API call: ", err);
     }
+
+    alert("Status Update Added");
   }
 
   //Create table rows from the statuses state array and use to populate the drop-down
@@ -127,7 +138,7 @@ function AddStatus() {
             {statusLinks}
           </select>
           <div className="form-group">
-            <label htmlFor="status_date">Date of Reservation</label>
+            <label htmlFor="status_date">Date of Status Update</label>
             <input
               type="date"
               name="status_date"
@@ -137,9 +148,29 @@ function AddStatus() {
               value={statusDate}
             />
           </div>
+          <div className="form-group">
+            <label htmlFor="status_notes">Status Notes</label>
+            <input
+              type="text"
+              name="status_notes"
+              className="form-control"
+              id="status_notes"
+              onChange={handleStatusNotesChange}
+              value={statusNotes}
+            />
+          </div>
           <button type="submit" className="btn btn-primary">
-            Submit
+            Submit Status Update
           </button>
+          <Link to={`/participants/${instanceId}/view`}>
+            <button
+              type="button"
+              class="btn btn-primary"
+              style={{ margin: "5px" }}
+            >
+              Return to View Participant
+            </button>
+          </Link>
         </form>
       </div>
     </main>

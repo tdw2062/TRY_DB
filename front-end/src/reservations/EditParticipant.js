@@ -76,13 +76,7 @@ function EditParticipant({ date }) {
     }
     await changeParticipant(participant);
 
-    //Reset fields
-    setFirstName("");
-    setLastName("");
-    setMobileNumber("");
-
-    //Go back to dashboard page
-    history.push(`/dashboard`);
+    alert("Participant Info Updated successfully");
   }
 
   //Create the handleCancel function to return the user to the previous page

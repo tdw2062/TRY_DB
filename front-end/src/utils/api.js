@@ -77,6 +77,7 @@ export async function listInstances(params, signal) {
 
 //Returns a list of statuses filtered by a given parameter
 export async function listStatuses(params, signal) {
+  console.log("params", params);
   const url = new URL(`${API_BASE_URL}/statuses`);
   Object.entries(params).forEach(([key, value]) =>
     url.searchParams.append(key, value.toString())
