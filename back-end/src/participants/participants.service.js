@@ -15,8 +15,11 @@ function read(participant_id) {
 }
 
 //List all tables
-function list() {
-  return knex("participants").select("*").orderBy("participant_id");
+function list(params) {
+  return knex("participants")
+    .select("*")
+    .where(params)
+    .orderBy("participant_id");
 }
 
 //Modify a given participant by participantId

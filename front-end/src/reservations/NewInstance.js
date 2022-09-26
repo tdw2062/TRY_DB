@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import {
-  readReservation,
-  updateReservation,
-  readParticipant,
-  createParticipant,
-  readInstance,
-  updateInstance,
-} from "../utils/api";
+import { readInstance, createInstance } from "../utils/api";
 import EnrollFormOld from "./EnrollFormOld";
 
 import ErrorAlert from "../layout/ErrorAlert";
@@ -18,13 +11,17 @@ import ErrorAlert from "../layout/ErrorAlert";
  *  the date for which the user wants to view reservations.
  * @returns {JSX.Element}
  */
-function EditInstance({ date }) {
+function NewInstance({ date }) {
   //Create state variables for each field of reservation and add event listeners
   const [firstName, setFirstName] = useState("");
   const handleFirstNameChange = (event) => setFirstName(event.target.value);
 
   const [lastName, setLastName] = useState("");
   const handleLastNameChange = (event) => setLastName(event.target.value);
+
+  const [participantId, setParticipantId] = useState("");
+  const handleParticipantIdChange = (event) =>
+    setParticipantId(event.target.value);
 
   const [gender, setGender] = useState("");
   const handleGenderChange = (event) => setGender(event.target.value);
@@ -99,24 +96,9 @@ function EditInstance({ date }) {
       const response = await readInstance(instanceId);
       setFirstName(response.first_name);
       setLastName(response.last_name);
+      setParticipantId(response.participant_id);
       setGender(response.gender);
       setDob(response.birth_date.substring(0, 10));
-      setHomeCounty(response.has_checking);
-      setIncidentNum(response.incident_num);
-      setIncomeBefore(response.has_license);
-      setAccountsPrior(response.accounts_before_try);
-      setLastUseDate(response.last_use_date.substring(0, 10));
-      setYearsInside(response.years_inside);
-      setSexOff(response.sex_offender);
-      setRecentStayLength(response.recent_stay_length);
-      setDrugChoice(response.drug_of_choice);
-      setStartDate(response.start_date.substring(0, 10));
-      setMat(response.mat_entering_try);
-      setTanf(response.tanf);
-      setChargesDescr(response.charges);
-      setCopingLength(response.coping_period_length);
-      setNeedsGed(response.needs_ged);
-      setEmploymentDetails(response.employment_status_entering);
     }
     getInstance(instanceId);
   }, [instanceId]);
@@ -130,7 +112,7 @@ function EditInstance({ date }) {
       data: {},
     };
 
-    participant.data.instance_id = instanceId;
+    participant.data.participant_id = participantId;
     participant.data.first_name = firstName;
     participant.data.last_name = lastName;
     participant.data.gender = gender;
@@ -156,18 +138,18 @@ function EditInstance({ date }) {
     console.log("participant", participant);
 
     //Make api call to update reservation
-    async function updateParticipant(participant) {
+    async function newParticipant(participant) {
       try {
-        const response = await updateInstance(participant);
+        const response = await createInstance(participant);
         console.log(response);
       } catch (err) {
         console.log("Error making updateReservation API call: ", err);
         setErrMessage(err);
       }
     }
-    await updateParticipant(participant);
+    await newParticipant(participant);
 
-    alert("Participant Info Updated Successfully");
+    alert("Participant Enrolled Successfully");
 
     //Go back to dashboard page
     //history.push(`/participants/dashboard`);
@@ -230,4 +212,4 @@ function EditInstance({ date }) {
   );
 }
 
-export default EditInstance;
+export default NewInstance;

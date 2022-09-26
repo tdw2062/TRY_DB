@@ -22,4 +22,6 @@ router
   .put(controller.update)
   .all(methodNotAllowed);
 
+router.route("/byDate").get(controller.list).all(methodNotAllowed);
+
 module.exports = router;

@@ -101,6 +101,19 @@ export async function createStatus(status, signal) {
 
 //Create a participant
 export async function createParticipant(participant, signal) {
+  const url = `${API_BASE_URL}/participants`;
+  const options = {
+    method: "POST",
+    headers,
+    body: JSON.stringify(participant),
+    signal,
+  };
+
+  return await fetchJson(url, options, {});
+}
+
+//Create a participant
+export async function createInstance(participant, signal) {
   const url = `${API_BASE_URL}/instances`;
   const options = {
     method: "POST",

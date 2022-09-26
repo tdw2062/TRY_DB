@@ -3,7 +3,7 @@
 //tables and allow the user to finish the tables
 
 import React, { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { listInstances } from "../utils/api";
 
 /**
@@ -12,7 +12,7 @@ import { listInstances } from "../utils/api";
  *  the date for which the user wants to view reservations.
  * @returns {JSX.Element}
  */
-function RecDashboard({ date }) {
+function RecPrevInstances({ date }) {
   //The main state variables are reservations and tables which are arrays to be displayed
   let [instances, setInstances] = useState([]);
   const [instancesError, setInstancesError] = useState(null);
@@ -21,50 +21,26 @@ function RecDashboard({ date }) {
   const [day, setDay] = useState("");
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
+
   //Declare an instance of the useHistory hook
   const history = useHistory();
 
-  //Use useEffect to load the reservations and the tables
+  //Get instanceId from url
+  const { participant_id } = useParams();
+  console.log("participant id", participant_id);
 
+  //Use useEffect to load the reservations and the tables
   //Load reservations
   useEffect(loadDashboard, [day, month, year]);
-
   function loadDashboard() {
     console.log("trying");
-
     const abortController = new AbortController();
     setInstancesError(null);
 
-    listInstances({ day, month, year }, abortController.signal)
+    listInstances({ participant_id }, abortController.signal)
       .then(setInstances)
       .catch(setInstancesError);
     return () => abortController.abort();
-  }
-
-  function pastDue() {
-    const currDate = new Date();
-    setMonth(currDate.getMonth());
-    setDay(currDate.getDate());
-    setYear(currDate.getFullYear());
-    console.log("dateString", month, day, year);
-  }
-
-  function dueWithin30() {
-    const currDate = new Date();
-    currDate.setDate(currDate.getDate() + 30);
-    setMonth(currDate.getMonth());
-    setDay(currDate.getDate());
-    setYear(currDate.getFullYear());
-    console.log("dateString", month, day, year);
-  }
-
-  function dueWithin90() {
-    const currDate = new Date();
-    currDate.setDate(currDate.getDate() + 90);
-    setMonth(currDate.getMonth());
-    setDay(currDate.getDate());
-    setYear(currDate.getFullYear());
-    console.log("dateString", month, day, year);
   }
 
   //Create table rows of reservations using the 'reservations' state array
@@ -106,17 +82,6 @@ function RecDashboard({ date }) {
             </button>
           </Link>{" "}
         </td>
-        <td>
-          <Link to={`/participants/${instance.participant_id}/rec_prev`}>
-            <button
-              type="button"
-              class="btn btn-primary"
-              style={{ margin: "5px" }}
-            >
-              View All
-            </button>
-          </Link>{" "}
-        </td>
       </tr>
     );
   });
@@ -124,17 +89,13 @@ function RecDashboard({ date }) {
   //Return the html code for the reservations and the tables
   return (
     <main>
-      <h1>Recidivism Dashboard</h1>
+      <h1>View Previous Instances</h1>
       <br />
-      <button type="button" class="btn btn-primary" onClick={pastDue}>
-        Past Due
-      </button>{" "}
-      <button type="button" class="btn btn-primary" onClick={dueWithin30}>
-        Due within 30 Days
-      </button>{" "}
-      <button type="button" class="btn btn-primary" onClick={dueWithin90}>
-        Due within 90 Days
-      </button>
+      <Link to={`/participants/rec_dashboard`}>
+        <button type="button" class="btn btn-primary" style={{ margin: "5px" }}>
+          Return to Recidivism Dashboard
+        </button>{" "}
+      </Link>
       <br />
       <br />
       <table class="table table-sm">
@@ -161,4 +122,4 @@ function RecDashboard({ date }) {
   );
 }
 
-export default RecDashboard;
+export default RecPrevInstances;

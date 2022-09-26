@@ -5,7 +5,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-function EnrollForm({
+function EnrollFormOld({
   firstName,
   handleFirstNameChange,
   lastName,
@@ -344,4 +344,4 @@ function EnrollForm({
   );
 }
 
-export default EnrollForm;
+export default EnrollFormOld;

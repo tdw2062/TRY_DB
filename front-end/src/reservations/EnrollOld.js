@@ -4,9 +4,7 @@ import {
   readReservation,
   updateReservation,
   readParticipant,
-  createParticipant,
-  readInstance,
-  updateInstance,
+  createInstance,
 } from "../utils/api";
 import EnrollFormOld from "./EnrollFormOld";
 
@@ -18,7 +16,7 @@ import ErrorAlert from "../layout/ErrorAlert";
  *  the date for which the user wants to view reservations.
  * @returns {JSX.Element}
  */
-function EditInstance({ date }) {
+function EnrollOld({ date }) {
   //Create state variables for each field of reservation and add event listeners
   const [firstName, setFirstName] = useState("");
   const handleFirstNameChange = (event) => setFirstName(event.target.value);
@@ -90,36 +88,8 @@ function EditInstance({ date }) {
   const [errMessage, setErrMessage] = useState("");
   const [visibility3, setVisibility3] = useState(null);
 
-  //Get instanceId from url
-  let { instanceId } = useParams();
-
-  //Make an API Call to get the instance based on the instance_id
-  useEffect(() => {
-    async function getInstance(instanceId) {
-      const response = await readInstance(instanceId);
-      setFirstName(response.first_name);
-      setLastName(response.last_name);
-      setGender(response.gender);
-      setDob(response.birth_date.substring(0, 10));
-      setHomeCounty(response.has_checking);
-      setIncidentNum(response.incident_num);
-      setIncomeBefore(response.has_license);
-      setAccountsPrior(response.accounts_before_try);
-      setLastUseDate(response.last_use_date.substring(0, 10));
-      setYearsInside(response.years_inside);
-      setSexOff(response.sex_offender);
-      setRecentStayLength(response.recent_stay_length);
-      setDrugChoice(response.drug_of_choice);
-      setStartDate(response.start_date.substring(0, 10));
-      setMat(response.mat_entering_try);
-      setTanf(response.tanf);
-      setChargesDescr(response.charges);
-      setCopingLength(response.coping_period_length);
-      setNeedsGed(response.needs_ged);
-      setEmploymentDetails(response.employment_status_entering);
-    }
-    getInstance(instanceId);
-  }, [instanceId]);
+  //Create instance of useHistory hook
+  const history = useHistory();
 
   //Create the handleSubmit function to update the deck
   //This function creates a reservation based on the user input and then uses changeReservation() api call
@@ -130,7 +100,6 @@ function EditInstance({ date }) {
       data: {},
     };
 
-    participant.data.instance_id = instanceId;
     participant.data.first_name = firstName;
     participant.data.last_name = lastName;
     participant.data.gender = gender;
@@ -156,32 +125,31 @@ function EditInstance({ date }) {
     console.log("participant", participant);
 
     //Make api call to update reservation
-    async function updateParticipant(participant) {
+    async function newParticipant(participant) {
       try {
-        const response = await updateInstance(participant);
+        const response = await createInstance(participant);
         console.log(response);
       } catch (err) {
         console.log("Error making updateReservation API call: ", err);
         setErrMessage(err);
       }
     }
-    await updateParticipant(participant);
+    await newParticipant(participant);
 
-    alert("Participant Info Updated Successfully");
-
+    alert("Participant Enrolled Successfully");
     //Go back to dashboard page
     //history.push(`/participants/dashboard`);
   }
 
   //Create the handleCancel function to return the user to the previous page
   const handleCancel = (event) => {
-    //history.push(`/dashboard`);
+    history.push(`/dashboard`);
   };
 
   //Return the form to enter the reservation details
   return (
     <main>
-      <h1>Edit Participant</h1>
+      <h1>Enroll Participant</h1>
       <EnrollFormOld
         firstName={firstName}
         handleFirstNameChange={handleFirstNameChange}
@@ -230,4 +198,4 @@ function EditInstance({ date }) {
   );
 }
 
-export default EditInstance;
+export default EnrollOld;

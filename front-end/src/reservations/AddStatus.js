@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { createStatus } from "../utils/api";
-
-import { readInstance } from "../utils/api";
+import { createStatus, readInstance, updateInstance } from "../utils/api";
 import { useParams, Link, useHistory } from "react-router-dom";
 
 /**
@@ -12,15 +10,46 @@ import { useParams, Link, useHistory } from "react-router-dom";
  */
 function AddStatus() {
   const [statuses, setStatuses] = useState([
-    { statusId: 1, statusName: "Had RC" },
-    { statusId: 2, statusName: "Start MAT" },
-    { statusId: 3, statusName: "On Restrictions" },
-    { statusId: 4, statusName: "Got License" },
-    { statusId: 5, statusName: "Off Restrictions" },
-    { statusId: 6, statusName: "ADM Funding Start" },
-    { statusId: 7, statusName: "Drug Test Date" },
-    { statusId: 8, statusName: "IOP Start Date" },
-    { statusId: 9, statusName: "ADM Funding Start" },
+    { statusField: "off_coping_date", statusDescr: "Off Coping Date" },
+    { statusField: "off_coping60_date", statusDescr: "Off Coping +60" },
+    {
+      statusField: "on_restrictions_date",
+      statusDescr: "On Restrictions Date",
+    },
+    {
+      statusField: "off_restrictions_date",
+      statusDescr: "Off Restrictions Date",
+    },
+    {
+      statusField: "employment_start_date",
+      statusDescr: "Employment Start Date",
+    },
+    {
+      statusField: "leadership_dev_start_date",
+      statusDescr: "Leadership Development Start Date",
+    },
+    {
+      statusField: "job_search_start_date",
+      statusDescr: "Job Search Start Date",
+    },
+    { statusField: "iop_start_date", statusDescr: "IOP Start Date" },
+    { statusField: "iop_end_date", statusDescr: "IOP End Date" },
+    {
+      statusField: "aftercare_start_date",
+      statusDescr: "Aftercare Start Date",
+    },
+    { statusField: "aftercare_end_date", statusDescr: "Aftercare End Date" },
+    { statusField: "ged_start_date", statusDescr: "GED Start Date" },
+    { statusField: "ged_end_date", statusDescr: "GED End Date" },
+    { statusField: "cpt_start_date", statusDescr: "CPT Start Date" },
+    { statusField: "cpt_end_date", statusDescr: "CPT End Date" },
+    {
+      statusField: "rec_treatment_update",
+      statusDescr: "Received Treatment Update",
+    },
+    { statusField: "had_counseling", statusDescr: "Had Individual Counseling" },
+    { statusField: "relapse_date", statusDescr: "Relapse Date" },
+    { statusField: "started_mat_date", statusDescr: "Started MAT" },
   ]);
 
   //Create state variables for each field of reservation and add event listeners
@@ -28,13 +57,18 @@ function AddStatus() {
   const handleFirstNameChange = (event) => setFirstName(event.target.value);
 
   const [lastName, setLastName] = useState("");
-  const handleLastNameChange = (event) => setLastName(event.target.value);
+  const handleLastNameChange = (event) => {
+    setLastName(event.target.value);
+    console.log(statusField);
+  };
 
   const [incident, setIncident] = useState(null);
   const handleIncidentChange = (event) => setIncident(event.target.value);
 
-  const [statusName, setStatusName] = useState(null);
+  const [statusName, setStatusName] = useState("Started MAT");
   const handleStatusNameChange = (event) => setStatusName(event.target.value);
+
+  const [statusField, setStatusField] = useState(null);
 
   const [statusDate, setStatusDate] = useState(null);
   const handleStatusDateChange = (event) => setStatusDate(event.target.value);
@@ -62,6 +96,29 @@ function AddStatus() {
   }, [instanceId]);
 
   async function handleSubmit() {
+    //Find the object that matches the statusName
+    const objectMatch = statuses.find(
+      ({ statusDescr }) => statusDescr === statusName
+    );
+
+    //Create an instance object to update the instances table
+    let instance = {
+      data: {},
+    };
+
+    instance.data.instance_id = instanceId;
+    instance.data[objectMatch.statusField] = statusDate;
+
+    console.log("Instance Number", instance.data.instance_id);
+    console.log("Instance Field", instance.data);
+    console.log("Instance Value", instance.data[objectMatch.statusField]);
+
+    try {
+      const response1 = await updateInstance(instance);
+    } catch (err) {
+      console.log("Error making createTable API call: ", err);
+    }
+
     //Make an api call to post the new table to the db
     let status = {
       data: {},
@@ -73,7 +130,7 @@ function AddStatus() {
     status.data.notes = statusNotes;
 
     try {
-      const response = await createStatus(status);
+      const response2 = await createStatus(status);
     } catch (err) {
       console.log("Error making createTable API call: ", err);
     }
@@ -83,7 +140,7 @@ function AddStatus() {
 
   //Create table rows from the statuses state array and use to populate the drop-down
   const statusLinks = statuses.map((status) => (
-    <option value={status.statusName}>{status.statusName}</option>
+    <option value={status.statusDescr}>{status.statusDescr}</option>
   ));
 
   //Return the html with status drop-down

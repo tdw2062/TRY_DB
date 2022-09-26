@@ -9,17 +9,17 @@ exports.seed = async function (knex) {
     {
       first_name: "Mike",
       last_name: "Jones",
-      mobile_number: "330-867-8888",
+      dob: "02/02/1981",
     },
     {
       first_name: "Tim",
       last_name: "Clinton",
-      mobile_number: "330-867-1101",
+      dob: "06/02/1984",
     },
     {
       first_name: "Jimmy",
       last_name: "Johns",
-      mobile_number: "330-836-4444",
+      dob: "03/07/1987",
     },
   ]);
 };

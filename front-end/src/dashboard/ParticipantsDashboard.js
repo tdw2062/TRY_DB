@@ -79,6 +79,17 @@ function ParticipantsDashboard({ date }) {
             Edit
           </button>
         </Link>
+        <Link
+          to={`/participants/${instance.instance_id}/discharge_participant`}
+        >
+          <button
+            type="button"
+            class="btn btn-primary"
+            style={{ margin: "5px" }}
+          >
+            Discharge
+          </button>
+        </Link>{" "}
       </tr>
     );
   });

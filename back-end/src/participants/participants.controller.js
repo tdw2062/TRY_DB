@@ -27,7 +27,8 @@ async function read(req, res, next) {
 
 //List all of the participants
 async function list(req, res, next) {
-  const data = await participantsService.list();
+  const params = req.query;
+  const data = await participantsService.list(params);
   res.json({ data });
 }
 

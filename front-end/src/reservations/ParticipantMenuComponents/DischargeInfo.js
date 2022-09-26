@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { readInstance, readParticipant, updateParticipant } from "../utils/api";
+import {
+  readInstance,
+  readParticipant,
+  updateParticipant,
+} from "../../utils/api";
 
-import ErrorAlert from "../layout/ErrorAlert";
+import ErrorAlert from "../../layout/ErrorAlert";
 
 /**
  * Defines the dashboard page.

@@ -4,9 +4,9 @@ import {
   readReservation,
   updateReservation,
   readParticipant,
-  createParticipant,
+  createInstance,
 } from "../utils/api";
-import EnrollForm from "./EnrollForm";
+import EnrollFormOld from "./EnrollFormOld";
 
 import ErrorAlert from "../layout/ErrorAlert";
 
@@ -16,7 +16,7 @@ import ErrorAlert from "../layout/ErrorAlert";
  *  the date for which the user wants to view reservations.
  * @returns {JSX.Element}
  */
-function EnrollParticipant({ date }) {
+function EnrollNew({ date }) {
   //Create state variables for each field of reservation and add event listeners
   const [firstName, setFirstName] = useState("");
   const handleFirstNameChange = (event) => setFirstName(event.target.value);
@@ -91,6 +91,26 @@ function EnrollParticipant({ date }) {
   //Create instance of useHistory hook
   const history = useHistory();
 
+  //Get participantId from url
+  const { participantId } = useParams();
+  const participant_id = participantId;
+  console.log("instance id", participant_id);
+
+  //Load participant
+  //Make an API Call to get the participant on the participant_id
+  useEffect(() => {
+    async function getParticipant(participantId) {
+      const response = await readParticipant(participantId);
+
+      let dobString = response.dob.substring(0, 10);
+
+      setFirstName(response.first_name);
+      setLastName(response.last_name);
+      setDob(dobString);
+    }
+    getParticipant(participantId);
+  }, [participantId]);
+
   //Create the handleSubmit function to update the deck
   //This function creates a reservation based on the user input and then uses changeReservation() api call
   async function handleSubmit(event) {
@@ -100,6 +120,7 @@ function EnrollParticipant({ date }) {
       data: {},
     };
 
+    participant.data.participant_id = participantId;
     participant.data.first_name = firstName;
     participant.data.last_name = lastName;
     participant.data.gender = gender;
@@ -127,7 +148,7 @@ function EnrollParticipant({ date }) {
     //Make api call to update reservation
     async function newParticipant(participant) {
       try {
-        const response = await createParticipant(participant);
+        const response = await createInstance(participant);
         console.log(response);
       } catch (err) {
         console.log("Error making updateReservation API call: ", err);
@@ -150,7 +171,7 @@ function EnrollParticipant({ date }) {
   return (
     <main>
       <h1>Enroll Participant</h1>
-      <EnrollForm
+      <EnrollFormOld
         firstName={firstName}
         handleFirstNameChange={handleFirstNameChange}
         lastName={lastName}
@@ -198,4 +219,4 @@ function EnrollParticipant({ date }) {
   );
 }
 
-export default EnrollParticipant;
+export default EnrollNew;
