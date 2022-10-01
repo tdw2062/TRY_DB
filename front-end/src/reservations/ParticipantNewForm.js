@@ -12,8 +12,6 @@ function ParticipantNewForm({
   handleLastNameChange,
   dob,
   handleDobChange,
-  current,
-  handleCurrentChange,
   handleSubmit,
   handleCancel,
 }) {
@@ -59,19 +57,6 @@ function ParticipantNewForm({
               id="dob"
               onChange={handleDobChange}
               value={dob}
-            />
-          </div>
-        </div>
-        <div class="col">
-          <div className="form-group">
-            <label htmlFor="current">Currently in Program?</label>
-            <input
-              type="text"
-              name="current"
-              className="form-control"
-              id="current"
-              onChange={handleCurrentChange}
-              value={current}
             />
           </div>
         </div>

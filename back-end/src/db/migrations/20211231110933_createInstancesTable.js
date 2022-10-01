@@ -28,6 +28,7 @@ exports.up = function (knex) {
     table.string("employment_details");
     table.string("incident_num");
     table.date("start_date");
+    table.string("currently_in_program");
     //Begin Status Fields (one-time statuses)
     table.date("off_coping_date");
     table.date("off_coping60_date");
@@ -51,26 +52,31 @@ exports.up = function (knex) {
     table.date("had_counseling");
     table.date("relapse_date");
     //Begin Discharge Fields
-    table.date("got_checking");
-    table.date("got_license");
-    table.date("got_savings");
+    table.string("got_checking");
+    table.string("got_license");
+    table.string("got_savings");
     table.string("program_utilization");
     table.date("discharge_date");
     table.string("discharge_reason");
-    table.date("housing_transition");
+    table.string("housing_transition");
     table.string("status_at_discharge");
     //Begin Recidivism fields
     table.date("next_check_date");
     table.string("1_YR_Fed");
     table.string("1_YR_State");
+    table.string("1_YR_Note");
     table.string("2_YR_Fed");
     table.string("2_YR_State");
+    table.string("2_YR_Note");
     table.string("3_YR_Fed");
     table.string("3_YR_State");
+    table.string("3_YR_Note");
     table.string("4_YR_Fed");
     table.string("4_YR_State");
+    table.string("4_YR_Note");
     table.string("5_YR_Fed");
     table.string("5_YR_State");
+    table.string("5_YR_Note");
     table.timestamps(true, true); // adds created_at and updated_at columns; passing true as the first argument sets the columns to be a timestamp type while passing true as the second argument sets those columns to be non-nullable and to use the current timestamp by default
   });
 };

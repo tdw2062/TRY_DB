@@ -3,7 +3,6 @@ import React from "react";
 import { Redirect, Route, Switch, useLocation } from "react-router-dom";
 import ParticipantsDashboard from "../dashboard/ParticipantsDashboard";
 import EditParticipant from "../reservations/EditParticipant";
-import EnrollOld from "../reservations/EnrollOld";
 import EnrollNew from "../reservations/EnrollNew";
 import EnrollHome from "../reservations/EnrollHome";
 import NewParticipant from "../reservations/NewParticipant";
@@ -78,13 +77,10 @@ function Routes() {
       <Route path="/participants/enroll">
         <EnrollHome />
       </Route>
-      <Route path="/participants/enrollOld">
-        <EnrollOld />
-      </Route>
+
       <Route path="/participants/:participantId/enrollNew">
         <EnrollNew />
       </Route>
-
       <Route>
         <NotFound />
       </Route>

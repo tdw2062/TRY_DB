@@ -43,6 +43,9 @@ function RecCheck({ date }) {
   const [state, setState] = useState("");
   const handleStateChange = (event) => setState(event.target.value);
 
+  const [note, setNote] = useState("");
+  const handleNoteChange = (event) => setNote(event.target.value);
+
   //State vars for ErrorCaught
   const [visibility3, setVisibility3] = useState(null);
   const [errMessage, setErrMessage] = useState("");
@@ -77,30 +80,35 @@ function RecCheck({ date }) {
     };
 
     instance.data.instance_id = Number(instanceId);
+    if (timePeriod === "1") instance.data["1_YR_Note"] = note;
     if (timePeriod === "1" && fed === "yes") instance.data["1_YR_Fed"] = "yes";
     if (timePeriod === "1" && fed === "no") instance.data["1_YR_Fed"] = "no";
     if (timePeriod === "1" && state === "yes")
       instance.data["1_YR_State"] = "yes";
     if (timePeriod === "1" && state === "no")
       instance.data["1_YR_State"] = "no";
+    if (timePeriod === "2") instance.data["2_YR_Note"] = note;
     if (timePeriod === "2" && fed === "yes") instance.data["2_YR_Fed"] = "yes";
     if (timePeriod === "2" && fed === "no") instance.data["2_YR_Fed"] = "no";
     if (timePeriod === "2" && state === "yes")
       instance.data["2_YR_State"] = "yes";
     if (timePeriod === "2" && state === "no")
       instance.data["2_YR_State"] = "no";
+    if (timePeriod === "3") instance.data["3_YR_Note"] = note;
     if (timePeriod === "3" && fed === "yes") instance.data["3_YR_Fed"] = "yes";
     if (timePeriod === "3" && fed === "no") instance.data["3_YR_Fed"] = "no";
     if (timePeriod === "3" && state === "yes")
       instance.data["3_YR_State"] = "yes";
     if (timePeriod === "3" && state === "no")
       instance.data["3_YR_State"] = "no";
+    if (timePeriod === "4") instance.data["4_YR_Note"] = note;
     if (timePeriod === "4" && fed === "yes") instance.data["4_YR_Fed"] = "yes";
     if (timePeriod === "4" && fed === "no") instance.data["4_YR_Fed"] = "no";
     if (timePeriod === "4" && state === "yes")
       instance.data["4_YR_State"] = "yes";
     if (timePeriod === "4" && state === "no")
       instance.data["4_YR_State"] = "no";
+    if (timePeriod === "5") instance.data["5_YR_Note"] = note;
     if (timePeriod === "5" && fed === "yes") instance.data["5_YR_Fed"] = "yes";
     if (timePeriod === "5" && fed === "no") instance.data["5_YR_Fed"] = "no";
     if (timePeriod === "5" && state === "yes")
@@ -232,6 +240,17 @@ function RecCheck({ date }) {
             <option value="yes"> Yes</option>
             <option value="no"> No</option>
           </select>
+          <div className="form-group">
+            <label htmlFor="note">Note</label>
+            <input
+              type="text"
+              name="note"
+              className="form-control"
+              id="note"
+              onChange={handleNoteChange}
+              value={note}
+            />
+          </div>
           <br />
           <button type="submit" className="btn btn-primary">
             Submit

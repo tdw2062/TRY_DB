@@ -107,14 +107,16 @@ function DischargeForm({
         <div class="col">
           <div className="form-group">
             <label htmlFor="got_checking">Got Checking Account</label>
-            <input
-              type="date"
-              name="got_checking"
+            <select
               className="form-control"
               id="got_checking"
+              name="got_checking"
               onChange={handleGotCheckingChange}
               value={gotChecking}
-            />
+            >
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
           </div>
         </div>
       </div>
@@ -122,27 +124,31 @@ function DischargeForm({
         <div class="col">
           <div className="form-group">
             <label htmlFor="got_license">Got Drivers License</label>
-            <input
-              type="date"
-              name="got_license"
+            <select
               className="form-control"
               id="got_license"
+              name="got_license"
               onChange={handleGotLicenseChange}
               value={gotLicense}
-            />
+            >
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
           </div>
         </div>
         <div class="col">
           <div className="form-group">
             <label htmlFor="got_savings">Got Savings Account</label>
-            <input
-              type="date"
-              name="got_savings"
+            <select
               className="form-control"
               id="got_savings"
+              name="got_savings"
               onChange={handleGotSavingsChange}
               value={gotSavings}
-            />
+            >
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
           </div>
         </div>
       </div>
@@ -150,14 +156,16 @@ function DischargeForm({
         <div class="col">
           <div className="form-group">
             <label htmlFor="program_utilization">Program Utilization</label>
-            <input
-              type="text"
-              name="program_utilization"
+            <select
               className="form-control"
               id="program_utilization"
+              name="program_utilization"
               onChange={handleProgramUtilizationChange}
               value={programUtilization}
-            />
+            >
+              <option value="successful">Successful</option>
+              <option value="unsuccessful">Unsuccessful</option>
+            </select>
           </div>
         </div>
         <div class="col">
@@ -165,14 +173,16 @@ function DischargeForm({
             <label htmlFor="housing_transition">
               Transitioned to Stable Housing?
             </label>
-            <input
-              type="date"
-              name="housing_transition"
+            <select
               className="form-control"
               id="housing_transition"
+              name="housing_transition"
               onChange={handleHousingTransitionChange}
               value={housingTransition}
-            />
+            >
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
           </div>
         </div>
       </div>
@@ -180,14 +190,18 @@ function DischargeForm({
         <div class="col">
           <div className="form-group">
             <label htmlFor="discharge_status">Status at Discharge</label>
-            <input
-              type="text"
-              name="discharge_status"
+            <select
               className="form-control"
               id="discharge_status"
+              name="discharge_status"
               onChange={handleDischargeStatusChange}
               value={dischargeStatus}
-            />
+            >
+              <option value="coping">Coping</option>
+              <option value="coping +60">Coping +60</option>
+              <option value="career development">Career Development</option>
+              <option value="employed">Employed</option>
+            </select>
           </div>
         </div>
         <div class="col"></div>

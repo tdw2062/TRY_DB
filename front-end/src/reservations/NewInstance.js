@@ -133,6 +133,7 @@ function NewInstance({ date }) {
     participant.data.coping_period_length = copingLength;
     participant.data.needs_ged = needsGed;
     participant.data.employment_status_entering = employmentDetails;
+    participant.data.currently_in_program = "yes";
 
     //Log participant
     console.log("participant", participant);

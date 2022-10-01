@@ -31,7 +31,7 @@ function ParticipantsDashboard({ date }) {
     const abortController = new AbortController();
     setInstancesError(null);
 
-    listInstances({}, abortController.signal)
+    listInstances({ currently_in_program: "yes" }, abortController.signal)
       .then(setInstances)
       .catch(setInstancesError);
     return () => abortController.abort();

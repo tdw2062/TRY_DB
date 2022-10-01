@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import {
-  readReservation,
-  updateReservation,
-  readParticipant,
-  createInstance,
-} from "../utils/api";
+import { readParticipant, createInstance, listInstances } from "../utils/api";
 import EnrollFormOld from "./EnrollFormOld";
 
 import ErrorAlert from "../layout/ErrorAlert";
@@ -109,6 +104,29 @@ function EnrollNew({ date }) {
       setDob(dobString);
     }
     getParticipant(participantId);
+
+    async function getInstances(participantId) {
+      const response = await listInstances({ participant_id: participantId });
+      console.log("instances retrieved", response);
+      setIncidentNum(response.length + 1);
+      if (response.length > 0) {
+        //Loop through the array of objects and grab the one with the highest instance_id
+        let counter = 0;
+        let chosenObject = {};
+        for (let i = 0; i < response.length; i++) {
+          if (response[i].instance_id > counter) {
+            counter = response[i].instance_id;
+            chosenObject = response[i];
+          }
+        }
+        setGender(chosenObject.gender);
+        setHomeCounty(chosenObject.home_county);
+        setDrugChoice(chosenObject.drug_of_choice);
+        setSexOff(chosenObject.sex_offender);
+        console.log("chosenObject", chosenObject);
+      }
+    }
+    getInstances(participantId);
   }, [participantId]);
 
   //Create the handleSubmit function to update the deck
@@ -140,7 +158,8 @@ function EnrollNew({ date }) {
     participant.data.charges = chargesDescr;
     participant.data.coping_period_length = copingLength;
     participant.data.needs_ged = needsGed;
-    participant.data.employment_status_entering = employmentDetails;
+    participant.data.employment_details = employmentDetails;
+    participant.data.currently_in_program = "yes";
 
     //Log participant
     console.log("participant", participant);
@@ -159,7 +178,7 @@ function EnrollNew({ date }) {
 
     alert("Participant Enrolled Successfully");
     //Go back to dashboard page
-    //history.push(`/participants/dashboard`);
+    history.push(`/participants/dashboard`);
   }
 
   //Create the handleCancel function to return the user to the previous page

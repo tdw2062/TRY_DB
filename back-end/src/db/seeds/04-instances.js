@@ -28,6 +28,7 @@ exports.seed = function (knex) {
           employment_details: "Obtained employment outside TRY",
           incident_num: 1,
           start_date: "01-02-2019",
+          currently_in_program: "yes",
 
           //Begin Discharge Fields
           //got_checking:"02-05-2020",
@@ -62,6 +63,7 @@ exports.seed = function (knex) {
           employment_details: "Obtained employment outside TRY",
           incident_num: 1,
           start_date: "03-01-2019",
+          currently_in_program: "yes",
 
           //Begin Discharge Fields
           //got_checking:"02-05-2020",

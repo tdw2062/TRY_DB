@@ -22,9 +22,6 @@ function ParticipantNew({ date }) {
   const [dob, setDob] = useState(null);
   const handleDobChange = (event) => setDob(event.target.value);
 
-  const [current, setCurrent] = useState("");
-  const handleCurrentChange = (event) => setCurrent(event.target.value);
-
   //State vars for error message
   const [errMessage, setErrMessage] = useState("");
   const [visibility3, setVisibility3] = useState(null);
@@ -46,7 +43,6 @@ function ParticipantNew({ date }) {
     participant.data.first_name = firstName;
     participant.data.last_name = lastName;
     participant.data.dob = dob;
-    participant.data.current_participant = current;
 
     //Make api call to update reservation
     async function newParticipant(participant) {
@@ -82,8 +78,6 @@ function ParticipantNew({ date }) {
         handleLastNameChange={handleLastNameChange}
         dob={dob}
         handleDobChange={handleDobChange}
-        current={current}
-        handleCurrentChange={handleCurrentChange}
         handleSubmit={handleSubmit}
         handleCancel={handleCancel}
       />
