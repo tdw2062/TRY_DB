@@ -69,6 +69,7 @@ function RecDashboard({ date }) {
 
   //Create table rows of reservations using the 'reservations' state array
   const instanceLinks = instances.map((instance) => {
+    let programUtilization = instance.program_utilization;
     let startDateString = instance.start_date.substring(0, 10);
     let dischargeDateString = "";
     if (instance.discharge_date)
@@ -84,6 +85,7 @@ function RecDashboard({ date }) {
         <td>{instance.last_name}</td>
         <td>{startDateString}</td>
         <td>{dischargeDateString}</td>
+        <td>{programUtilization}</td>
         <td>{checkDateString}</td>
         <td>{instance["1_YR_Fed"]}</td>
         <td>{instance["1_YR_State"]}</td>
@@ -140,7 +142,9 @@ function RecDashboard({ date }) {
       <table class="table table-sm">
         <tr>
           <th>Instance ID</th> <th>First Name</th> <th>Last Name</th>
-          <th>Start Date</th> <th>Discharge Date</th> <th>Next Check Date</th>
+          <th>Start Date</th> <th>Discharge Date</th>
+          <th>Program Utilization</th>
+          <th>Next Check Date</th>
           <th>1 YR Fed</th>
           <th>1 YR State</th>
           <th>2 YR Fed</th>

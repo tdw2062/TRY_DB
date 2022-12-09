@@ -46,6 +46,14 @@ function RecCheck({ date }) {
   const [note, setNote] = useState("");
   const handleNoteChange = (event) => setNote(event.target.value);
 
+  const [updatedProgramUtilization, setUpdatedProgramUtilization] =
+    useState("");
+  const handleUpdatedProgramUtilizationChange = (event) =>
+    setUpdatedProgramUtilization(event.target.value);
+
+  const [currentProgramUtilization, setCurrentProgramUtilization] =
+    useState("");
+
   //State vars for ErrorCaught
   const [visibility3, setVisibility3] = useState(null);
   const [errMessage, setErrMessage] = useState("");
@@ -69,10 +77,18 @@ function RecCheck({ date }) {
       setStartDate(startDateString);
       setDischargeDate(dischargeDateString);
       setCheckDate(checkDateString);
+      setCurrentProgramUtilization(response.program_utilization);
     }
     getInstance(instanceId);
-    console.log("start date", startDate, "discharge date", dischargeDate);
-  }, [instanceId]);
+    console.log(
+      "start date",
+      startDate,
+      "discharge date",
+      dischargeDate,
+      "updatedProgramUtilization",
+      updatedProgramUtilization
+    );
+  }, []);
 
   async function handleSubmit(event) {
     let instance = {
@@ -116,10 +132,38 @@ function RecCheck({ date }) {
     if (timePeriod === "5" && state === "no")
       instance.data["5_YR_State"] = "no";
 
+    //Check to see if program utilization has been changed
+    //If it has then put the updated value in instance.data
+    //and run an api call to create a status
+    if (
+      updatedProgramUtilization !== "" &&
+      currentProgramUtilization !== updatedProgramUtilization
+    ) {
+      instance.data["program_utilization"] = updatedProgramUtilization;
+
+      //Make an api call to post the new table to the db
+
+      let status = {
+        data: {},
+      };
+
+      status.data.instance_id = instanceId;
+      status.data.status_name = "Changed Program Utilization Success";
+      status.data.date = checkDate;
+      status.data.notes = note;
+
+      try {
+        console.log("##status##", status);
+        const response2 = await createStatus(status);
+      } catch (err) {
+        console.log("Error making createTable API call: ", err);
+      }
+    }
+
     //Make api call to update instance
     async function changeInstance(instance) {
       const response = await updateInstance(instance);
-      console.log(response);
+      console.log("returned response", response);
     }
     await changeInstance(instance);
 
@@ -239,6 +283,20 @@ function RecCheck({ date }) {
             <option value="">--Went Back?--</option>
             <option value="yes"> Yes</option>
             <option value="no"> No</option>
+          </select>
+          <label for="programUtilization">Program Utilization</label>
+          <select
+            class="form-control"
+            id="programUtilization"
+            name="programUtilization"
+            onChange={handleUpdatedProgramUtilizationChange}
+            value={updatedProgramUtilization}
+          >
+            <option value={currentProgramUtilization}>
+              No Change in Program Utilization
+            </option>
+            <option value="Successful"> Changed to Successful</option>
+            <option value="Unsuccessful">Changed to Unsuccessful</option>
           </select>
           <div className="form-group">
             <label htmlFor="note">Note</label>

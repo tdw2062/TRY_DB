@@ -163,8 +163,8 @@ function DischargeForm({
               onChange={handleProgramUtilizationChange}
               value={programUtilization}
             >
-              <option value="successful">Successful</option>
-              <option value="unsuccessful">Unsuccessful</option>
+              <option value="Successful">Successful</option>
+              <option value="Unsuccessful">Unsuccessful</option>
             </select>
           </div>
         </div>

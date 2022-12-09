@@ -44,9 +44,11 @@ function DischargeParticipant({ date }) {
   const [gotSavings, setGotSavings] = useState("");
   const handleGotSavingsChange = (event) => setGotSavings(event.target.value);
 
-  const [programUtilization, setProgramUtilization] = useState("");
-  const handleProgramUtilizationChange = (event) =>
+  const [programUtilization, setProgramUtilization] = useState("Successful");
+  const handleProgramUtilizationChange = (event) => {
     setProgramUtilization(event.target.value);
+    console.log("programUtilization", programUtilization);
+  };
 
   const [housingTransition, setHousingTransition] = useState("");
   const handleHousingTransitionChange = (event) =>
@@ -87,6 +89,7 @@ function DischargeParticipant({ date }) {
   //Create the handleSubmit function to update the deck
   //This function creates a reservation based on the user input and then uses changeReservation() api call
   async function handleSubmit(event) {
+    console.log("beforeSubmit", programUtilization);
     event.preventDefault();
 
     let instance = {
@@ -121,7 +124,7 @@ function DischargeParticipant({ date }) {
 
     alert("Participant Discharged Successfully");
     //Go back to dashboard page
-    history.push(`/participants/dashboard`);
+    // history.push(`/participants/dashboard`);
   }
 
   //Create the handleCancel function to return the user to the previous page

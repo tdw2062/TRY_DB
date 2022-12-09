@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { listInstances } from "../utils/api";
 import ErrorCaught from "../ErrorCaught";
+import { json2csv } from "json-2-csv";
 
 /**
  * Defines the dashboard page.
@@ -35,6 +36,23 @@ function ParticipantsDashboard({ date }) {
       .then(setInstances)
       .catch(setInstancesError);
     return () => abortController.abort();
+  }
+
+  function handleExportInstances() {
+    json2csv(instances, (err, csv) => {
+      if (err) throw err;
+      console.log(typeof csv);
+      console.log(csv.length);
+      console.log(csv);
+      const element = document.createElement("a");
+      const file = new Blob([csv], {
+        type: "application/csv",
+      });
+      element.href = URL.createObjectURL(file);
+      element.download = "instancesExport.csv";
+      document.body.appendChild(element); // Required for this to work in FireFox
+      element.click();
+    });
   }
 
   //Create table rows of reservations using the 'reservations' state array
@@ -108,7 +126,14 @@ function ParticipantsDashboard({ date }) {
         {instanceLinks}
       </table>
       <br />
-
+      <button
+        type="button"
+        onClick={handleExportInstances}
+        class="btn btn-primary"
+        style={{ margin: "5px" }}
+      >
+        Download Instances CSV
+      </button>
       <ErrorCaught visibility3={visibility3} msg={errMessage} />
     </main>
   );
