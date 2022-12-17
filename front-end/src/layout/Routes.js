@@ -11,6 +11,7 @@ import NewInstance from "../reservations/NewInstance";
 import Search from "../reservations/Search";
 import SearchParticipants from "../reservations/EnrollHome";
 import ParticipantNew from "../reservations/ParticipantNew";
+import Reporting from "../reservations/Reporting";
 import ViewParticipant from "../reservations/ViewParticipant";
 import DischargeParticipant from "../reservations/DischargeParticipant";
 import RecCheck from "../reservations/RecCheck";
@@ -80,6 +81,9 @@ function Routes() {
 
       <Route path="/participants/:participantId/enrollNew">
         <EnrollNew />
+      </Route>
+      <Route path="/participants/reporting">
+        <Reporting />
       </Route>
       <Route>
         <NotFound />

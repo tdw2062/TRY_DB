@@ -65,6 +65,8 @@ function AddStatus() {
   const [incident, setIncident] = useState(null);
   const handleIncidentChange = (event) => setIncident(event.target.value);
 
+  const [participantId, setParticipantId] = useState(null);
+
   const [statusName, setStatusName] = useState("Started MAT");
   const handleStatusNameChange = (event) => setStatusName(event.target.value);
 
@@ -91,6 +93,7 @@ function AddStatus() {
       setFirstName(response.first_name);
       setLastName(response.last_name);
       setIncident(response.incident_num);
+      setParticipantId(response.participant_id);
     }
     getInstance(instanceId);
   }, [instanceId]);
@@ -125,6 +128,10 @@ function AddStatus() {
     };
 
     status.data.instance_id = instanceId;
+    status.data.participant_id = participantId;
+    status.data.first_name = firstName;
+    status.data.last_name = lastName;
+    status.data.incident_num = incident;
     status.data.status_name = statusName;
     status.data.date = statusDate;
     status.data.notes = statusNotes;

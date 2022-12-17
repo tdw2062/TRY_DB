@@ -38,23 +38,6 @@ function ParticipantsDashboard({ date }) {
     return () => abortController.abort();
   }
 
-  function handleExportInstances() {
-    json2csv(instances, (err, csv) => {
-      if (err) throw err;
-      console.log(typeof csv);
-      console.log(csv.length);
-      console.log(csv);
-      const element = document.createElement("a");
-      const file = new Blob([csv], {
-        type: "application/csv",
-      });
-      element.href = URL.createObjectURL(file);
-      element.download = "instancesExport.csv";
-      document.body.appendChild(element); // Required for this to work in FireFox
-      element.click();
-    });
-  }
-
   //Create table rows of reservations using the 'reservations' state array
   const instanceLinks = instances.map((instance) => {
     let startDateString = instance.start_date.substring(0, 10);
@@ -126,14 +109,7 @@ function ParticipantsDashboard({ date }) {
         {instanceLinks}
       </table>
       <br />
-      <button
-        type="button"
-        onClick={handleExportInstances}
-        class="btn btn-primary"
-        style={{ margin: "5px" }}
-      >
-        Download Instances CSV
-      </button>
+
       <ErrorCaught visibility3={visibility3} msg={errMessage} />
     </main>
   );

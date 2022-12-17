@@ -46,6 +46,12 @@ function Menu() {
               &nbsp;Recidivism Dashboard
             </Link>
           </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/participants/reporting">
+              <span className="oi oi-layers" />
+              &nbsp;Reporting
+            </Link>
+          </li>
         </ul>
         <div className="text-center d-none d-md-inline">
           <button
