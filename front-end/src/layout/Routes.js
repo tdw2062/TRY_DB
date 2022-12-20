@@ -13,11 +13,13 @@ import SearchParticipants from "../reservations/EnrollHome";
 import ParticipantNew from "../reservations/ParticipantNew";
 import Reporting from "../reservations/Reporting";
 import ViewParticipant from "../reservations/ViewParticipant";
+import ViewInstance from "../reservations/ViewInstance";
 import DischargeParticipant from "../reservations/DischargeParticipant";
 import RecCheck from "../reservations/RecCheck";
 import RecDashboard from "../dashboard/RecDashboard";
 import RecPrevInstances from "../dashboard/RecPrevInstances";
 import AddStatus from "../reservations/AddStatus";
+import Importer from "../reservations/data-importer/Importer";
 import NotFound from "./NotFound";
 import { today } from "../utils/date-time";
 
@@ -58,6 +60,9 @@ function Routes() {
       <Route exact={true} path="/participants/:instanceId/view">
         <ViewParticipant />
       </Route>
+      <Route exact={true} path="/instances/:participantId/view">
+        <ViewInstance />
+      </Route>
       <Route exact={true} path="/participants/:instanceId/create">
         <NewInstance />
       </Route>
@@ -84,6 +89,9 @@ function Routes() {
       </Route>
       <Route path="/participants/reporting">
         <Reporting />
+      </Route>
+      <Route path="/data-importer">
+        <Importer />
       </Route>
       <Route>
         <NotFound />

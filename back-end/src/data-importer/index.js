@@ -1,4 +1,5 @@
 const fs = require("fs").promises;
+const nf = require("fs");
 const path = require("path");
 const process = require("process");
 const { authenticate } = require("@google-cloud/local-auth");
@@ -71,7 +72,7 @@ async function authorize() {
  * @see https://docs.google.com/spreadsheets/d/1SoWGEcPaxCBSrHFIrUF52LYQlqdst37oAnzDlVnEbO4/edit#gid=681108900
  * @param {google.auth.OAuth2} auth The authenticated Google OAuth client.
  */
-async function listMajors(auth) {
+async function listInstances(auth) {
   const sheets = google.sheets({ version: "v4", auth });
   const res = await sheets.spreadsheets.values.get({
     spreadsheetId: "1SoWGEcPaxCBSrHFIrUF52LYQlqdst37oAnzDlVnEbO4",
@@ -83,7 +84,7 @@ async function listMajors(auth) {
     return;
   }
   console.log("Name, Major:");
-  let objArray = [];
+  let instanceArray = [];
 
   const headingsArray = [
     "last_name",
@@ -233,26 +234,66 @@ async function listMajors(auth) {
     const instanceObj = {};
 
     for (let i = 0; i < headingsArray.length; i++) {
-      if (row[i]) {
-        instanceObj[headingsArray[i]] = row[i];
-      } else {
-        instanceObj[headingsArray[i]] = "";
+      if (!notUsedArray.includes(headingsArray[i])) {
+        if (row[i]) {
+          instanceObj[headingsArray[i]] = row[i];
+        } else {
+          instanceObj[headingsArray[i]] = "";
+        }
       }
     }
-    objArray.push(instanceObj);
+    instanceArray.push(instanceObj);
   });
 
-  console.log(objArray);
+  console.log(instanceArray);
 
-  /*
-  const jsonArray = JSON.stringify(objArray);
-
-  fs.writeFile("./instances.json", jsonArray, "utf-8", (err) => {
-    if (err) {
-      return console.log(err);
+  nf.writeFile(
+    "./instances.json",
+    JSON.stringify(instanceArray, null, 2),
+    (err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("File successfully written");
+      }
     }
-  });
-  */
+  );
+
+  //Create participants table and then output as a json file
+  let participantsArray = [];
+  let participantsNamesArray = [];
+
+  //Loop through instanceArray and if the first name and last names are not already in there,
+  //then add it to the participantsArray
+  for (let instance of instanceArray) {
+    //Create name string from instance array
+    const name_string = instance.last_name + " " + instance.first_name;
+
+    let participantObj = {};
+
+    if (!participantsNamesArray.includes(name_string)) {
+      participantObj.first_name = instance.first_name;
+      participantObj.last_name = instance.last_name;
+      participantObj.dob = instance.birth_date;
+      participantsArray.push(participantObj);
+      participantsNamesArray.push(name_string);
+    }
+  }
+
+  //Output participants table
+  nf.writeFile(
+    "./participants.json",
+    JSON.stringify(participantsArray, null, 2),
+    (err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("File successfully written");
+      }
+    }
+  );
+
+  console.log("participants_table", participantsArray);
 }
 
-authorize().then(listMajors).catch(console.error);
+authorize().then(listInstances).catch(console.error);

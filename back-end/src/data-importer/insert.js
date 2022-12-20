@@ -1,12 +1,17 @@
 const knex = require("../db/connection");
 
 //Create a table
-function createInstance(instance) {
-  return knex("instances")
-    .insert(instance)
+function createParticipant(participant) {
+  console.log("hello2");
+  return knex("participants")
+    .insert(participant)
     .returning("*")
     .then((results) => results[0]);
 }
 
-let dummyInstance = { first_name: "Kyle", last_name: "Hodges" };
-createInstance(dummyInstance);
+let dummyParticipant = {
+  first_name: "Kyle",
+  last_name: "Hodges",
+};
+
+createParticipant(dummyParticipant);
