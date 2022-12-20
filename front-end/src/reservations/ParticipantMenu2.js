@@ -11,35 +11,24 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-function ParticipantMenu({ instanceId }) {
+function ParticipantMenu2({ instanceId }) {
   return (
     <div class="btn-group-vertical">
       <button type="button" class="btn btn-secondary">
-        View/Edit Enrollment Info
+        View/Edit Participant Info
       </button>
       <br />
       <button type="button" class="btn btn-secondary">
-        View/Edit One-Time Statuses
-      </button>
-      <br />
-      <button type="button" class="btn btn-secondary">
-        View/Edit Multiple STatuses
-      </button>
-      <br />
-      <button type="button" class="btn btn-secondary">
-        View/Edit Discharge Fields
-      </button>
-      <br />
-      <button type="button" class="btn btn-secondary">
-        View/Edit Recidivism Fields
+        View/Edit All Statuses
       </button>
       <br />
       <button type="button" class="btn btn-secondary">
         Go Back
       </button>
+
       <br />
     </div>
   );
 }
 
-export default ParticipantMenu;
+export default ParticipantMenu2;

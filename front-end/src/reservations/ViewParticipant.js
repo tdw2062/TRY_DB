@@ -70,6 +70,24 @@ function ParticipantsDashboard({ date }) {
         <td style={{ padding: "10px" }}>{status.status_name}</td>
         <td style={{ padding: "10px" }}>{dateString}</td>
         <td style={{ padding: "10px" }}>{status.notes}</td>
+        <Link to={`/participants/1/statuses`}>
+          <button
+            type="button"
+            class="btn btn-primary"
+            style={{ margin: "5px" }}
+          >
+            View/Edit Status
+          </button>
+        </Link>{" "}
+        <Link to={`/participants/1/view`}>
+          <button
+            type="button"
+            class="btn btn-primary"
+            style={{ margin: "5px" }}
+          >
+            Delete Status
+          </button>
+        </Link>{" "}
       </tr>
     );
   });
@@ -78,7 +96,7 @@ function ParticipantsDashboard({ date }) {
   return (
     <main>
       <h1>
-        <center>View Participant</center>
+        <center>View Instance</center>
       </h1>
       <center>
         <table

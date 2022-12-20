@@ -10,7 +10,7 @@ import {
   listInstances,
   readParticipant,
 } from "../utils/api";
-import ParticipantMenu from "./ParticipantMenu";
+import ParticipantMenu2 from "./ParticipantMenu2";
 
 /**
  * Defines the dashboard page.
@@ -65,6 +65,7 @@ function ParticipantsDashboard({ date }) {
 
   //Create table rows of statuses using the 'statuses' state array
   const instanceLinks = instances.map((instance) => {
+    console.log("instance", instance);
     let startDateString = instance.start_date.substring(0, 10);
     let dischargeDateString = instance.discharge_date.substring(0, 10);
 
@@ -126,7 +127,7 @@ function ParticipantsDashboard({ date }) {
       <div class="container">
         <div class="row">
           <div class="col">
-            <ParticipantMenu instanceId={participantId} />
+            <ParticipantMenu2 instanceId={participantId} />
           </div>
           <div class="col-9">
             <h1>Instances</h1>

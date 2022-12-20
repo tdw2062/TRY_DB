@@ -5,6 +5,8 @@ import ParticipantsDashboard from "../dashboard/ParticipantsDashboard";
 import EditParticipant from "../reservations/EditParticipant";
 import EnrollNew from "../reservations/EnrollNew";
 import EnrollHome from "../reservations/EnrollHome";
+import EnrollEdit from "../reservations/ParticipantMenuComponents/EnrollEdit";
+import StatusEdit from "../reservations/ParticipantMenuComponents/StatusEdit";
 import NewParticipant from "../reservations/NewParticipant";
 import ParticipantMenu from "../reservations/ParticipantMenu";
 import NewInstance from "../reservations/NewInstance";
@@ -92,6 +94,12 @@ function Routes() {
       </Route>
       <Route path="/data-importer">
         <Importer />
+      </Route>
+      <Route path="/participants/:instanceId/enrollEdit">
+        <EnrollEdit />
+      </Route>
+      <Route path="/participants/:instanceId/statusEdit">
+        <StatusEdit />
       </Route>
       <Route>
         <NotFound />
