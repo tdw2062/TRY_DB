@@ -2,6 +2,7 @@
 //It is used on the Search component
 
 import React from "react";
+import { useParams, Link, useHistory } from "react-router-dom";
 
 function SearchResults({ visibility, last_name, filteredParticipants }) {
   //Create table rows of the reservations to display in the search results
@@ -14,6 +15,15 @@ function SearchResults({ visibility, last_name, filteredParticipants }) {
         <td>{participant.first_name}</td>
         <td>{participant.last_name}</td>
         <td>{dobString}</td>
+        <Link to={`/participants/${participant.participant_id}/view`}>
+          <button
+            type="button"
+            class="btn btn-primary"
+            style={{ margin: "5px" }}
+          >
+            Select Participant
+          </button>
+        </Link>
       </tr>
     );
   });

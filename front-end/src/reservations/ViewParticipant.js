@@ -4,8 +4,13 @@
 
 import React, { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
-import { readInstance, listStatuses } from "../utils/api";
-import ParticipantMenu from "./ParticipantMenu";
+import {
+  readInstance,
+  listStatuses,
+  listInstances,
+  readParticipant,
+} from "../utils/api";
+import ParticipantMenu2 from "./ParticipantMenu2";
 
 /**
  * Defines the dashboard page.
@@ -13,13 +18,13 @@ import ParticipantMenu from "./ParticipantMenu";
  *  the date for which the user wants to view reservations.
  * @returns {JSX.Element}
  */
-function ParticipantsDashboard({ date }) {
+function ViewParticipant({ date }) {
   //The main state variables are reservations and tables which are arrays to be displayed
-  const [statuses, setStatuses] = useState([]);
-  const [statusesError, setStatusesError] = useState(null);
+  const [instances, setInstances] = useState([]);
+  const [instancesError, setInstancesError] = useState(null);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [incidentNum, setIncidentNum] = useState(null);
+  const [dateOfBirth, setDateOfBirth] = useState(null);
   const [startDate, setStartDate] = useState(null);
   const [visibility3, setVisibility3] = useState(null);
   const [errMessage, setErrMessage] = useState("");
@@ -27,65 +32,68 @@ function ParticipantsDashboard({ date }) {
   const history = useHistory();
 
   //Get instanceId from url
-  const { instanceId } = useParams();
-  const instance_id = instanceId;
-  console.log("instance id", instance_id);
+  const { participantId } = useParams();
+  const participant_id = participantId;
+  console.log("participant id", participant_id);
 
   //Use useEffect to load the statuses and the instances
   //Load reservations
-  useEffect(loadStatuses, [date]);
+  useEffect(loadInstances, []);
 
-  function loadStatuses() {
+  function loadInstances() {
     const abortController = new AbortController();
-    setStatusesError(null);
+    setInstancesError(null);
 
-    listStatuses({ instance_id }, abortController.signal)
-      .then(setStatuses)
-      .catch(setStatusesError);
+    listInstances({ participant_id }, abortController.signal)
+      .then(setInstances)
+      .catch(setInstancesError);
     return () => abortController.abort();
   }
 
   //Load instance
   //Make an API Call to get the instance on the instance_id
   useEffect(() => {
-    async function getInstance(instanceId) {
-      const response = await readInstance(instanceId);
-
-      let instDateString = response.start_date.substring(0, 10);
-
+    async function getParticipant(participantId) {
+      const response = await readParticipant(participantId);
+      if (response.dob) setDateOfBirth(response.dob.substring(0, 10));
       setFirstName(response.first_name);
       setLastName(response.last_name);
-      setIncidentNum(response.incident_num);
-      setStartDate(instDateString);
     }
-    getInstance(instanceId);
-  }, [instanceId]);
+    getParticipant(participantId);
+  }, [participantId]);
 
   //Create table rows of statuses using the 'statuses' state array
-  const statusLinks = statuses.map((status) => {
-    let dateString = status.date.substring(0, 10);
+  const instanceLinks = instances.map((instance) => {
+    console.log("instance", instance);
+    let startDateString = instance.start_date
+      ? instance.start_date.substring(0, 10)
+      : "";
+    let dischargeDateString = instance.discharge_date
+      ? instance.discharge_date.substring(0, 10)
+      : "";
 
     return (
-      <tr key={status.status_id}>
-        <td style={{ padding: "10px" }}>{status.status_name}</td>
-        <td style={{ padding: "10px" }}>{dateString}</td>
-        <td style={{ padding: "10px" }}>{status.notes}</td>
-        <Link to={`/participants/1/statuses`}>
+      <tr key={instance.instance_id}>
+        <td style={{ padding: "10px" }}>{startDateString}</td>
+        <td style={{ padding: "10px" }}>{instance.incident_num}</td>
+        <td style={{ padding: "10px" }}>{dischargeDateString}</td>
+        <td style={{ padding: "10px" }}>{instance.discharge_reason}</td>
+        <Link to={`/instances/${instance.instance_id}/view`}>
           <button
             type="button"
             class="btn btn-primary"
             style={{ margin: "5px" }}
           >
-            View/Edit Status
+            View/Edit Instance
           </button>
         </Link>{" "}
-        <Link to={`/participants/1/view`}>
+        <Link to={`/participants/${instance.instance_id}/view`}>
           <button
             type="button"
             class="btn btn-primary"
             style={{ margin: "5px" }}
           >
-            Delete Status
+            Delete Instance
           </button>
         </Link>{" "}
       </tr>
@@ -96,7 +104,7 @@ function ParticipantsDashboard({ date }) {
   return (
     <main>
       <h1>
-        <center>View Instance</center>
+        <center>View Participant</center>
       </h1>
       <center>
         <table
@@ -112,10 +120,7 @@ function ParticipantsDashboard({ date }) {
               <strong>Last Name: </strong> {lastName}
             </td>
             <td>
-              <strong>Incident #: </strong> {incidentNum}
-            </td>
-            <td>
-              <strong>Start Date: </strong> {startDate}
+              <strong>Date of Birth: </strong> {dateOfBirth}
             </td>
           </tr>
         </table>
@@ -125,15 +130,17 @@ function ParticipantsDashboard({ date }) {
       <div class="container">
         <div class="row">
           <div class="col">
-            <ParticipantMenu instanceId={instanceId} />
+            <ParticipantMenu2 participantId={participantId} />
           </div>
           <div class="col-9">
-            <h1>Status Updates</h1>
+            <h1>Instances</h1>
             <table class="table table-sm">
               <tr>
-                <th>Status Name</th> <th>Date</th> <th>Notes</th>{" "}
+                <th>Start Date</th> <th>Incident Number</th>{" "}
+                <th>Discharge Date</th>
+                <th>Discharge Reason</th>{" "}
               </tr>
-              {statusLinks}
+              {instanceLinks}
             </table>
           </div>
         </div>
@@ -144,4 +151,4 @@ function ParticipantsDashboard({ date }) {
   );
 }
 
-export default ParticipantsDashboard;
+export default ViewParticipant;

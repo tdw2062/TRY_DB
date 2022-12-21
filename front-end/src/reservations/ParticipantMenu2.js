@@ -11,21 +11,22 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-function ParticipantMenu2({ instanceId }) {
+function ParticipantMenu2({ participantId }) {
   return (
     <div class="btn-group-vertical">
       <button type="button" class="btn btn-secondary">
         View/Edit Participant Info
       </button>
       <br />
-      <button type="button" class="btn btn-secondary">
-        View/Edit All Statuses
-      </button>
+      <Link to={`/participants/${participantId}/all_statuses`}>
+        <button type="button" class="btn btn-secondary">
+          View/Edit All Statuses
+        </button>
+      </Link>{" "}
       <br />
       <button type="button" class="btn btn-secondary">
         Go Back
       </button>
-
       <br />
     </div>
   );

@@ -4,8 +4,8 @@
 
 import React, { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
-import { readInstance, listStatuses } from "../utils/api";
-import ParticipantMenu from "./ParticipantMenu";
+import { readParticipant, listStatuses } from "../../utils/api";
+import ParticipantMenu2 from "../ParticipantMenu2";
 
 /**
  * Defines the dashboard page.
@@ -13,23 +13,21 @@ import ParticipantMenu from "./ParticipantMenu";
  *  the date for which the user wants to view reservations.
  * @returns {JSX.Element}
  */
-function ViewInstance({ date }) {
+function ViewAllStatuses({ date }) {
   //The main state variables are reservations and tables which are arrays to be displayed
   const [statuses, setStatuses] = useState([]);
   const [statusesError, setStatusesError] = useState(null);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [incidentNum, setIncidentNum] = useState(null);
-  const [startDate, setStartDate] = useState(null);
   const [visibility3, setVisibility3] = useState(null);
   const [errMessage, setErrMessage] = useState("");
   //Declare an instance of the useHistory hook
   const history = useHistory();
 
   //Get instanceId from url
-  const { instanceId } = useParams();
-  const instance_id = instanceId;
-  console.log("instance id", instance_id);
+  const { participantId } = useParams();
+  const participant_id = participantId;
+  console.log("participant id", participant_id);
 
   //Use useEffect to load the statuses and the instances
   //Load reservations
@@ -39,38 +37,34 @@ function ViewInstance({ date }) {
     const abortController = new AbortController();
     setStatusesError(null);
 
-    listStatuses({ instance_id }, abortController.signal)
+    listStatuses({ participant_id }, abortController.signal)
       .then(setStatuses)
       .catch(setStatusesError);
     return () => abortController.abort();
   }
 
-  //Load instance
+  //Load Participant
   //Make an API Call to get the instance on the instance_id
   useEffect(() => {
-    async function getInstance(instanceId) {
-      const response = await readInstance(instanceId);
-
-      let instDateString = response.start_date.substring(0, 10);
+    async function getParticipant(participantId) {
+      const response = await readParticipant(participantId);
 
       setFirstName(response.first_name);
       setLastName(response.last_name);
-      setIncidentNum(response.incident_num);
-      setStartDate(instDateString);
     }
-    getInstance(instanceId);
-  }, [instanceId]);
+    getParticipant(participantId);
+  }, [participantId]);
 
   //Create table rows of statuses using the 'statuses' state array
   const statusLinks = statuses.map((status) => {
-    let dateString = status.date.substring(0, 10);
+    let dateString = status.date ? status.date.substring(0, 10) : null;
 
     return (
       <tr key={status.status_id}>
         <td style={{ padding: "10px" }}>{status.status_name}</td>
         <td style={{ padding: "10px" }}>{dateString}</td>
         <td style={{ padding: "10px" }}>{status.notes}</td>
-        <Link to={`/statuses/${status.status_id}/edit`}>
+        <Link to={`/participants/${status.status_id}/viewEditStatus`}>
           <button
             type="button"
             class="btn btn-primary"
@@ -111,12 +105,6 @@ function ViewInstance({ date }) {
             <td>
               <strong>Last Name: </strong> {lastName}
             </td>
-            <td>
-              <strong>Incident #: </strong> {incidentNum}
-            </td>
-            <td>
-              <strong>Start Date: </strong> {startDate}
-            </td>
           </tr>
         </table>
       </center>
@@ -125,7 +113,7 @@ function ViewInstance({ date }) {
       <div class="container">
         <div class="row">
           <div class="col">
-            <ParticipantMenu instanceId={instanceId} />
+            <ParticipantMenu2 instanceId={participantId} />
           </div>
           <div class="col-9">
             <h1>Status Updates</h1>
@@ -144,4 +132,4 @@ function ViewInstance({ date }) {
   );
 }
 
-export default ViewInstance;
+export default ViewAllStatuses;

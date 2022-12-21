@@ -8,6 +8,8 @@ import EnrollHome from "../reservations/EnrollHome";
 import EnrollEdit from "../reservations/ParticipantMenuComponents/EnrollEdit";
 import StatusEdit from "../reservations/ParticipantMenuComponents/StatusEdit";
 import RecEdit from "../reservations/ParticipantMenuComponents/RecEdit";
+import View_Edit_Status from "../reservations/ParticipantMenuComponents/View_Edit_Status";
+import View_Edit_Participant from "../reservations/ParticipantMenuComponents/View_Edit_Participant";
 import DischargeEdit from "../reservations/ParticipantMenuComponents/DischargeEdit";
 import NewParticipant from "../reservations/NewParticipant";
 import ParticipantMenu from "../reservations/ParticipantMenu";
@@ -18,6 +20,7 @@ import ParticipantNew from "../reservations/ParticipantNew";
 import Reporting from "../reservations/Reporting";
 import ViewParticipant from "../reservations/ViewParticipant";
 import ViewInstance from "../reservations/ViewInstance";
+import ViewAllStatuses from "../reservations/ParticipantMenuComponents/ViewAllStatuses";
 import DischargeParticipant from "../reservations/DischargeParticipant";
 import RecCheck from "../reservations/RecCheck";
 import RecDashboard from "../dashboard/RecDashboard";
@@ -61,11 +64,14 @@ function Routes() {
       <Route exact={true} path="/participants/:instanceId/rec_check">
         <RecCheck />
       </Route>
-      <Route exact={true} path="/participants/:instanceId/view">
+      <Route exact={true} path="/participants/:participantId/view">
         <ViewParticipant />
       </Route>
-      <Route exact={true} path="/instances/:participantId/view">
+      <Route exact={true} path="/instances/:instanceId/view">
         <ViewInstance />
+      </Route>
+      <Route exact={true} path="/participants/:participantId/all_statuses">
+        <ViewAllStatuses />
       </Route>
       <Route exact={true} path="/participants/:instanceId/create">
         <NewInstance />
@@ -108,6 +114,12 @@ function Routes() {
       </Route>
       <Route path="/participants/:instanceId/recEdit">
         <RecEdit />
+      </Route>
+      <Route path="/statuses/:statusId/edit">
+        <View_Edit_Status />
+      </Route>
+      <Route path="/participants/:participantId/viewEditParticipant">
+        <View_Edit_Participant />
       </Route>
       <Route>
         <NotFound />

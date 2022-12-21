@@ -137,6 +137,12 @@ export async function readInstance(instanceId, signal) {
   return await fetchJson(url, { signal }, {});
 }
 
+//Gets one specific instance by status_id
+export async function readStatus(statusId, signal) {
+  const url = `${API_BASE_URL}/statuses/${statusId}`;
+  return await fetchJson(url, { signal }, {});
+}
+
 //Update participant
 export async function updateParticipant(updatedParticipant, signal) {
   const url = `${API_BASE_URL}/participants/${updatedParticipant.data.participant_id}`;
@@ -159,4 +165,16 @@ export async function updateInstance(updatedInstance, signal) {
     signal,
   };
   return await fetchJson(url, options, updatedInstance);
+}
+
+//Updates a status
+export async function updateStatus(updatedStatus, signal) {
+  const url = `${API_BASE_URL}/statuses/${updatedStatus.data.status_id}`;
+  const options = {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(updatedStatus),
+    signal,
+  };
+  return await fetchJson(url, options, updatedStatus);
 }

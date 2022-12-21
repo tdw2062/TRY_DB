@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import SearchResults from "./SearchResults";
 import { listInstances, listParticipants } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
+import { useParams, Link, useHistory } from "react-router-dom";
 
 /**
  * Defines the dashboard page.
@@ -107,9 +108,15 @@ function Search({ date }) {
             {participantLinks}
           </select>
         </div>
-        <button type="button" className="btn btn-primary">
-          View/Edit Data
-        </button>
+        <Link to={`/participants/${participantId}/view`}>
+          <button
+            type="button"
+            class="btn btn-primary"
+            style={{ margin: "5px" }}
+          >
+            Select Participant
+          </button>
+        </Link>
         <br></br>
 
         <div className="form-group">
