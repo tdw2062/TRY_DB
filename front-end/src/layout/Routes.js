@@ -7,6 +7,8 @@ import EnrollNew from "../reservations/EnrollNew";
 import EnrollHome from "../reservations/EnrollHome";
 import EnrollEdit from "../reservations/ParticipantMenuComponents/EnrollEdit";
 import StatusEdit from "../reservations/ParticipantMenuComponents/StatusEdit";
+import RecEdit from "../reservations/ParticipantMenuComponents/RecEdit";
+import DischargeEdit from "../reservations/ParticipantMenuComponents/DischargeEdit";
 import NewParticipant from "../reservations/NewParticipant";
 import ParticipantMenu from "../reservations/ParticipantMenu";
 import NewInstance from "../reservations/NewInstance";
@@ -100,6 +102,12 @@ function Routes() {
       </Route>
       <Route path="/participants/:instanceId/statusEdit">
         <StatusEdit />
+      </Route>
+      <Route path="/participants/:instanceId/dischargeEdit">
+        <DischargeEdit />
+      </Route>
+      <Route path="/participants/:instanceId/recEdit">
+        <RecEdit />
       </Route>
       <Route>
         <NotFound />

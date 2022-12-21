@@ -5,7 +5,6 @@ import {
   readParticipant,
   updateParticipant,
 } from "../../utils/api";
-import ResForm from "../ResForm";
 
 import ErrorAlert from "../../layout/ErrorAlert";
 

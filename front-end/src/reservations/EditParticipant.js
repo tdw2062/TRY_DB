@@ -6,7 +6,6 @@ import {
   readParticipant,
   updateParticipant,
 } from "../utils/api";
-import ResForm from "./ResForm";
 
 import ErrorAlert from "../layout/ErrorAlert";
 
@@ -88,16 +87,6 @@ function EditParticipant({ date }) {
   return (
     <main>
       <h1>Edit Participant</h1>
-      <ResForm
-        firstName={firstName}
-        handleFirstNameChange={handleFirstNameChange}
-        lastName={lastName}
-        handleLastNameChange={handleLastNameChange}
-        mobileNumber={mobileNumber}
-        handleMobileNumberChange={handleMobileNumberChange}
-        handleSubmit={handleSubmit}
-        handleCancel={handleCancel}
-      />
     </main>
   );
 }

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { createReservation, createParticipant } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
-import ResForm from "./ResForm";
+
 import ErrorCaught from "../ErrorCaught";
 
 /**
@@ -92,16 +92,7 @@ function NewReservation({ date }) {
   return (
     <main>
       <h1>Add a New Program Participant</h1>
-      <ResForm
-        firstName={firstName}
-        handleFirstNameChange={handleFirstNameChange}
-        lastName={lastName}
-        handleLastNameChange={handleLastNameChange}
-        mobileNumber={mobileNumber}
-        handleMobileNumberChange={handleMobileNumberChange}
-        handleSubmit={handleSubmit}
-        handleCancel={handleCancel}
-      />
+
       <ErrorCaught visibility3={visibilityError} msg={errMessage} />
     </main>
   );
