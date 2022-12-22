@@ -9,6 +9,7 @@ import {
   listStatuses,
   listInstances,
   readParticipant,
+  deleteInstance,
 } from "../utils/api";
 import ParticipantMenu2 from "./ParticipantMenu2";
 
@@ -62,6 +63,19 @@ function ViewParticipant({ date }) {
     getParticipant(participantId);
   }, [participantId]);
 
+  //Function to delete an instance
+  async function handleDelete(instance_id) {
+    console.log("here is the instance id", instance_id);
+
+    try {
+      await deleteInstance(instance_id);
+    } catch (err) {
+      console.log("Error making API call: ", err);
+    }
+
+    history.go(0);
+  }
+
   //Create table rows of statuses using the 'statuses' state array
   const instanceLinks = instances.map((instance) => {
     console.log("instance", instance);
@@ -92,6 +106,9 @@ function ViewParticipant({ date }) {
             type="button"
             class="btn btn-primary"
             style={{ margin: "5px" }}
+            onClick={() => {
+              handleDelete(instance.instance_id);
+            }}
           >
             Delete Instance
           </button>

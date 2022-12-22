@@ -50,8 +50,16 @@ async function update(req, res, next) {
   res.json({ data: response });
 }
 
+//Delete a specific instance (by instance_id)
+async function destroy(req, res) {
+  console.log("request given", req);
+  await instancesService.destroy(Number(req.params.instanceId));
+  res.sendStatus(204);
+}
+
 module.exports = {
   createInstance: asyncErrorBoundary(createInstance),
+  destroy: asyncErrorBoundary(destroy),
   list: asyncErrorBoundary(list),
   read: [asyncErrorBoundary(instanceExists), asyncErrorBoundary(read)],
   update: asyncErrorBoundary(update),

@@ -63,6 +63,7 @@ function ViewInstance({ date }) {
     getInstance(instanceId);
   }, [instanceId]);
 
+  //Function to delete a status
   async function handleDelete(status_id) {
     console.log("here is the status id", status_id);
 
