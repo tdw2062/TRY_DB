@@ -9,14 +9,18 @@
 */
 
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 function ParticipantMenu2({ participantId }) {
+  const history = useHistory();
+
   return (
     <div class="btn-group-vertical">
-      <button type="button" class="btn btn-secondary">
-        View/Edit Participant Info
-      </button>
+      <Link to={`/participants/${participantId}/viewEditParticipant`}>
+        <button type="button" class="btn btn-secondary">
+          View/Edit Participant Info
+        </button>
+      </Link>
       <br />
       <Link to={`/participants/${participantId}/all_statuses`}>
         <button type="button" class="btn btn-secondary">
@@ -24,9 +28,11 @@ function ParticipantMenu2({ participantId }) {
         </button>
       </Link>{" "}
       <br />
-      <button type="button" class="btn btn-secondary">
-        Go Back
-      </button>
+      <Link to={`/participants/search`}>
+        <button type="button" class="btn btn-secondary">
+          Return to Previous
+        </button>
+      </Link>
       <br />
     </div>
   );

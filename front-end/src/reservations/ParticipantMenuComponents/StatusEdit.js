@@ -235,6 +235,7 @@ function StatusEdit({ date }) {
         handleFirstNameChange={handleFirstNameChange}
         lastName={lastName}
         handleLastNameChange={handleLastNameChange}
+        instanceId={instanceId}
         incidentNum={incidentNum}
         handleIncidentNumChange={handleIncidentNumChange}
         startDate={startDate}

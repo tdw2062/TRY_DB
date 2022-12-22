@@ -47,8 +47,16 @@ async function update(req, res, next) {
   res.json({ data: response });
 }
 
+//Delete a specific status (by status_id)
+async function destroy(req, res) {
+  console.log("request given", req);
+  await statusesService.destroy(Number(req.params.statusId));
+  res.sendStatus(204);
+}
+
 module.exports = {
   createStatus: asyncErrorBoundary(createStatus),
+  destroy: asyncErrorBoundary(destroy),
   list: asyncErrorBoundary(list),
   read: [asyncErrorBoundary(statusExists), asyncErrorBoundary(read)],
   update: asyncErrorBoundary(update),

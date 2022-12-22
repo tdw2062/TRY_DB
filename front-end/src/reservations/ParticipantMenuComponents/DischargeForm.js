@@ -10,6 +10,7 @@ function StatusForm({
   handleFirstNameChange,
   lastName,
   handleLastNameChange,
+  instanceId,
   incidentNum,
   handleIncidentNumChange,
   startDate,
@@ -208,9 +209,9 @@ function StatusForm({
       <button type="submit" className="btn btn-primary">
         Save Changes
       </button>{" "}
-      <Link to={`/participants/dashboard`}>
-        <button type="cancel" className="btn btn-primary">
-          Return to Dashboard
+      <Link to={`/instances/${instanceId}/view`}>
+        <button type="button" className="btn btn-primary">
+          Return to Previous
         </button>
       </Link>
     </form>

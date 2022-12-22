@@ -4,7 +4,7 @@
 
 import React, { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
-import { readParticipant, listStatuses } from "../../utils/api";
+import { readParticipant, listStatuses, deleteStatus } from "../../utils/api";
 import ParticipantMenu2 from "../ParticipantMenu2";
 
 /**
@@ -55,6 +55,18 @@ function ViewAllStatuses({ date }) {
     getParticipant(participantId);
   }, [participantId]);
 
+  async function handleDelete(status_id) {
+    console.log("here is the status id", status_id);
+
+    try {
+      await deleteStatus(status_id);
+    } catch (err) {
+      console.log("Error making API call: ", err);
+    }
+
+    history.go(0);
+  }
+
   //Create table rows of statuses using the 'statuses' state array
   const statusLinks = statuses.map((status) => {
     let dateString = status.date ? status.date.substring(0, 10) : null;
@@ -64,7 +76,7 @@ function ViewAllStatuses({ date }) {
         <td style={{ padding: "10px" }}>{status.status_name}</td>
         <td style={{ padding: "10px" }}>{dateString}</td>
         <td style={{ padding: "10px" }}>{status.notes}</td>
-        <Link to={`/participants/${status.status_id}/viewEditStatus`}>
+        <Link to={`/statuses/${status.status_id}/edit`}>
           <button
             type="button"
             class="btn btn-primary"
@@ -73,15 +85,16 @@ function ViewAllStatuses({ date }) {
             View/Edit Status
           </button>
         </Link>{" "}
-        <Link to={`/participants/1/view`}>
-          <button
-            type="button"
-            class="btn btn-primary"
-            style={{ margin: "5px" }}
-          >
-            Delete Status
-          </button>
-        </Link>{" "}
+        <button
+          type="button"
+          class="btn btn-primary"
+          style={{ margin: "5px" }}
+          onClick={() => {
+            handleDelete(status.status_id);
+          }}
+        >
+          Delete Status
+        </button>
       </tr>
     );
   });
@@ -90,7 +103,7 @@ function ViewAllStatuses({ date }) {
   return (
     <main>
       <h1>
-        <center>View Instance</center>
+        <center>View All Participant Statuses</center>
       </h1>
       <center>
         <table
@@ -113,7 +126,7 @@ function ViewAllStatuses({ date }) {
       <div class="container">
         <div class="row">
           <div class="col">
-            <ParticipantMenu2 instanceId={participantId} />
+            <ParticipantMenu2 participantId={participantId} />
           </div>
           <div class="col-9">
             <h1>Status Updates</h1>

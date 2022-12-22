@@ -62,24 +62,15 @@ function ParticipantsDashboard({ date }) {
             Add Status
           </button>
         </Link>{" "}
-        <Link to={`/participants/${instance.instance_id}/view`}>
+        <Link to={`/instances/${instance.instance_id}/view`}>
           <button
             type="button"
             class="btn btn-primary"
             style={{ margin: "5px" }}
           >
-            View
+            View/Edit
           </button>
         </Link>{" "}
-        <Link to={`/participants/${instance.instance_id}/edit`}>
-          <button
-            type="button"
-            class="btn btn-primary"
-            style={{ margin: "5px" }}
-          >
-            Edit
-          </button>
-        </Link>
         <Link
           to={`/participants/${instance.instance_id}/discharge_participant`}
         >

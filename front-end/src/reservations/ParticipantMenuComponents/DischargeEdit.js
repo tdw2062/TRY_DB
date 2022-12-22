@@ -148,12 +148,13 @@ function StatusEdit({ date }) {
   //Return the form to enter the reservation details
   return (
     <main>
-      <h1>Edit Enrollment Information</h1>
+      <h1>Edit Discharge Information</h1>
       <DischargeForm
         firstName={firstName}
         handleFirstNameChange={handleFirstNameChange}
         lastName={lastName}
         handleLastNameChange={handleLastNameChange}
+        instanceId={instanceId}
         incidentNum={incidentNum}
         handleIncidentNumChange={handleIncidentNumChange}
         startDate={startDate}

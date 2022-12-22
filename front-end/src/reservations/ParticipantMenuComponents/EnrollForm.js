@@ -3,7 +3,7 @@
 //The two props are visibility and reservationId
 
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 function EnrollForm({
   firstName,
@@ -13,6 +13,7 @@ function EnrollForm({
   gender,
   handleGenderChange,
   dob,
+  instanceId,
   handleDobChange,
   homeCounty,
   handleHomeCountyChange,
@@ -49,6 +50,8 @@ function EnrollForm({
   handleSubmit,
   handleCancel,
 }) {
+  const history = useHistory();
+
   return (
     <form onSubmit={handleSubmit}>
       <div class="row">
@@ -335,9 +338,9 @@ function EnrollForm({
       <button type="submit" className="btn btn-primary">
         Save Changes
       </button>{" "}
-      <Link to={`/participants/dashboard`}>
-        <button type="cancel" className="btn btn-primary">
-          Return to Dashboard
+      <Link to={`/instances/${instanceId}/view`}>
+        <button type="button" className="btn btn-primary">
+          Return to Previous
         </button>
       </Link>
     </form>

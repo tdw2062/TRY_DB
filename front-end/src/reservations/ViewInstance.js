@@ -4,7 +4,7 @@
 
 import React, { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
-import { readInstance, listStatuses } from "../utils/api";
+import { readInstance, listStatuses, deleteStatus } from "../utils/api";
 import ParticipantMenu from "./ParticipantMenu";
 
 /**
@@ -20,6 +20,7 @@ function ViewInstance({ date }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [incidentNum, setIncidentNum] = useState(null);
+  const [participantId, setParticipantId] = useState(null);
   const [startDate, setStartDate] = useState(null);
   const [visibility3, setVisibility3] = useState(null);
   const [errMessage, setErrMessage] = useState("");
@@ -57,10 +58,22 @@ function ViewInstance({ date }) {
       setLastName(response.last_name);
       setIncidentNum(response.incident_num);
       setStartDate(instDateString);
+      setParticipantId(response.participant_id);
     }
     getInstance(instanceId);
   }, [instanceId]);
 
+  async function handleDelete(status_id) {
+    console.log("here is the status id", status_id);
+
+    try {
+      await deleteStatus(status_id);
+    } catch (err) {
+      console.log("Error making API call: ", err);
+    }
+
+    history.go(0);
+  }
   //Create table rows of statuses using the 'statuses' state array
   const statusLinks = statuses.map((status) => {
     let dateString = status.date.substring(0, 10);
@@ -79,15 +92,16 @@ function ViewInstance({ date }) {
             View/Edit Status
           </button>
         </Link>{" "}
-        <Link to={`/participants/1/view`}>
-          <button
-            type="button"
-            class="btn btn-primary"
-            style={{ margin: "5px" }}
-          >
-            Delete Status
-          </button>
-        </Link>{" "}
+        <button
+          type="button"
+          class="btn btn-primary"
+          style={{ margin: "5px" }}
+          onClick={() => {
+            handleDelete(status.status_id);
+          }}
+        >
+          Delete Status
+        </button>
       </tr>
     );
   });
@@ -125,7 +139,10 @@ function ViewInstance({ date }) {
       <div class="container">
         <div class="row">
           <div class="col">
-            <ParticipantMenu instanceId={instanceId} />
+            <ParticipantMenu
+              instanceId={instanceId}
+              participantId={participantId}
+            />
           </div>
           <div class="col-9">
             <h1>Status Updates</h1>

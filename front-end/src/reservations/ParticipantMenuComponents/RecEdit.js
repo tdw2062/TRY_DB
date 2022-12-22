@@ -193,6 +193,7 @@ function StatusEdit({ date }) {
         handleIncidentNumChange={handleIncidentNumChange}
         startDate={startDate}
         handleStartDateChange={handleStartDateChange}
+        instanceId={instanceId}
         nextCheckDate={nextCheckDate}
         handleNextCheckDateChange={handleNextCheckDateChange}
         Yr1Fed={Yr1Fed}

@@ -11,33 +11,41 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-function ParticipantMenu({ instanceId }) {
+function ParticipantMenu({ instanceId, participantId }) {
   return (
     <div class="btn-group-vertical">
-      <button type="button" class="btn btn-secondary">
-        View/Edit Enrollment Info
-      </button>
+      <Link to={`/instances/${instanceId}/enrollEdit`}>
+        <button type="button" class="btn btn-secondary">
+          View/Edit Enrollment Info
+        </button>
+      </Link>
       <br />
-      <button type="button" class="btn btn-secondary">
-        View/Edit One-Time Statuses
-      </button>
+      <Link to={`/instances/${instanceId}/statusEdit`}>
+        <button type="button" class="btn btn-secondary">
+          View/Edit Statuses of Instance
+        </button>
+      </Link>
       <br />
-      <button type="button" class="btn btn-secondary">
-        View/Edit Multiple STatuses
-      </button>
-      <br />
-      <button type="button" class="btn btn-secondary">
-        View/Edit Discharge Fields
-      </button>
-      <br />
-      <button type="button" class="btn btn-secondary">
-        View/Edit Recidivism Fields
-      </button>
-      <br />
-      <button type="button" class="btn btn-secondary">
-        Go Back
-      </button>
-      <br />
+      <Link to={`/instances/${instanceId}/dischargeEdit`}>
+        <button type="button" class="btn btn-secondary">
+          View/Edit Discharge Fields
+        </button>
+        <br />
+        <br />
+      </Link>
+      <Link to={`/instances/${instanceId}/recEdit`}>
+        <button type="button" class="btn btn-secondary">
+          View/Edit Recidivism Fields
+        </button>
+        <br />
+        <br />
+      </Link>
+      <Link to={`/participants/${participantId}/view`}>
+        <button type="button" class="btn btn-secondary">
+          Return to Previous
+        </button>
+        <br />
+      </Link>
     </div>
   );
 }

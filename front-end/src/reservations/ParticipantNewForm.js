@@ -3,7 +3,7 @@
 //The two props are visibility and reservationId
 
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 function ParticipantNewForm({
   firstName,
@@ -15,6 +15,8 @@ function ParticipantNewForm({
   handleSubmit,
   handleCancel,
 }) {
+  const history = useHistory();
+
   return (
     <form onSubmit={handleSubmit}>
       <div class="row">
@@ -64,11 +66,15 @@ function ParticipantNewForm({
       <button type="submit" className="btn btn-primary">
         Submit
       </button>{" "}
-      <Link to={`/participants/dashboard`}>
-        <button type="cancel" className="btn btn-primary">
-          Return to Dashboard
-        </button>
-      </Link>
+      <button
+        type="button"
+        className="btn btn-primary"
+        onClick={() => {
+          history.goBack();
+        }}
+      >
+        Return to Previous
+      </button>
     </form>
   );
 }

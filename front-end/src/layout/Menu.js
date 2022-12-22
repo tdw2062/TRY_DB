@@ -31,7 +31,7 @@ function Menu() {
           <li className="nav-item">
             <Link className="nav-link" to="/participants/search">
               <span className="oi oi-magnifying-glass" />
-              &nbsp;Find Participant
+              &nbsp;View/Edit Information
             </Link>
           </li>
           <li className="nav-item">

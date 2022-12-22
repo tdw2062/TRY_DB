@@ -28,8 +28,14 @@ function update(updatedStatus, statusId) {
     .then((updatedRecords) => updatedRecords[0]);
 }
 
+//Delete a status by status_id
+function destroy(status_id) {
+  return knex("statuses").where({ status_id }).del();
+}
+
 module.exports = {
   createStatus,
+  destroy,
   list,
   read,
   update,

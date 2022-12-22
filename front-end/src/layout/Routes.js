@@ -103,16 +103,16 @@ function Routes() {
       <Route path="/data-importer">
         <Importer />
       </Route>
-      <Route path="/participants/:instanceId/enrollEdit">
+      <Route path="/instances/:instanceId/enrollEdit">
         <EnrollEdit />
       </Route>
-      <Route path="/participants/:instanceId/statusEdit">
+      <Route path="/instances/:instanceId/statusEdit">
         <StatusEdit />
       </Route>
-      <Route path="/participants/:instanceId/dischargeEdit">
+      <Route path="/instances/:instanceId/dischargeEdit">
         <DischargeEdit />
       </Route>
-      <Route path="/participants/:instanceId/recEdit">
+      <Route path="/instances/:instanceId/recEdit">
         <RecEdit />
       </Route>
       <Route path="/statuses/:statusId/edit">

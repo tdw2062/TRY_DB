@@ -205,6 +205,7 @@ function EnrollEdit({ date }) {
         handleGenderChange={handleGenderChange}
         dob={dob}
         handleDobChange={handleDobChange}
+        instanceId={instanceId}
         homeCounty={homeCounty}
         handleHomeCountyChange={handleHomeCountyChange}
         incidentNum={incidentNum}

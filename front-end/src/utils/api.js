@@ -143,6 +143,16 @@ export async function readStatus(statusId, signal) {
   return await fetchJson(url, { signal }, {});
 }
 
+//Deletes one specific instance by status_id
+export async function deleteStatus(statusId, signal) {
+  console.log("status_id in request", statusId);
+  const url = `${API_BASE_URL}/statuses/${statusId}`;
+  const options = {
+    method: "DELETE",
+  };
+  return await fetchJson(url, options, {});
+}
+
 //Update participant
 export async function updateParticipant(updatedParticipant, signal) {
   const url = `${API_BASE_URL}/participants/${updatedParticipant.data.participant_id}`;

@@ -83,6 +83,8 @@ function View_Edit_Status() {
   const [statusNotes, setStatusNotes] = useState(null);
   const handleStatusNotesChange = (event) => setStatusNotes(event.target.value);
 
+  const history = useHistory();
+
   //State vars for ErrorCaught
   const [visibility3, setVisibility3] = useState(null);
   const [errMessage, setErrMessage] = useState("");
@@ -235,15 +237,17 @@ function View_Edit_Status() {
           <button type="submit" className="btn btn-primary">
             Submit Status Update
           </button>
-          <Link to={`/participants/${instanceId}/view`}>
-            <button
-              type="button"
-              class="btn btn-primary"
-              style={{ margin: "5px" }}
-            >
-              Return to View Participant
-            </button>
-          </Link>
+
+          <button
+            type="button"
+            class="btn btn-primary"
+            style={{ margin: "5px" }}
+            onClick={() => {
+              history.goBack();
+            }}
+          >
+            Return to Previous
+          </button>
         </form>
       </div>
     </main>
