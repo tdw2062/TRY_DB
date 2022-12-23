@@ -31,9 +31,35 @@ function update(updatedParticipant, participantId) {
     .then((updatedRecords) => updatedRecords[0]);
 }
 
+//Modify a given participant by participantId
+function updateInstance(updatedInstance, participantId) {
+  return knex("instances")
+    .select("*")
+    .where({ participant_id: participantId })
+    .update(updatedInstance, "*")
+    .then((updatedRecords) => updatedRecords[0]);
+}
+
+//Modify a given participant by participantId
+function updateStatus(updatedStatus, participantId) {
+  return knex("statuses")
+    .select("*")
+    .where({ participant_id: participantId })
+    .update(updatedStatus, "*")
+    .then((updatedRecords) => updatedRecords[0]);
+}
+
+//Delete a status by status_id
+function destroy(participant_id) {
+  return knex("participants").where({ participant_id }).del();
+}
+
 module.exports = {
   createParticipant,
+  destroy,
   list,
   read,
   update,
+  updateInstance,
+  updateStatus,
 };

@@ -5,8 +5,8 @@ exports.up = function (knex) {
     table
       .foreign("participant_id")
       .references("participant_id")
-      .inTable("participants")
-      .onDelete("CASCADE");
+      .inTable("participants");
+
     table.string("first_name");
     table.string("last_name");
     table.date("birth_date");

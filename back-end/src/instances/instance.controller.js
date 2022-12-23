@@ -47,6 +47,15 @@ async function update(req, res, next) {
     req.body.data,
     req.params.instanceId
   );
+  //Make the object to update the statuses table
+  const statusObj = {
+    incident_num: response.incident_num,
+  };
+
+  const response2 = await instancesService.updateStatus(
+    statusObj,
+    response.instance_id
+  );
   res.json({ data: response });
 }
 

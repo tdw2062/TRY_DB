@@ -175,6 +175,7 @@ function View_Edit_Status() {
           aria-describedby="emailHelp"
           onChange={handleFirstNameChange}
           value={firstName}
+          readOnly
         />
       </div>
       <div className="form-group">
@@ -186,10 +187,11 @@ function View_Edit_Status() {
           id="last_name"
           onChange={handleLastNameChange}
           value={lastName}
+          readOnly
         />
       </div>
       <div className="form-group">
-        <label htmlFor="last_name">Incident</label>
+        <label htmlFor="last_name">Incident Number</label>
         <input
           type="text"
           name="last_name"
@@ -197,6 +199,7 @@ function View_Edit_Status() {
           id="last_name"
           onChange={handleIncidentChange}
           value={incident}
+          readOnly
         />
       </div>
       <div class="form-group">

@@ -67,13 +67,20 @@ function ViewParticipant({ date }) {
   async function handleDelete(instance_id) {
     console.log("here is the instance id", instance_id);
 
-    try {
-      await deleteInstance(instance_id);
-    } catch (err) {
-      console.log("Error making API call: ", err);
-    }
+    if (
+      window.confirm(
+        "Are you sure want to delete this instance? (Note: All statuses associated with this instance must be deleted or this delete will not process.)"
+      ) == true
+    ) {
+      try {
+        await deleteInstance(instance_id);
+      } catch (err) {
+        console.log("Error making API call: ", err);
+      }
 
-    history.go(0);
+      history.go(0);
+    } else {
+    }
   }
 
   //Create table rows of statuses using the 'statuses' state array

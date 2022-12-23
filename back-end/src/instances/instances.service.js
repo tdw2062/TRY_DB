@@ -44,6 +44,15 @@ function update(updatedInstance, instanceId) {
     .then((updatedRecords) => updatedRecords[0]);
 }
 
+//Modify a given status by instanceId
+function updateStatus(updatedStatus, instanceId) {
+  return knex("statuses")
+    .select("*")
+    .where({ instance_id: instanceId })
+    .update(updatedStatus, "*")
+    .then((updatedRecords) => updatedRecords[0]);
+}
+
 //Delete a status by status_id
 function destroy(instance_id) {
   return knex("instances").where({ instance_id }).del();
@@ -55,4 +64,5 @@ module.exports = {
   list,
   read,
   update,
+  updateStatus,
 };

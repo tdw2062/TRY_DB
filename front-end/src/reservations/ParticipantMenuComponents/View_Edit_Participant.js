@@ -63,7 +63,7 @@ function View_Edit_Participant() {
 
     console.log("participantToSend", participant);
 
-    //Make api call to update reservation
+    //Make api call to update participant
     async function editParticipant(participant) {
       try {
         const response = await updateParticipant(participant);

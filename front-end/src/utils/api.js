@@ -147,6 +147,16 @@ export async function deleteInstance(instanceId, signal) {
   return await fetchJson(url, options, {});
 }
 
+//Deletes one specific instance by status_id
+export async function deleteParticipant(participantId, signal) {
+  console.log("participant_id in request", participantId);
+  const url = `${API_BASE_URL}/participants/${participantId}`;
+  const options = {
+    method: "DELETE",
+  };
+  return await fetchJson(url, options, {});
+}
+
 //Gets one specific instance by status_id
 export async function readStatus(statusId, signal) {
   const url = `${API_BASE_URL}/statuses/${statusId}`;

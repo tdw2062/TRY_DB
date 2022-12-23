@@ -67,13 +67,16 @@ function ViewInstance({ date }) {
   async function handleDelete(status_id) {
     console.log("here is the status id", status_id);
 
-    try {
-      await deleteStatus(status_id);
-    } catch (err) {
-      console.log("Error making API call: ", err);
-    }
+    if (window.confirm("Are you sure want to delete this status?") == true) {
+      try {
+        await deleteStatus(status_id);
+      } catch (err) {
+        console.log("Error making API call: ", err);
+      }
 
-    history.go(0);
+      history.go(0);
+    } else {
+    }
   }
   //Create table rows of statuses using the 'statuses' state array
   const statusLinks = statuses.map((status) => {

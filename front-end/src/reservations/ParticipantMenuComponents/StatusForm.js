@@ -73,6 +73,7 @@ function StatusForm({
               aria-describedby="emailHelp"
               onChange={handleFirstNameChange}
               value={firstName}
+              readOnly
             />
           </div>
         </div>
@@ -86,6 +87,7 @@ function StatusForm({
               id="last_name"
               onChange={handleLastNameChange}
               value={lastName}
+              readOnly
             />
           </div>
         </div>
@@ -101,6 +103,7 @@ function StatusForm({
               id="incident_num"
               onChange={handleIncidentNumChange}
               value={incidentNum}
+              readOnly
             />
           </div>
         </div>
@@ -114,6 +117,7 @@ function StatusForm({
               id="start_date"
               onChange={handleStartDateChange}
               value={startDate}
+              readOnly
             />
           </div>
         </div>

@@ -40,18 +40,52 @@ async function createParticipant(req, res, next) {
   res.status(201).json({ data });
 }
 
-//Update the participant
+//Update the participant and then update first_name and last_name
+//in both the instances and statuses table
 async function update(req, res, next) {
   //Update the participant
+  console.log("request body", req.body.data);
   const response = await participantsService.update(
     req.body.data,
     req.params.participantId
   );
+  console.log("This is the response", response);
+  //Make object to update instances table
+  const instanceObj = {
+    first_name: response.first_name,
+    last_name: response.last_name,
+    birth_date: response.dob,
+  };
+
+  const response2 = await participantsService.updateInstance(
+    instanceObj,
+    response.participant_id
+  );
+
+  //Make object to update statuses table
+  const statusObj = {
+    first_name: instanceObj.first_name,
+    last_name: instanceObj.last_name,
+  };
+
+  const response3 = await participantsService.updateStatus(
+    statusObj,
+    response.participant_id
+  );
+
   res.json({ data: response });
+}
+
+//Delete a specific instance (by instance_id)
+async function destroy(req, res) {
+  console.log("request given", req);
+  await participantsService.destroy(Number(req.params.participantId));
+  res.sendStatus(204);
 }
 
 module.exports = {
   createParticipant: asyncErrorBoundary(createParticipant),
+  destroy: asyncErrorBoundary(destroy),
   list: asyncErrorBoundary(list),
   read: [asyncErrorBoundary(participantExists), asyncErrorBoundary(read)],
   update: asyncErrorBoundary(update),
