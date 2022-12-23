@@ -164,6 +164,7 @@ function AddStatus() {
           aria-describedby="emailHelp"
           onChange={handleFirstNameChange}
           value={firstName}
+          readOnly
         />
       </div>
       <div className="form-group">
@@ -175,6 +176,7 @@ function AddStatus() {
           id="last_name"
           onChange={handleLastNameChange}
           value={lastName}
+          readOnly
         />
       </div>
       <div className="form-group">
@@ -186,6 +188,7 @@ function AddStatus() {
           id="last_name"
           onChange={handleIncidentChange}
           value={incident}
+          readOnly
         />
       </div>
       <div class="form-group">

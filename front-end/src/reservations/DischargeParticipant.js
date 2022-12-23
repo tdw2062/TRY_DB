@@ -27,7 +27,7 @@ function DischargeParticipant({ date }) {
   const [startDate, setStartDate] = useState("");
   const handleStartDateChange = (event) => setStartDate(event.target.value);
 
-  const [dischargeDate, setDischargeDate] = useState("");
+  const [dischargeDate, setDischargeDate] = useState(null);
   const handleDischargeDateChange = (event) =>
     setDischargeDate(event.target.value);
 
@@ -90,7 +90,15 @@ function DischargeParticipant({ date }) {
   //This function creates a reservation based on the user input and then uses changeReservation() api call
   async function handleSubmit(event) {
     console.log("beforeSubmit", programUtilization);
+    console.log(typeof dischargeDate, "dischargeDate", dischargeDate);
     event.preventDefault();
+
+    //To change discharge date into next_check_date
+    function addOneYear(input) {
+      const year = Number(input.substring(0, 4)) + 1;
+      console.log("return value", year + input.substring(4));
+      return year + input.substring(4);
+    }
 
     let instance = {
       data: {},
@@ -106,6 +114,7 @@ function DischargeParticipant({ date }) {
     instance.data.housing_transition = housingTransition;
     instance.data.status_at_discharge = dischargeStatus;
     instance.data.currently_in_program = "no";
+    instance.data.next_check_date = addOneYear(dischargeDate);
 
     //Log participant
     console.log("instance", instance);

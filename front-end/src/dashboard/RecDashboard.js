@@ -15,6 +15,7 @@ import { listInstances } from "../utils/api";
 function RecDashboard({ date }) {
   //The main state variables are reservations and tables which are arrays to be displayed
   let [instances, setInstances] = useState([]);
+  let [instancesFiltered, setInstancesFiltered] = useState([]);
   const [instancesError, setInstancesError] = useState(null);
   const [visibility3, setVisibility3] = useState(null);
   const [errMessage, setErrMessage] = useState("");
@@ -68,60 +69,62 @@ function RecDashboard({ date }) {
   }
 
   //Create table rows of reservations using the 'reservations' state array
-  const instanceLinks = instances.map((instance) => {
-    let programUtilization = instance.program_utilization;
-    let startDateString = instance.start_date.substring(0, 10);
-    let dischargeDateString = "";
-    if (instance.discharge_date)
-      dischargeDateString = instance.discharge_date.substring(0, 10);
-    let checkDateString = null;
-    if (instance.next_check_date)
-      checkDateString = instance.next_check_date.substring(0, 10);
+  const instanceLinks = instances
+    .filter((instance) => instance.currently_in_program === "no")
+    .map((instance) => {
+      let programUtilization = instance.program_utilization;
+      let startDateString = instance.start_date.substring(0, 10);
+      let dischargeDateString = "";
+      if (instance.discharge_date)
+        dischargeDateString = instance.discharge_date.substring(0, 10);
+      let checkDateString = null;
+      if (instance.next_check_date)
+        checkDateString = instance.next_check_date.substring(0, 10);
 
-    return (
-      <tr key={instance.instance_id} style={{ padding: "15px" }}>
-        <td>{instance.instance_id}</td>
-        <td>{instance.first_name}</td>
-        <td>{instance.last_name}</td>
-        <td>{startDateString}</td>
-        <td>{dischargeDateString}</td>
-        <td>{programUtilization}</td>
-        <td>{checkDateString}</td>
-        <td>{instance["1_YR_Fed"]}</td>
-        <td>{instance["1_YR_State"]}</td>
-        <td>{instance["2_YR_Fed"]}</td>
-        <td>{instance["2_YR_State"]}</td>
-        <td>{instance["3_YR_Fed"]}</td>
-        <td>{instance["3_YR_State"]}</td>
-        <td>{instance["4_YR_Fed"]}</td>
-        <td>{instance["4_YR_State"]}</td>
-        <td>{instance["5_YR_Fed"]}</td>
-        <td>{instance["5_YR_State"]}</td>
-        <td>
-          <Link to={`/participants/${instance.instance_id}/rec_check`}>
-            <button
-              type="button"
-              class="btn btn-primary"
-              style={{ margin: "5px" }}
-            >
-              Perform Check
-            </button>
-          </Link>{" "}
-        </td>
-        <td>
-          <Link to={`/participants/${instance.participant_id}/rec_prev`}>
-            <button
-              type="button"
-              class="btn btn-primary"
-              style={{ margin: "5px" }}
-            >
-              View All
-            </button>
-          </Link>{" "}
-        </td>
-      </tr>
-    );
-  });
+      return (
+        <tr key={instance.instance_id} style={{ padding: "15px" }}>
+          <td>{instance.instance_id}</td>
+          <td>{instance.first_name}</td>
+          <td>{instance.last_name}</td>
+          <td>{startDateString}</td>
+          <td>{dischargeDateString}</td>
+          <td>{programUtilization}</td>
+          <td>{checkDateString}</td>
+          <td>{instance["1_YR_Fed"]}</td>
+          <td>{instance["1_YR_State"]}</td>
+          <td>{instance["2_YR_Fed"]}</td>
+          <td>{instance["2_YR_State"]}</td>
+          <td>{instance["3_YR_Fed"]}</td>
+          <td>{instance["3_YR_State"]}</td>
+          <td>{instance["4_YR_Fed"]}</td>
+          <td>{instance["4_YR_State"]}</td>
+          <td>{instance["5_YR_Fed"]}</td>
+          <td>{instance["5_YR_State"]}</td>
+          <td>
+            <Link to={`/participants/${instance.instance_id}/rec_check`}>
+              <button
+                type="button"
+                class="btn btn-primary"
+                style={{ margin: "5px" }}
+              >
+                Perform Check
+              </button>
+            </Link>{" "}
+          </td>
+          <td>
+            <Link to={`/participants/${instance.participant_id}/rec_prev`}>
+              <button
+                type="button"
+                class="btn btn-primary"
+                style={{ margin: "5px" }}
+              >
+                View All
+              </button>
+            </Link>{" "}
+          </td>
+        </tr>
+      );
+    });
 
   //Return the html code for the reservations and the tables
   return (

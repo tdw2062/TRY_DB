@@ -15,6 +15,10 @@ function StatusForm({
   handleIncidentNumChange,
   startDate,
   handleStartDateChange,
+  nextCheckDate,
+  handleNextCheckDateChange,
+  dischargeDate,
+
   Yr1Fed,
   handleYr1FedChange,
   Yr1State,
@@ -80,8 +84,6 @@ function StatusForm({
             />
           </div>
         </div>
-      </div>
-      <div class="row">
         <div class="col">
           <div className="form-group">
             <label htmlFor="incident_num">Incident Number</label>
@@ -92,6 +94,21 @@ function StatusForm({
               id="incident_num"
               onChange={handleIncidentNumChange}
               value={incidentNum}
+              readOnly
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div className="form-group">
+            <label htmlFor="start_date">Discharge Date</label>
+            <input
+              type="date"
+              name="start_date"
+              className="form-control"
+              id="start_date"
+              value={dischargeDate}
               readOnly
             />
           </div>
@@ -107,6 +124,19 @@ function StatusForm({
               onChange={handleStartDateChange}
               value={startDate}
               readOnly
+            />
+          </div>
+        </div>
+        <div class="col">
+          <div className="form-group">
+            <label htmlFor="next_check_date">Next Check Date</label>
+            <input
+              type="date"
+              name="next_check_date"
+              className="form-control"
+              id="next_check_date"
+              onChange={handleNextCheckDateChange}
+              value={nextCheckDate}
             />
           </div>
         </div>

@@ -33,6 +33,10 @@ function StatusEdit({ date }) {
   const [startDate, setStartDate] = useState(null);
   const handleStartDateChange = (event) => setStartDate(event.target.value);
 
+  const [dischargeDate, setDischargeDate] = useState(null);
+  const handleDischargeDateChange = (event) =>
+    setDischargeDate(event.target.value);
+
   const [nextCheckDate, setNextCheckDate] = useState(null);
   const handleNextCheckDateChange = (event) =>
     setNextCheckDate(event.target.value);
@@ -108,6 +112,8 @@ function StatusEdit({ date }) {
         setStartDate(response.start_date.substring(0, 10));
       if (response.next_check_date)
         setNextCheckDate(response.next_check_date.substring(0, 10));
+      if (response.discharge_date)
+        setDischargeDate(response.discharge_date.substring(0, 10));
       setYr1Fed(response["1_YR_Fed"]);
       setYr1State(response["1_YR_State"]);
       setYr1Note(response["1_YR_Note"]);
@@ -139,6 +145,7 @@ function StatusEdit({ date }) {
     participant.data.instance_id = Number(instanceId);
     participant.data.participant_id = Number(participantId);
     participant.data.next_check_date = nextCheckDate;
+    participant.data.discharge_date = dischargeDate;
     participant.data["1_YR_Fed"] = Yr1Fed;
     participant.data["1_YR_State"] = Yr1State;
     participant.data["1_YR_Note"] = Yr1Note;
@@ -193,6 +200,7 @@ function StatusEdit({ date }) {
         handleIncidentNumChange={handleIncidentNumChange}
         startDate={startDate}
         handleStartDateChange={handleStartDateChange}
+        dischargeDate={dischargeDate}
         instanceId={instanceId}
         nextCheckDate={nextCheckDate}
         handleNextCheckDateChange={handleNextCheckDateChange}

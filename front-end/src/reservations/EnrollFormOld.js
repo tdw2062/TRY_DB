@@ -65,6 +65,7 @@ function EnrollFormOld({
               aria-describedby="emailHelp"
               onChange={handleFirstNameChange}
               value={firstName}
+              readOnly
             />
           </div>
         </div>
@@ -78,6 +79,7 @@ function EnrollFormOld({
               id="last_name"
               onChange={handleLastNameChange}
               value={lastName}
+              readOnly
             />
           </div>
         </div>
@@ -106,6 +108,7 @@ function EnrollFormOld({
               id="dob"
               onChange={handleDobChange}
               value={dob}
+              readOnly
             />
           </div>
         </div>

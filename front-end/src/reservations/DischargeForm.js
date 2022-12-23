@@ -45,6 +45,7 @@ function DischargeForm({
               aria-describedby="emailHelp"
               onChange={handleFirstNameChange}
               value={firstName}
+              readOnly
             />
           </div>
         </div>
@@ -58,6 +59,7 @@ function DischargeForm({
               id="last_name"
               onChange={handleLastNameChange}
               value={lastName}
+              readOnly
             />
           </div>
         </div>
@@ -73,6 +75,7 @@ function DischargeForm({
               id="start_date"
               onChange={handleStartDateChange}
               value={startDate}
+              readOnly
             />
           </div>
         </div>

@@ -95,7 +95,17 @@ function RecCheck({ date }) {
       data: {},
     };
 
+    //To change date of current check into next_check_date
+    function addOneYear(input) {
+      const year = Number(input.substring(0, 4)) + 1;
+      console.log("return value", year + input.substring(4));
+      return year + input.substring(4);
+    }
+    console.log(typeof checkDate, "checkDate", checkDate);
+
     instance.data.instance_id = Number(instanceId);
+    instance.data.next_check_date = addOneYear(checkDate);
+
     if (timePeriod === "1") instance.data["1_YR_Note"] = note;
     if (timePeriod === "1" && fed === "yes") instance.data["1_YR_Fed"] = "yes";
     if (timePeriod === "1" && fed === "no") instance.data["1_YR_Fed"] = "no";
