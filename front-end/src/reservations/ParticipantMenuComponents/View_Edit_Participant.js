@@ -1,3 +1,6 @@
+//This component is used to view and edit the info for a
+//specific participant (name, dob)
+
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { readParticipant, updateParticipant } from "../../utils/api";
@@ -5,14 +8,8 @@ import ParticipantNewForm from "../ParticipantNewForm";
 
 import ErrorAlert from "../../layout/ErrorAlert";
 
-/**
- * Defines the dashboard page.
- * @param date
- *  the date for which the user wants to view reservations.
- * @returns {JSX.Element}
- */
 function View_Edit_Participant() {
-  //Create state variables for each field of reservation and add event listeners
+  //Create state variables for each participant and add event listeners
   const [firstName, setFirstName] = useState("");
   const handleFirstNameChange = (event) => setFirstName(event.target.value);
 
@@ -48,7 +45,7 @@ function View_Edit_Participant() {
   }, [participantId]);
 
   //Create the handleSubmit function to update the deck
-  //This function creates a reservation based on the user input and then uses changeReservation() api call
+  //This function updates a participant based on the input
   async function handleSubmit(event) {
     event.preventDefault();
 

@@ -7,12 +7,6 @@ import {
 } from "../../utils/api";
 import { useParams, Link, useHistory } from "react-router-dom";
 
-/**
- * Defines the dashboard page.
- * @param date
- *  the date for which the user wants to view reservations.
- * @returns {JSX.Element}
- */
 function View_Edit_Status() {
   const [statuses, setStatuses] = useState([
     { statusField: "off_coping_date", statusDescr: "Off Coping Date" },
@@ -57,7 +51,7 @@ function View_Edit_Status() {
     { statusField: "started_mat_date", statusDescr: "Started MAT" },
   ]);
 
-  //Create state variables for each field of reservation and add event listeners
+  //Create state variables for each instance and add event listeners
   const [firstName, setFirstName] = useState("");
   const handleFirstNameChange = (event) => setFirstName(event.target.value);
 

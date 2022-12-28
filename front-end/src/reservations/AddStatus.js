@@ -49,6 +49,7 @@ function AddStatus() {
     },
     { statusField: "had_counseling", statusDescr: "Had Individual Counseling" },
     { statusField: "relapse_date", statusDescr: "Relapse Date" },
+    { statusField: "drug_test_date", statusDescr: "Drug Test Date" },
     { statusField: "started_mat_date", statusDescr: "Started MAT" },
   ]);
 
@@ -99,10 +100,11 @@ function AddStatus() {
   }, [instanceId]);
 
   async function handleSubmit() {
-    //Find the object that matches the statusName
+    /*Find the object that matches the statusName
     const objectMatch = statuses.find(
       ({ statusDescr }) => statusDescr === statusName
     );
+    
 
     //Create an instance object to update the instances table
     let instance = {
@@ -121,7 +123,7 @@ function AddStatus() {
     } catch (err) {
       console.log("Error making createTable API call: ", err);
     }
-
+    */
     //Make an api call to post the new table to the db
     let status = {
       data: {},
@@ -138,11 +140,10 @@ function AddStatus() {
 
     try {
       const response2 = await createStatus(status);
+      if (response2) alert("Status Update Added");
     } catch (err) {
       console.log("Error making createTable API call: ", err);
     }
-
-    alert("Status Update Added");
   }
 
   //Create table rows from the statuses state array and use to populate the drop-down
@@ -229,13 +230,13 @@ function AddStatus() {
           <button type="submit" className="btn btn-primary">
             Submit Status Update
           </button>
-          <Link to={`/participants/${instanceId}/view`}>
+          <Link to={`/participants/dashboard`}>
             <button
               type="button"
               class="btn btn-primary"
               style={{ margin: "5px" }}
             >
-              Return to View Participant
+              Return to Dashboard
             </button>
           </Link>
         </form>

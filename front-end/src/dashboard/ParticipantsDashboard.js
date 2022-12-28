@@ -1,12 +1,10 @@
-//The main functions of the Dashboard component are to display all of the reservations
-//and allow the user to seat, edit, or cancel reservations and to display all of the
-//tables and allow the user to finish the tables
+//The main functions of the Dashboard component are to display all of the active participants
+//and allow the user to add a status, view, or discharge the participant
 
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { listInstances } from "../utils/api";
 import ErrorCaught from "../ErrorCaught";
-import { json2csv } from "json-2-csv";
 
 /**
  * Defines the dashboard page.
@@ -15,7 +13,7 @@ import { json2csv } from "json-2-csv";
  * @returns {JSX.Element}
  */
 function ParticipantsDashboard({ date }) {
-  //The main state variables are reservations and tables which are arrays to be displayed
+  //The main state variabe is instances which is an instance of an active particpant to be displayed
   const [instances, setInstances] = useState([]);
   const [instancesError, setInstancesError] = useState(null);
   const [visibility3, setVisibility3] = useState(null);
@@ -23,9 +21,8 @@ function ParticipantsDashboard({ date }) {
   //Declare an instance of the useHistory hook
   const history = useHistory();
 
-  //Use useEffect to load the reservations and the tables
-
-  //Load reservations
+  //Use useEffect to load the participants that are currently_in_program
+  //Load isntances
   useEffect(loadDashboard, [date]);
 
   function loadDashboard() {
@@ -38,7 +35,7 @@ function ParticipantsDashboard({ date }) {
     return () => abortController.abort();
   }
 
-  //Create table rows of reservations using the 'reservations' state array
+  //Create table rows of instances using the 'instances' state array
   const instanceLinks = instances.map((instance) => {
     let startDateString = instance.start_date.substring(0, 10);
     let dischargeDateString = "";
@@ -86,7 +83,7 @@ function ParticipantsDashboard({ date }) {
     );
   });
 
-  //Return the html code for the reservations and the tables
+  //Return the html code for the display of instances
   return (
     <main>
       <h1>Active Participants</h1>

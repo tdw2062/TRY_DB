@@ -1,20 +1,12 @@
-//The main functions of the Dashboard component are to display all of the reservations
-//and allow the user to seat, edit, or cancel reservations and to display all of the
-//tables and allow the user to finish the tables
-
+//This component is used to view all of the statuses (regardless of instance)
+//for a given participant
 import React, { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { readParticipant, listStatuses, deleteStatus } from "../../utils/api";
 import ParticipantMenu2 from "../ParticipantMenu2";
 
-/**
- * Defines the dashboard page.
- * @param date
- *  the date for which the user wants to view reservations.
- * @returns {JSX.Element}
- */
-function ViewAllStatuses({ date }) {
-  //The main state variables are reservations and tables which are arrays to be displayed
+function ViewAllStatuses({}) {
+  //The main state variables are statuses to be displayed
   const [statuses, setStatuses] = useState([]);
   const [statusesError, setStatusesError] = useState(null);
   const [firstName, setFirstName] = useState("");
@@ -30,8 +22,8 @@ function ViewAllStatuses({ date }) {
   console.log("participant id", participant_id);
 
   //Use useEffect to load the statuses and the instances
-  //Load reservations
-  useEffect(loadStatuses, [date]);
+  //Load statuses
+  useEffect(loadStatuses, []);
 
   function loadStatuses() {
     const abortController = new AbortController();
@@ -99,7 +91,7 @@ function ViewAllStatuses({ date }) {
     );
   });
 
-  //Return the html code for the reservations and the tables
+  //Return the html code to display all of the statuses[l]
   return (
     <main>
       <h1>

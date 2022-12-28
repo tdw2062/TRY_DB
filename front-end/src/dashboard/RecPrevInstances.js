@@ -1,6 +1,4 @@
-//The main functions of the Dashboard component are to display all of the reservations
-//and allow the user to seat, edit, or cancel reservations and to display all of the
-//tables and allow the user to finish the tables
+//This code is used to show all of the previous instances of a participant
 
 import React, { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
@@ -13,7 +11,7 @@ import { listInstances } from "../utils/api";
  * @returns {JSX.Element}
  */
 function RecPrevInstances({ date }) {
-  //The main state variables are reservations and tables which are arrays to be displayed
+  //The main state variables are instances of a specific participant
   let [instances, setInstances] = useState([]);
   const [instancesError, setInstancesError] = useState(null);
   const [visibility3, setVisibility3] = useState(null);
@@ -29,8 +27,8 @@ function RecPrevInstances({ date }) {
   const { participant_id } = useParams();
   console.log("participant id", participant_id);
 
-  //Use useEffect to load the reservations and the tables
-  //Load reservations
+  //Use useEffect to load instances of a specific particiapnt
+  //Load isntances
   useEffect(loadDashboard, [day, month, year]);
   function loadDashboard() {
     console.log("trying");
@@ -43,7 +41,7 @@ function RecPrevInstances({ date }) {
     return () => abortController.abort();
   }
 
-  //Create table rows of reservations using the 'reservations' state array
+  //Create table rows of instances using the 'instances' array
   const instanceLinks = instances.map((instance) => {
     let startDateString = instance.start_date.substring(0, 10);
     let dischargeDateString = "";
@@ -86,7 +84,7 @@ function RecPrevInstances({ date }) {
     );
   });
 
-  //Return the html code for the reservations and the tables
+  //Return the html code for the instances
   return (
     <main>
       <h1>View Previous Instances</h1>

@@ -2,7 +2,7 @@ import React from "react";
 
 import { Redirect, Route, Switch, useLocation } from "react-router-dom";
 import ParticipantsDashboard from "../dashboard/ParticipantsDashboard";
-import EditParticipant from "../reservations/EditParticipant";
+
 import EnrollNew from "../reservations/EnrollNew";
 import EnrollHome from "../reservations/EnrollHome";
 import EnrollEdit from "../reservations/ParticipantMenuComponents/EnrollEdit";
@@ -90,6 +90,7 @@ function Routes() {
       <Route path="/participants/dashboard">
         <ParticipantsDashboard />
       </Route>
+
       <Route path="/participants/enroll">
         <EnrollHome />
       </Route>
@@ -120,6 +121,9 @@ function Routes() {
       </Route>
       <Route path="/participants/:participantId/viewEditParticipant">
         <View_Edit_Participant />
+      </Route>
+      <Route path="/">
+        <ParticipantsDashboard />
       </Route>
       <Route>
         <NotFound />

@@ -48,6 +48,7 @@ function ParticipantNew({ date }) {
     async function newParticipant(participant) {
       try {
         const response = await createParticipant(participant);
+        if (response) alert("Participant Added Successfully");
         participant_id = response.participant_id;
         console.log("Here is the response", participant_id);
       } catch (err) {
@@ -57,7 +58,6 @@ function ParticipantNew({ date }) {
     }
     await newParticipant(participant);
 
-    alert("Participant Enrolled Successfully");
     //Go back to dashboard page
     history.push(`/participants/${participant_id}/enrollNew`);
   }

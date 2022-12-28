@@ -1,19 +1,12 @@
-//The main functions of the Dashboard component are to display all of the reservations
-//and allow the user to seat, edit, or cancel reservations and to display all of the
-//tables and allow the user to finish the tables
+//The main functions of the Recidivism Dashboard component are to display all of the participants that are
+//active in the program. From there, you can perform a Recidivism check on a given participant.
 
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { listInstances } from "../utils/api";
 
-/**
- * Defines the dashboard page.
- * @param date
- *  the date for which the user wants to view reservations.
- * @returns {JSX.Element}
- */
-function RecDashboard({ date }) {
-  //The main state variables are reservations and tables which are arrays to be displayed
+function RecDashboard({}) {
+  //The main state variables are instances to be displayed in the dashboard
   let [instances, setInstances] = useState([]);
   let [instancesFiltered, setInstancesFiltered] = useState([]);
   const [instancesError, setInstancesError] = useState(null);
@@ -25,9 +18,8 @@ function RecDashboard({ date }) {
   //Declare an instance of the useHistory hook
   const history = useHistory();
 
-  //Use useEffect to load the reservations and the tables
-
-  //Load reservations
+  //Use useEffect to load instances where participants are not currently in the program
+  //Load instances
   useEffect(loadDashboard, [day, month, year]);
 
   function loadDashboard() {
@@ -68,7 +60,7 @@ function RecDashboard({ date }) {
     console.log("dateString", month, day, year);
   }
 
-  //Create table rows of reservations using the 'reservations' state array
+  //Create table rows of instances only for participants that are not currently_in_program
   const instanceLinks = instances
     .filter((instance) => instance.currently_in_program === "no")
     .map((instance) => {
@@ -126,7 +118,7 @@ function RecDashboard({ date }) {
       );
     });
 
-  //Return the html code for the reservations and the tables
+  //Return the html code for the dashboard
   return (
     <main>
       <h1>Recidivism Dashboard</h1>

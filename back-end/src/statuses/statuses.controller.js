@@ -1,6 +1,7 @@
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 
 const statusesService = require("./statuses.service.js");
+const instancesService = require("../instances/instances.service.js");
 
 //Helper function that determines if a given status exists (by tableId)
 async function statusExists(req, res, next) {
@@ -33,7 +34,21 @@ async function list(req, res, next) {
 
 //Create a status based on the request body data
 async function createStatus(req, res, next) {
-  const data = await statusesService.createStatus(req.body.data);
+  const newStatusObj = req.body.data;
+  const data = await statusesService.createStatus(newStatusObj);
+  const [year, month, day] = newStatusObj.date.split("-");
+  const statusDate = new Date(year, month - 1, day);
+  console.log("statusDate", statusDate);
+  const statusNameObj = statusLookup(newStatusObj.status_name);
+  const instanceGrabbed = await instancesService.read(newStatusObj.instance_id);
+  const dateOfInstance = instanceGrabbed[statusNameObj.statusField];
+  const insertObj = {};
+  insertObj[statusNameObj.statusField] = statusDate;
+  if (statusDate > dateOfInstance) {
+    await instancesService.update(insertObj, newStatusObj.instance_id);
+    console.log("date updated");
+  }
+
   res.status(201).json({ data });
 }
 
@@ -52,6 +67,54 @@ async function destroy(req, res) {
   console.log("request given", req);
   await statusesService.destroy(Number(req.params.statusId));
   res.sendStatus(204);
+}
+
+function statusLookup(description) {
+  const statusArray = [
+    { statusField: "off_coping_date", statusDescr: "Off Coping Date" },
+    { statusField: "off_coping60_date", statusDescr: "Off Coping +60" },
+    {
+      statusField: "on_restrictions_date",
+      statusDescr: "On Restrictions Date",
+    },
+    {
+      statusField: "off_restrictions_date",
+      statusDescr: "Off Restrictions Date",
+    },
+    {
+      statusField: "employment_start_date",
+      statusDescr: "Employment Start Date",
+    },
+    {
+      statusField: "leadership_dev_start_date",
+      statusDescr: "Leadership Development Start Date",
+    },
+    {
+      statusField: "job_search_start_date",
+      statusDescr: "Job Search Start Date",
+    },
+    { statusField: "iop_start_date", statusDescr: "IOP Start Date" },
+    { statusField: "iop_end_date", statusDescr: "IOP End Date" },
+    {
+      statusField: "aftercare_start_date",
+      statusDescr: "Aftercare Start Date",
+    },
+    { statusField: "aftercare_end_date", statusDescr: "Aftercare End Date" },
+    { statusField: "ged_start_date", statusDescr: "GED Start Date" },
+    { statusField: "ged_end_date", statusDescr: "GED End Date" },
+    { statusField: "cpt_start_date", statusDescr: "CPT Start Date" },
+    { statusField: "cpt_end_date", statusDescr: "CPT End Date" },
+    {
+      statusField: "rec_treatment_update",
+      statusDescr: "Received Treatment Update",
+    },
+    { statusField: "had_counseling", statusDescr: "Had Individual Counseling" },
+    { statusField: "relapse_date", statusDescr: "Relapse Date" },
+    { statusField: "drug_test_date", statusDescr: "Drug Test Date" },
+    { statusField: "started_mat_date", statusDescr: "Started MAT" },
+  ];
+
+  return statusArray.find(({ statusDescr }) => statusDescr === description);
 }
 
 module.exports = {

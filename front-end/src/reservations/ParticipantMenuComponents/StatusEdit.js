@@ -1,3 +1,7 @@
+//This component is used to update the instance info that pertains
+//to statuses. It contains editing ability for both "one-time statuses"
+//and "multiple-time statuses".
+
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import {
@@ -9,14 +13,8 @@ import {
 } from "../../utils/api";
 import StatusForm from "./StatusForm";
 
-/**
- * Defines the dashboard page.
- * @param date
- *  the date for which the user wants to view reservations.
- * @returns {JSX.Element}
- */
-function StatusEdit({ date }) {
-  //Create state variables for each field of reservation and add event listeners
+function StatusEdit({}) {
+  //Create state variables for each instance add event listeners
   const [firstName, setFirstName] = useState("");
   const handleFirstNameChange = (event) => setFirstName(event.target.value);
 
@@ -169,8 +167,8 @@ function StatusEdit({ date }) {
     getInstance(instanceId);
   }, [instanceId]);
 
-  //Create the handleSubmit function to update the deck
-  //This function creates a reservation based on the user input and then uses changeReservation() api call
+  //Create the handleSubmit function to update the status
+  //based on the information input
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -204,7 +202,7 @@ function StatusEdit({ date }) {
     //Log participant
     console.log("participant", participant);
 
-    //Make api call to update reservation
+    //Make api call to update the instance
     async function editInstance(participant) {
       try {
         const response = await updateInstance(participant);
@@ -226,7 +224,7 @@ function StatusEdit({ date }) {
     history.push(`/dashboard`);
   };
 
-  //Return the form to enter the reservation details
+  //Return the form to enter the instance
   return (
     <main>
       <h1>Edit Enrollment Information</h1>

@@ -9,14 +9,8 @@ import {
 } from "../../utils/api";
 import DischargeForm from "./DischargeForm";
 
-/**
- * Defines the dashboard page.
- * @param date
- *  the date for which the user wants to view reservations.
- * @returns {JSX.Element}
- */
-function StatusEdit({ date }) {
-  //Create state variables for each field of reservation and add event listeners
+function StatusEdit({}) {
+  //Create state variables to send to the DischargeForm which will modify discharge info
   const [firstName, setFirstName] = useState("");
   const handleFirstNameChange = (event) => setFirstName(event.target.value);
 
@@ -100,8 +94,8 @@ function StatusEdit({ date }) {
     getInstance(instanceId);
   }, [instanceId]);
 
-  //Create the handleSubmit function to update the deck
-  //This function creates a reservation based on the user input and then uses changeReservation() api call
+  //Create the handleSubmit function to update the discharge info on that instance
+  //This function creates an instance object and then calls an update function to update the instance
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -123,7 +117,7 @@ function StatusEdit({ date }) {
     //Log participant
     console.log("participant", participant);
 
-    //Make api call to update reservation
+    //Make api call to update instance
     async function editInstance(participant) {
       try {
         const response = await updateInstance(participant);
@@ -145,7 +139,7 @@ function StatusEdit({ date }) {
     history.push(`/dashboard`);
   };
 
-  //Return the form to enter the reservation details
+  //Return the form to enter the discharge details
   return (
     <main>
       <h1>Edit Discharge Information</h1>

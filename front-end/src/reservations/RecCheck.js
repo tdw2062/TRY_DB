@@ -21,6 +21,9 @@ function RecCheck({ date }) {
   const [incident, setIncident] = useState(null);
   const handleIncidentChange = (event) => setIncident(event.target.value);
 
+  const [participantId, setParticipantId] = useState(null);
+  const handleParicipantIdChange = (event) => setIncident(event.target.value);
+
   const [statusName, setStatusName] = useState(null);
   const handleStatusNameChange = (event) => setStatusName(event.target.value);
 
@@ -62,6 +65,8 @@ function RecCheck({ date }) {
   const { instanceId } = useParams();
   console.log("instanceId", instanceId);
 
+  const history = useHistory();
+
   //Make an API Call to get the reservation based on the reservation_id
   useEffect(() => {
     async function getInstance(instanceId) {
@@ -74,6 +79,7 @@ function RecCheck({ date }) {
       setFirstName(response.first_name);
       setLastName(response.last_name);
       setIncident(response.incident_num);
+      setParticipantId(response.participant_id);
       setStartDate(startDateString);
       setDischargeDate(dischargeDateString);
       setCheckDate(checkDateString);
@@ -106,6 +112,7 @@ function RecCheck({ date }) {
     instance.data.instance_id = Number(instanceId);
     instance.data.next_check_date = addOneYear(checkDate);
 
+    //Assign fields to instance object based on rec_form input and selections
     if (timePeriod === "1") instance.data["1_YR_Note"] = note;
     if (timePeriod === "1" && fed === "yes") instance.data["1_YR_Fed"] = "yes";
     if (timePeriod === "1" && fed === "no") instance.data["1_YR_Fed"] = "no";
@@ -158,9 +165,13 @@ function RecCheck({ date }) {
       };
 
       status.data.instance_id = instanceId;
+      status.data.first_name = firstName;
+      status.data.last_name = lastName;
       status.data.status_name = "Changed Program Utilization Success";
       status.data.date = checkDate;
       status.data.notes = note;
+      status.data.participant_id = participantId;
+      status.data.incident_num = incident;
 
       try {
         console.log("##status##", status);
@@ -173,11 +184,12 @@ function RecCheck({ date }) {
     //Make api call to update instance
     async function changeInstance(instance) {
       const response = await updateInstance(instance);
+      if (response) alert("Recidivism Check Performed Successfully");
       console.log("returned response", response);
     }
     await changeInstance(instance);
 
-    alert("Recidivism Check Performed Successfully");
+    history.go(-1);
   }
 
   //Return the html with status drop-down
@@ -194,6 +206,7 @@ function RecCheck({ date }) {
           aria-describedby="emailHelp"
           onChange={handleFirstNameChange}
           value={firstName}
+          readOnly
         />
       </div>
       <div className="form-group">
@@ -205,6 +218,7 @@ function RecCheck({ date }) {
           id="last_name"
           onChange={handleLastNameChange}
           value={lastName}
+          readOnly
         />
       </div>
       <div className="form-group">
@@ -216,6 +230,7 @@ function RecCheck({ date }) {
           id="last_name"
           onChange={handleIncidentChange}
           value={incident}
+          readOnly
         />
       </div>
       <div class="form-group">
@@ -229,6 +244,7 @@ function RecCheck({ date }) {
               id="start_date"
               onChange={handleStartDateChange}
               value={startDate}
+              readOnly
             />
           </div>
           <div className="form-group">
@@ -240,6 +256,7 @@ function RecCheck({ date }) {
               id="discharge_date"
               onChange={handleDischargeDateChange}
               value={dischargeDate}
+              readOnly
             />
           </div>
           <div className="form-group">

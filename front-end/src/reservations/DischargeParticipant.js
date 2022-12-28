@@ -133,7 +133,7 @@ function DischargeParticipant({ date }) {
 
     alert("Participant Discharged Successfully");
     //Go back to dashboard page
-    // history.push(`/participants/dashboard`);
+    history.push(`/participants/dashboard`);
   }
 
   //Create the handleCancel function to return the user to the previous page

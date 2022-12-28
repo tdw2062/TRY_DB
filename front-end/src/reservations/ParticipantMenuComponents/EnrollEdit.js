@@ -1,3 +1,5 @@
+//This component is used to edit the enrollment information for an instance
+
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import {
@@ -9,14 +11,8 @@ import {
 } from "../../utils/api";
 import EnrollForm from "./EnrollForm";
 
-/**
- * Defines the dashboard page.
- * @param date
- *  the date for which the user wants to view reservations.
- * @returns {JSX.Element}
- */
-function EnrollEdit({ date }) {
-  //Create state variables for each field of reservation and add event listeners
+function EnrollEdit({}) {
+  //Create state variables for each instance field and add event listeners
   const [firstName, setFirstName] = useState("");
   const handleFirstNameChange = (event) => setFirstName(event.target.value);
 
@@ -134,8 +130,7 @@ function EnrollEdit({ date }) {
     getInstance(instanceId);
   }, [instanceId]);
 
-  //Create the handleSubmit function to update the deck
-  //This function creates a reservation based on the user input and then uses changeReservation() api call
+  //Create the handleSubmit function to update the enrollment info for the instance
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -170,7 +165,7 @@ function EnrollEdit({ date }) {
     //Log participant
     console.log("participant", participant);
 
-    //Make api call to update reservation
+    //Make api call to update the instance
     async function editInstance(participant) {
       try {
         const response = await updateInstance(participant);
@@ -192,7 +187,7 @@ function EnrollEdit({ date }) {
     history.push(`/dashboard`);
   };
 
-  //Return the form to enter the reservation details
+  //Return the form to enter the instance details
   return (
     <main>
       <h1>Edit Enrollment Information</h1>

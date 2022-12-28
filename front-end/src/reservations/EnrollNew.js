@@ -168,6 +168,7 @@ function EnrollNew({ date }) {
     async function newParticipant(participant) {
       try {
         const response = await createInstance(participant);
+        if (response) alert("Participant Enrolled Successfully");
         console.log(response);
       } catch (err) {
         console.log("Error making updateReservation API call: ", err);
@@ -176,7 +177,6 @@ function EnrollNew({ date }) {
     }
     await newParticipant(participant);
 
-    alert("Participant Enrolled Successfully");
     //Go back to dashboard page
     history.push(`/participants/dashboard`);
   }
