@@ -197,6 +197,18 @@ export async function updateInstance(updatedInstance, signal) {
   return await fetchJson(url, options, updatedInstance);
 }
 
+//Updates an instance using recidivism endpoint
+export async function updateRecInstance(updatedInstance, signal) {
+  const url = `${API_BASE_URL}/recidivism/${updatedInstance.data.instance_id}`;
+  const options = {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(updatedInstance),
+    signal,
+  };
+  return await fetchJson(url, options, updatedInstance);
+}
+
 //Updates a status
 export async function updateStatus(updatedStatus, signal) {
   const url = `${API_BASE_URL}/statuses/${updatedStatus.data.status_id}`;

@@ -108,7 +108,7 @@ function ViewParticipant({ date }) {
             View/Edit Instance
           </button>
         </Link>{" "}
-        <Link to={`/participants/${instance.instance_id}/view`}>
+        <Link to={`/participants/${instance.participant_id}/view`}>
           <button
             type="button"
             class="btn btn-primary"

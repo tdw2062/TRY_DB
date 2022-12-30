@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createStatus } from "../utils/api";
 
-import { readInstance, updateInstance } from "../utils/api";
+import { readInstance, updateRecInstance } from "../utils/api";
 import { useParams, useHistory, Link } from "react-router-dom";
 
 /**
@@ -111,6 +111,11 @@ function RecCheck({ date }) {
 
     instance.data.instance_id = Number(instanceId);
     instance.data.next_check_date = addOneYear(checkDate);
+    instance.data.note = note;
+    instance.data.first_name = firstName;
+    instance.data.last_name = lastName;
+    instance.data.incident_num = incident;
+    instance.data.participant_id = participantId;
 
     //Assign fields to instance object based on rec_form input and selections
     if (timePeriod === "1") instance.data["1_YR_Note"] = note;
@@ -157,33 +162,11 @@ function RecCheck({ date }) {
       currentProgramUtilization !== updatedProgramUtilization
     ) {
       instance.data["program_utilization"] = updatedProgramUtilization;
-
-      //Make an api call to post the new table to the db
-
-      let status = {
-        data: {},
-      };
-
-      status.data.instance_id = instanceId;
-      status.data.first_name = firstName;
-      status.data.last_name = lastName;
-      status.data.status_name = "Changed Program Utilization Success";
-      status.data.date = checkDate;
-      status.data.notes = note;
-      status.data.participant_id = participantId;
-      status.data.incident_num = incident;
-
-      try {
-        console.log("##status##", status);
-        const response2 = await createStatus(status);
-      } catch (err) {
-        console.log("Error making createTable API call: ", err);
-      }
     }
 
     //Make api call to update instance
     async function changeInstance(instance) {
-      const response = await updateInstance(instance);
+      const response = await updateRecInstance(instance);
       if (response) alert("Recidivism Check Performed Successfully");
       console.log("returned response", response);
     }

@@ -34,16 +34,21 @@ async function list(req, res, next) {
 
 //Create a status based on the request body data
 async function createStatus(req, res, next) {
+  //Create a status object based on request and create new status in table
   const newStatusObj = req.body.data;
   const data = await statusesService.createStatus(newStatusObj);
+  //Convert date in status object to JS date
   const [year, month, day] = newStatusObj.date.split("-");
   const statusDate = new Date(year, month - 1, day);
   console.log("statusDate", statusDate);
+  //Use statusLookup to match "status_name" with "status_field"
   const statusNameObj = statusLookup(newStatusObj.status_name);
+  //Look at the instance of the status and find the date of the "status_field"
   const instanceGrabbed = await instancesService.read(newStatusObj.instance_id);
   const dateOfInstance = instanceGrabbed[statusNameObj.statusField];
   const insertObj = {};
   insertObj[statusNameObj.statusField] = statusDate;
+  //If the statusDate is greater than instance date then replace
   if (statusDate > dateOfInstance) {
     await instancesService.update(insertObj, newStatusObj.instance_id);
     console.log("date updated");
@@ -54,11 +59,32 @@ async function createStatus(req, res, next) {
 
 //Update the status
 async function update(req, res, next) {
+  //Create a status object based on request and update status in table
+  const newStatusObj = req.body.data;
   //Update the status
   const response = await statusesService.update(
-    req.body.data,
+    newStatusObj,
     req.params.statusId
   );
+  //Convert date in status object to JS date
+  const [year, month, day] = newStatusObj.date.split("-");
+  const statusDate = new Date(year, month - 1, day);
+  console.log("statusDate", statusDate);
+  //Use statusLookup to match "status_name" with "status_field"
+  const statusNameObj = statusLookup(newStatusObj.status_name);
+  console.log("statusNameObj", statusNameObj);
+  console.log("newStatusObj", newStatusObj);
+  //Look at the instance of the status and find the date of the "status_field"
+  const instanceGrabbed = await instancesService.read(newStatusObj.instance_id);
+  console.log("instance grabbed", instanceGrabbed);
+  const dateOfInstance = instanceGrabbed[statusNameObj.statusField];
+  const insertObj = {};
+  insertObj[statusNameObj.statusField] = statusDate;
+  //If the statusDate is greater than instance date then replace
+  if (statusDate > dateOfInstance) {
+    await instancesService.update(insertObj, newStatusObj.instance_id);
+    console.log("date updated");
+  }
   res.json({ data: response });
 }
 

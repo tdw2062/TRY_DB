@@ -104,30 +104,6 @@ function View_Edit_Status() {
   }, [statusId]);
 
   async function handleSubmit() {
-    //Find the object that matches the statusName so that the statusName can be
-    //converted into the name of the status in the "statuses" table
-    const objectMatch = statuses.find(
-      ({ statusDescr }) => statusDescr === statusName
-    );
-
-    //Create an instance object to update the instances table
-    let instance = {
-      data: {},
-    };
-
-    instance.data.instance_id = instanceId;
-    instance.data[objectMatch.statusField] = statusDate;
-
-    console.log("Instance Number", instance.data.instance_id);
-    console.log("Instance Field", instance.data);
-    console.log("Instance Value", instance.data[objectMatch.statusField]);
-
-    try {
-      const response1 = await updateInstance(instance);
-    } catch (err) {
-      console.log("Error making createTable API call: ", err);
-    }
-
     //Make an api call to update the statuses table in the db
     let status = {
       data: {},
@@ -140,14 +116,14 @@ function View_Edit_Status() {
     status.data.status_name = statusName;
     status.data.date = statusDate;
     status.data.notes = statusNotes;
+    status.data.instance_id = instanceId;
 
     try {
       const response2 = await updateStatus(status);
+      if (response2) alert("Status Update Added");
     } catch (err) {
       console.log("Error making createTable API call: ", err);
     }
-
-    alert("Status Update Added");
   }
 
   //Create table rows from the statuses state array and use to populate the drop-down
@@ -205,6 +181,7 @@ function View_Edit_Status() {
             name="statusName"
             onChange={handleStatusNameChange}
             value={statusName}
+            disabled="true"
           >
             <option value="">--Select an Option--</option>
             {statusLinks}

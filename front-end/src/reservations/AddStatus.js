@@ -100,31 +100,6 @@ function AddStatus() {
   }, [instanceId]);
 
   async function handleSubmit() {
-    /*Find the object that matches the statusName
-    const objectMatch = statuses.find(
-      ({ statusDescr }) => statusDescr === statusName
-    );
-    
-
-    //Create an instance object to update the instances table
-    let instance = {
-      data: {},
-    };
-
-    instance.data.instance_id = instanceId;
-    instance.data[objectMatch.statusField] = statusDate;
-
-    console.log("Instance Number", instance.data.instance_id);
-    console.log("Instance Field", instance.data);
-    console.log("Instance Value", instance.data[objectMatch.statusField]);
-
-    try {
-      const response1 = await updateInstance(instance);
-    } catch (err) {
-      console.log("Error making createTable API call: ", err);
-    }
-    */
-    //Make an api call to post the new table to the db
     let status = {
       data: {},
     };
