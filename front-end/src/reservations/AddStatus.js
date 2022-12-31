@@ -86,6 +86,8 @@ function AddStatus() {
   //Get ParticipantId from url
   const { instanceId } = useParams();
 
+  const history = useHistory();
+
   //Make an API Call to get the reservation based on the reservation_id
   useEffect(() => {
     async function getInstance(instanceId) {
@@ -99,7 +101,9 @@ function AddStatus() {
     getInstance(instanceId);
   }, [instanceId]);
 
-  async function handleSubmit() {
+  async function handleSubmit(event) {
+    event.preventDefault();
+
     let status = {
       data: {},
     };
@@ -119,6 +123,8 @@ function AddStatus() {
     } catch (err) {
       console.log("Error making createTable API call: ", err);
     }
+
+    history.go(0);
   }
 
   //Create table rows from the statuses state array and use to populate the drop-down

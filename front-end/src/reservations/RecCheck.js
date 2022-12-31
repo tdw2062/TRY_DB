@@ -97,6 +97,8 @@ function RecCheck({ date }) {
   }, []);
 
   async function handleSubmit(event) {
+    event.preventDefault();
+
     let instance = {
       data: {},
     };

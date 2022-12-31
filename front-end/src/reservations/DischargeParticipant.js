@@ -7,6 +7,7 @@ import {
   createInstance,
 } from "../utils/api";
 import DischargeForm from "./DischargeForm";
+import DateError from "./DateError";
 
 import ErrorAlert from "../layout/ErrorAlert";
 
@@ -59,8 +60,7 @@ function DischargeParticipant({ date }) {
     setDischargeStatus(event.target.value);
 
   //State vars for error message
-  const [errMessage, setErrMessage] = useState("");
-  const [visibility3, setVisibility3] = useState(null);
+  const [visibility, setVisibility] = useState(null);
 
   //Create instance of useHistory hook
   const history = useHistory();
@@ -92,53 +92,70 @@ function DischargeParticipant({ date }) {
     console.log("beforeSubmit", programUtilization);
     console.log(typeof dischargeDate, "dischargeDate", dischargeDate);
     event.preventDefault();
+    const proceed = validate();
 
-    //To change discharge date into next_check_date
-    function addOneYear(input) {
-      const year = Number(input.substring(0, 4)) + 1;
-      console.log("return value", year + input.substring(4));
-      return year + input.substring(4);
-    }
-
-    let instance = {
-      data: {},
-    };
-
-    instance.data.instance_id = instanceId;
-    instance.data.discharge_date = dischargeDate;
-    instance.data.discharge_reason = dischargeReason;
-    instance.data.got_checking = gotChecking;
-    instance.data.got_license = gotLicense;
-    instance.data.got_savings = gotSavings;
-    instance.data.program_utilization = programUtilization;
-    instance.data.housing_transition = housingTransition;
-    instance.data.status_at_discharge = dischargeStatus;
-    instance.data.currently_in_program = "no";
-    instance.data.next_check_date = addOneYear(dischargeDate);
-
-    //Log participant
-    console.log("instance", instance);
-
-    //Make api call to update instance
-    async function updateDischargeInfo(updatedInstance) {
-      try {
-        const response = await updateInstance(updatedInstance);
-        console.log(response);
-      } catch (err) {
-        console.log("Error making updateReservation API call: ", err);
-        setErrMessage(err);
+    if (proceed) {
+      //To change discharge date into next_check_date
+      function addOneYear(input) {
+        const year = Number(input.substring(0, 4)) + 1;
+        console.log("return value", year + input.substring(4));
+        return year + input.substring(4);
       }
-    }
-    await updateDischargeInfo(instance);
 
-    alert("Participant Discharged Successfully");
-    //Go back to dashboard page
-    history.push(`/participants/dashboard`);
+      let instance = {
+        data: {},
+      };
+
+      instance.data.instance_id = instanceId;
+      instance.data.discharge_date = dischargeDate;
+      instance.data.discharge_reason = dischargeReason;
+      instance.data.got_checking = gotChecking;
+      instance.data.got_license = gotLicense;
+      instance.data.got_savings = gotSavings;
+      instance.data.program_utilization = programUtilization;
+      instance.data.housing_transition = housingTransition;
+      instance.data.status_at_discharge = dischargeStatus;
+      instance.data.currently_in_program = "no";
+      instance.data.next_check_date = addOneYear(dischargeDate);
+
+      //Log participant
+      console.log("instance", instance);
+
+      //Make api call to update instance
+      async function updateDischargeInfo(updatedInstance) {
+        try {
+          const response = await updateInstance(updatedInstance);
+          console.log(response);
+        } catch (err) {
+          console.log("Error making updateReservation API call: ", err);
+        }
+      }
+      await updateDischargeInfo(instance);
+
+      alert("Participant Discharged Successfully");
+      //Go back to dashboard page
+      history.push(`/participants/dashboard`);
+    }
   }
 
   //Create the handleCancel function to return the user to the previous page
   const handleCancel = (event) => {
     history.push(`/dashboard`);
+  };
+
+  //The validate function is used by the handleSubmit function to make sure
+  //that a discharge date has actually been added.
+  const validate = () => {
+    //Reset visibility
+    setVisibility(null);
+
+    //If there is no discharge date display error message
+    if (dischargeDate === null) {
+      setVisibility(true);
+      return false;
+    }
+
+    return true;
   };
 
   //Return the form to enter the reservation details
@@ -171,6 +188,7 @@ function DischargeParticipant({ date }) {
         handleSubmit={handleSubmit}
         handleCancel={handleCancel}
       />
+      <DateError visibility={visibility} />
     </main>
   );
 }

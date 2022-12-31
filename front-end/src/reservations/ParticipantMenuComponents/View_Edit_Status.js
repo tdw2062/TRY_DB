@@ -103,7 +103,8 @@ function View_Edit_Status() {
     getStatus(statusId);
   }, [statusId]);
 
-  async function handleSubmit() {
+  async function handleSubmit(event) {
+    event.preventDefault();
     //Make an api call to update the statuses table in the db
     let status = {
       data: {},
