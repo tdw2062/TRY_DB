@@ -27,6 +27,11 @@ function View_Edit_Status() {
       statusField: "leadership_dev_start_date",
       statusDescr: "Leadership Development Start Date",
     },
+    { statusField: "drug_test_date", statusDescr: "Drug Test Date" },
+    {
+      statusField: "program_utilization",
+      statusDescr: "Changed Program Utilization Success",
+    },
     {
       statusField: "job_search_start_date",
       statusDescr: "Job Search Start Date",

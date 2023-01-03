@@ -80,13 +80,14 @@ function StatusEdit({}) {
       setParticipantId(response.participant_id);
       if (response.start_date)
         setStartDate(response.start_date.substring(0, 10));
+
       if (response.discharge_date)
         setDischargeDate(response.discharge_date.substring(0, 10));
       setGotChecking(response.got_checking);
       setGotLicense(response.got_license);
       setGotSavings(response.got_savings);
       setProgramUtilization(response.program_utilization);
-      setDischargeDate(response.discharge_date);
+
       setDischargeReason(response.discharge_reason);
       setHousingTransition(response.housing_transition);
       setDischargeStatus(response.status_at_discharge);

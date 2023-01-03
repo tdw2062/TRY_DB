@@ -151,14 +151,15 @@ function StatusEdit({}) {
         setCptEnd(response.cpt_end_date.substring(0, 10));
       if (response.started_mat_date)
         setMatStart(response.started_mat_date.substring(0, 10));
-      if (response.on_restrictions)
-        setOnRestrictions(response.on_restrictions.substring(0, 10));
-      if (response.off_restrictions)
-        setOffRestrictions(response.off_restrictions.substring(0, 10));
+      if (response.on_restrictions_date)
+        setOnRestrictions(response.on_restrictions_date.substring(0, 10));
+      if (response.off_restrictions_date)
+        setOffRestrictions(response.off_restrictions_date.substring(0, 10));
       if (response.drug_test_date)
         setDrugTest(response.drug_test_date.substring(0, 10));
       if (response.rec_treatment_update)
         setRecTreatmentUpdate(response.rec_treatment_update.substring(0, 10));
+
       if (response.had_counseling)
         setHadCounseling(response.had_counseling.substring(0, 10));
       if (response.relapse_date)
@@ -272,7 +273,7 @@ function StatusEdit({}) {
         handleOffRestrictionsChange={handleOffRestrictionsChange}
         drugTest={drugTest}
         handleDrugTestChange={handleDrugTestChange}
-        recTreatementUpdate={recTreatmentUpdate}
+        recTreatmentUpdate={recTreatmentUpdate}
         handleRecTreatmentUpdateChange={handleRecTreatmentUpdateChange}
         hadCounseling={hadCounseling}
         handleHadCounselingChange={handleHadCounselingChange}

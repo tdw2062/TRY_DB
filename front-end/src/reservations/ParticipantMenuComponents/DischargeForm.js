@@ -197,7 +197,7 @@ function StatusForm({
           <div className="form-group">
             <label htmlFor="status_at_discharge">Status at Discharge</label>
             <input
-              type="date"
+              type="text"
               name="status_at_discharge"
               className="form-control"
               id="status_at_discharge"

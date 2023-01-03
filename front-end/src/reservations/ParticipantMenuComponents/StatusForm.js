@@ -58,6 +58,8 @@ function StatusForm({
   handleSubmit,
   handleCancel,
 }) {
+  console.log("treatmentUpdate", recTreatmentUpdate);
+
   return (
     <form onSubmit={handleSubmit}>
       <div class="row">

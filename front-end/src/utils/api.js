@@ -66,6 +66,7 @@ export async function listParticipants(params, signal) {
 
 //Returns a list of instances filtered by a given parameter
 export async function listInstances(params, signal) {
+  console.log("API URL", API_BASE_URL);
   const url = new URL(`${API_BASE_URL}/instances`);
   Object.entries(params).forEach(([key, value]) =>
     url.searchParams.append(key, value.toString())

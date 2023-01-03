@@ -36,13 +36,13 @@ function DischargeParticipant({ date }) {
   const handleDischargeReasonChange = (event) =>
     setDischargeReason(event.target.value);
 
-  const [gotChecking, setGotChecking] = useState("");
+  const [gotChecking, setGotChecking] = useState("yes");
   const handleGotCheckingChange = (event) => setGotChecking(event.target.value);
 
-  const [gotLicense, setGotLicense] = useState("");
+  const [gotLicense, setGotLicense] = useState("yes");
   const handleGotLicenseChange = (event) => setGotLicense(event.target.value);
 
-  const [gotSavings, setGotSavings] = useState("");
+  const [gotSavings, setGotSavings] = useState("yes");
   const handleGotSavingsChange = (event) => setGotSavings(event.target.value);
 
   const [programUtilization, setProgramUtilization] = useState("Successful");
@@ -51,7 +51,7 @@ function DischargeParticipant({ date }) {
     console.log("programUtilization", programUtilization);
   };
 
-  const [housingTransition, setHousingTransition] = useState("");
+  const [housingTransition, setHousingTransition] = useState("yes");
   const handleHousingTransitionChange = (event) =>
     setHousingTransition(event.target.value);
 

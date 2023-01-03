@@ -200,6 +200,7 @@ function DischargeForm({
               onChange={handleDischargeStatusChange}
               value={dischargeStatus}
             >
+              <option value="">--Select--</option>
               <option value="coping">Coping</option>
               <option value="coping +60">Coping +60</option>
               <option value="career development">Career Development</option>
